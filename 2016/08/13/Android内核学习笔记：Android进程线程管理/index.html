@@ -14,25 +14,31 @@
     
 
     
-    <meta name="description" content="Android&amp;#x7A0B;&amp;#x5E8F;&amp;#x542F;&amp;#x52A8;&amp;#x8FC7;&amp;#x7A0B;
+    <meta name="description" content="Android程序启动过程
 
-ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&amp;#x7ACB;&amp;#x7684;&amp;#x8FDB;&amp;#x7A0B;&amp;#x91CC;&amp;#xFF0C;&amp;#x4E0E;&amp;#x7A0B;&amp;#x5E8F;&amp;#x8F">
+ActivityManagerService与WindowManagerService在独立的进程里，与程序进度之间的通信通过Bindler进行
+每个应用程序都是运行在独立的进程里的，进程与进程之间无法直接通信，每个进程里都一个JVM虚拟机，不能通过static进行通信
+应用程序的进程是由ActivityManagerService通过Process.start(“a">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android内核学习笔记：Android进程\线程管理">
 <meta property="og:url" content="http://yoursite.com/2016/08/13/Android内核学习笔记：Android进程线程管理/index.html">
 <meta property="og:site_name" content="LiuYang's blog">
-<meta property="og:description" content="Android&amp;#x7A0B;&amp;#x5E8F;&amp;#x542F;&amp;#x52A8;&amp;#x8FC7;&amp;#x7A0B;
+<meta property="og:description" content="Android程序启动过程
 
-ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&amp;#x7ACB;&amp;#x7684;&amp;#x8FDB;&amp;#x7A0B;&amp;#x91CC;&amp;#xFF0C;&amp;#x4E0E;&amp;#x7A0B;&amp;#x5E8F;&amp;#x8F">
-<meta property="og:image" content="http://yoursite.com/2016/08/13/Android内核学习笔记：Android进程线程管理/Android程序的启动流程.png">
-<meta property="og:image" content="http://yoursite.com/2016/08/13/Android内核学习笔记：Android进程线程管理/Android程序流程.png">
+ActivityManagerService与WindowManagerService在独立的进程里，与程序进度之间的通信通过Bindler进行
+每个应用程序都是运行在独立的进程里的，进程与进程之间无法直接通信，每个进程里都一个JVM虚拟机，不能通过static进行通信
+应用程序的进程是由ActivityManagerService通过Process.start(“a">
+<meta property="og:image" content="http://yoursite.com/Android程序的启动流程.png">
+<meta property="og:image" content="http://yoursite.com/Android程序流程.png">
 <meta property="og:updated_time" content="2016-08-14T04:42:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android内核学习笔记：Android进程\线程管理">
-<meta name="twitter:description" content="Android&amp;#x7A0B;&amp;#x5E8F;&amp;#x542F;&amp;#x52A8;&amp;#x8FC7;&amp;#x7A0B;
+<meta name="twitter:description" content="Android程序启动过程
 
-ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&amp;#x7ACB;&amp;#x7684;&amp;#x8FDB;&amp;#x7A0B;&amp;#x91CC;&amp;#xFF0C;&amp;#x4E0E;&amp;#x7A0B;&amp;#x5E8F;&amp;#x8F">
-<meta name="twitter:image" content="http://yoursite.com/2016/08/13/Android内核学习笔记：Android进程线程管理/Android程序的启动流程.png">
+ActivityManagerService与WindowManagerService在独立的进程里，与程序进度之间的通信通过Bindler进行
+每个应用程序都是运行在独立的进程里的，进程与进程之间无法直接通信，每个进程里都一个JVM虚拟机，不能通过static进行通信
+应用程序的进程是由ActivityManagerService通过Process.start(“a">
+<meta name="twitter:image" content="http://yoursite.com/Android程序的启动流程.png">
 
     
     <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
@@ -111,45 +117,45 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
 		
 		</div>
 		
-		<h1 id="Android&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;"><a href="#Android&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;" class="headerlink" title="Android&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;"></a>Android&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;</h1><p><img src="/2016/08/13/Android&#x5185;&#x6838;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF1A;Android&#x8FDB;&#x7A0B;&#x7EBF;&#x7A0B;&#x7BA1;&#x7406;/Android&#x7A0B;&#x5E8F;&#x7684;&#x542F;&#x52A8;&#x6D41;&#x7A0B;.png" alt=""></p>
+		<h1 id="Android程序启动过程"><a href="#Android程序启动过程" class="headerlink" title="Android程序启动过程"></a>Android程序启动过程</h1><p><img src="Android程序的启动流程.png" alt=""></p>
 <ol>
-<li>ActivityManagerService&#x4E0E;WindowManagerService&#x5728;&#x72EC;&#x7ACB;&#x7684;&#x8FDB;&#x7A0B;&#x91CC;&#xFF0C;&#x4E0E;&#x7A0B;&#x5E8F;&#x8FDB;&#x5EA6;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#x901A;&#x8FC7;Bindler&#x8FDB;&#x884C;</li>
-<li>&#x6BCF;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x90FD;&#x662F;&#x8FD0;&#x884C;&#x5728;&#x72EC;&#x7ACB;&#x7684;&#x8FDB;&#x7A0B;&#x91CC;&#x7684;&#xFF0C;&#x8FDB;&#x7A0B;&#x4E0E;&#x8FDB;&#x7A0B;&#x4E4B;&#x95F4;&#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x901A;&#x4FE1;&#xFF0C;&#x6BCF;&#x4E2A;&#x8FDB;&#x7A0B;&#x91CC;&#x90FD;&#x4E00;&#x4E2A;JVM&#x865A;&#x62DF;&#x673A;&#xFF0C;&#x4E0D;&#x80FD;&#x901A;&#x8FC7;static&#x8FDB;&#x884C;&#x901A;&#x4FE1;</li>
-<li>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x8FDB;&#x7A0B;&#x662F;&#x7531;ActivityManagerService&#x901A;&#x8FC7;Process.start(&#x201C;android.app.ActivityThread&#x201D;)&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x8FDB;&#x7A0B;&#x521B;&#x5EFA;&#x540E;&#xFF0C;&#x4F1A;&#x540C;&#x65F6;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x7EBF;&#x7A0B;&#xFF0C;&#x8FD9;&#x4E2A;&#x7EBF;&#x7A0B;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x6240;&#x8BF4;&#x7684;UIThread&#x3002;</li>
-<li>&#x540C;&#x4E00;&#x4E2A;&#x8FDB;&#x7A0B;&#x91CC;&#x7684;Activity, Service&#x7B49;&#x7B49;&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x8FD0;&#x884C;&#x5728;ActivityThread&#x91CC;&#xFF0C;&#x5373;UI&#x7EBF;&#x7A0B;&#x91CC;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x8981;&#x5728;Service&#x91CC;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Thread&#x6765;&#x771F;&#x6B63;&#x6267;&#x884C;&#x540E;&#x53F0;&#x7A0B;&#x5E8F;</li>
-<li>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x540E;&#xFF0C;&#x9664;&#x4E86;&#x521B;&#x5EFA;AcivityThread&#x540E;&#xFF0C;&#x8FD8;&#x4F1A;&#x521B;&#x5EFA;&#x4E24;&#x4E2A;BindlerThread&#xFF0C;&#x4F5C;&#x7528;&#x5C31;&#x662F;&#x7528;&#x4E8E;&#x4E0E;AMS&#xFF0C;WMS&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#x7684;&#x3002;</li>
+<li>ActivityManagerService与WindowManagerService在独立的进程里，与程序进度之间的通信通过Bindler进行</li>
+<li>每个应用程序都是运行在独立的进程里的，进程与进程之间无法直接通信，每个进程里都一个JVM虚拟机，不能通过static进行通信</li>
+<li>应用程序的进程是由ActivityManagerService通过Process.start(“android.app.ActivityThread”)创建的，进程创建后，会同时创建一个线程，这个线程就是我们所说的UIThread。</li>
+<li>同一个进程里的Activity, Service等等四大组件都是运行在ActivityThread里，即UI线程里的。所以通常我们要在Service里创建一个Thread来真正执行后台程序</li>
+<li>应用程序启动后，除了创建AcivityThread后，还会创建两个BindlerThread，作用就是用于与AMS，WMS进行交互的。</li>
 </ol>
-<h1 id="&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;"><a href="#&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;" class="headerlink" title="&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;"></a>&#x4EC0;&#x4E48;&#x662F;&#x7EBF;&#x7A0B;</h1><p><strong>Runnable&#x662F;&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#xFF1F;</strong></p>
-<p>&#x4E0D;&#x662F;&#xFF0C;Runnable&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF0C;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x7EBF;&#x7A0B;&#x7684;&#x63A5;&#x53E3;&#x7C7B;</p>
-<p><strong>Thread&#x662F;&#x4E0D;&#x662F;&#x7EBF;&#x7A0B;&#xFF1F;</strong></p>
-<p>&#x4E0D;&#x662F;&#xFF0C;Thread&#x53EA;&#x6709;&#x5728;&#x8C03;&#x7528;thread.start()&#x65B9;&#x6CD5;&#x540E;&#xFF0C;&#x624D;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;Thread&#x51FA;&#x6765;&#xFF0C;&#x4E4B;&#x524D;&#x7684;&#x6240;&#x6709;&#x7684;&#x521D;&#x59CB;&#x5316;&#x6B65;&#x9AA4;&#x90FD;&#x662F;&#x5728;&#x5F53;&#x524D;&#x7EBF;&#x7A0B;&#x91CC;&#x6267;&#x884C;&#x7684;&#x3002;Thread.start()&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>{</div><div class="line">	checkNotStarted();</div><div class="line">	hasBeanStarted = <span class="keyword">true</span>;</div><div class="line">	VMThread.create(<span class="keyword">this</span>, stackSize); <span class="comment">// &#x8FD9;&#x91CC;&#x624D;&#x662F;&#x771F;&#x6B63;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;CPU&#x7EBF;&#x7A0B;&#x7684;&#x5730;&#x65B9;</span></div><div class="line">}</div></pre></td></tr></table></figure>
-<p>&#x53EA;&#x6709;&#x5F53;VMThread.create()&#x65B9;&#x6CD5;&#x4E4B;&#x540E;&#xFF0C;&#x624D;&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x771F;&#x6B63;&#x7684;&#x7EBF;&#x7A0B;&#x3002;</p>
-<h1 id="Android&#x7684;UIThread"><a href="#Android&#x7684;UIThread" class="headerlink" title="Android&#x7684;UIThread"></a>Android&#x7684;UIThread</h1><p>Android&#x6709;&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#xFF1A;Activity&#xFF0C;Service&#xFF0C;ContentProvider&#xFF0C;Broadcast&#x3002;&#x7EC4;&#x5404;&#x81EA;&#x7684;&#x529F;&#x80FD;&#xFF1A;</p>
+<h1 id="什么是线程"><a href="#什么是线程" class="headerlink" title="什么是线程"></a>什么是线程</h1><p><strong>Runnable是不是线程？</strong></p>
+<p>不是，Runnable只是一个接口，用于创建线程的接口类</p>
+<p><strong>Thread是不是线程？</strong></p>
+<p>不是，Thread只有在调用thread.start()方法后，才会创建一个Thread出来，之前的所有的初始化步骤都是在当前线程里执行的。Thread.start()方法如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">	checkNotStarted();</div><div class="line">	hasBeanStarted = <span class="keyword">true</span>;</div><div class="line">	VMThread.create(<span class="keyword">this</span>, stackSize); <span class="comment">// 这里才是真正创建一个CPU线程的地方</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>只有当VMThread.create()方法之后，才会创建一个真正的线程。</p>
+<h1 id="Android的UIThread"><a href="#Android的UIThread" class="headerlink" title="Android的UIThread"></a>Android的UIThread</h1><p>Android有四大组件：Activity，Service，ContentProvider，Broadcast。组各自的功能：</p>
 <ol>
-<li>Activity&#xFF1A;&#x754C;&#x9762;&#xFF0C;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;onCreate(), &#x2026;</li>
-<li>Service&#xFF1A;&#x540E;&#x53F0;&#x670D;&#x52A1;&#xFF0C;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;onCreate(), &#x2026;</li>
-<li>Broadcast&#xFF1A;&#x5E7F;&#x64AD;&#xFF0C;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;onReceive()</li>
-<li>ContentProvider&#xFF1A;&#x7528;&#x4E8E;&#x6570;&#x636E;&#x5171;&#x4EAB;&#xFF0C;&#x751F;&#x547D;&#x5468;&#x671F;&#xFF1A;onCreate(), &#x2026;</li>
+<li>Activity：界面，生命周期：onCreate(), …</li>
+<li>Service：后台服务，生命周期：onCreate(), …</li>
+<li>Broadcast：广播，生命周期：onReceive()</li>
+<li>ContentProvider：用于数据共享，生命周期：onCreate(), …</li>
 </ol>
-<p><strong>&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x7684;&#x8FD0;&#x884C;&#x54EA;&#x4E2A;&#x8FDB;&#x7A0B;&#xFF0C;&#x54EA;&#x4E2A;&#x7EBF;&#x7A0B;&#x91CC;&#x5462;&#xFF1F;</strong></p>
+<p><strong>四大组件的运行哪个进程，哪个线程里呢？</strong></p>
 <ol>
-<li>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF1A;&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x8FD0;&#x884C;&#x5728;&#x4EE5;&#x7A0B;&#x5E8F;&#x7684;&#x5305;&#x540D;&#x547D;&#x540D;&#x7684;&#x8FDB;&#x7A0B;&#x91CC;&#xFF0C;</li>
-<li>&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x90FD;&#x662F;&#x8FD0;&#x884C;&#x5728;UIThread&#x91CC;&#xFF0C;&#x4F46;&#x6CE8;&#x610F;&#xFF1A;&#x662F;&#x5176;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#x662F;&#x8FD0;&#x884C;&#x5728;UIThread&#x91CC;&#x3002;&#x5982;ContentProvider&#x7684;query()&#x7B49;&#x7B49;&#x65B9;&#x6CD5;&#x7684;&#x6267;&#x884C;&#x7EBF;&#x7A0B;&#x8981;&#x4F9D;&#x8C03;&#x7528;&#x65B9;&#x6765;&#x51B3;&#x5B9A;</li>
-<li>Service&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x662F;&#x8FD0;&#x884C;&#x5728;UIThread&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x6267;&#x884C;&#x7684;&#x540E;&#x53F0;&#x4EFB;&#x52A1;&#xFF0C;&#x9700;&#x8981;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B50;&#x7EBF;&#x7A0B;&#x6765;&#x6267;&#x884C;</li>
-<li>&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#xFF0C;Activity&#xFF0C;Service&#xFF0C;Broadcast&#x90FD;&#x662F;&#x9700;&#x8981;&#x65F6;&#xFF0C;&#x7CFB;&#x7EDF;&#x8FDB;&#x884C;&#x521B;&#x5EFA;&#xFF0C;&#x4F46;ContentProvider&#x4F8B;&#x5916;&#xFF0C;&#x5176;&#x662F;&#x5728;&#x5E94;&#x7528;&#x8FDB;&#x7A0B;&#x542F;&#x52A8;&#x65F6;&#xFF0C;&#x5C31;&#x4F1A;&#x5F00;&#x53D1;&#x521B;&#x5EFA;&#x3002;</li>
+<li>默认情况下：四大组件都是运行在以程序的包名命名的进程里，</li>
+<li>四大组件都是运行在UIThread里，但注意：是其生命周期方法是运行在UIThread里。如ContentProvider的query()等等方法的执行线程要依调用方来决定</li>
+<li>Service的生命周期是运行在UIThread里，我们需要执行的后台任务，需要创建一个子线程来执行</li>
+<li>四大组件，Activity，Service，Broadcast都是需要时，系统进行创建，但ContentProvider例外，其是在应用进程启动时，就会开发创建。</li>
 </ol>
-<h1 id="Android&#x7684;&#x7F16;&#x7A0B;&#x6846;&#x67B6;"><a href="#Android&#x7684;&#x7F16;&#x7A0B;&#x6846;&#x67B6;" class="headerlink" title="Android&#x7684;&#x7F16;&#x7A0B;&#x6846;&#x67B6;"></a>Android&#x7684;&#x7F16;&#x7A0B;&#x6846;&#x67B6;</h1><p>&#x4ECE;&#x5F00;&#x59CB;&#x63A5;&#x89E6;Android&#x5F00;&#x59CB;&#xFF0C;&#x6211;&#x4EEC;&#x90FD;&#x662F;&#x9762;&#x5411;&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x53CA;&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#x6765;&#x8FDB;&#x884C;&#x7F16;&#x7A0B;&#x3002;<br>&#x4F46;&#x5B66;&#x8FC7;C&#x7A0B;&#x5E8F;&#x5F00;&#x53D1;&#x7684;&#x90FD;&#x77E5;&#x9053;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x90FD;&#x662F;&#x4ECE;main()&#x65B9;&#x6CD5;&#x5F00;&#x59CB;&#x6267;&#x884C;&#xFF0C;&#x518D;&#x6267;&#x884C;&#x4E00;&#x4E2A;while()&#x5FAA;&#x73AF;&#xFF0C;&#x4E0D;&#x505C;&#x63A5;&#x6536;&#x4E8B;&#x4EF6;&#xFF0C;&#x518D;&#x5904;&#x7406;&#x4E8B;&#x4EF6;&#x7684;&#x8FC7;&#x7A0B;&#x3002;<br>Android&#x7684;&#x4E8B;&#x4EF6;&#x9A71;&#x52A8;&#x6D41;&#x7A0B;&#xFF1A;<br><img src="/2016/08/13/Android&#x5185;&#x6838;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF1A;Android&#x8FDB;&#x7A0B;&#x7EBF;&#x7A0B;&#x7BA1;&#x7406;/Android&#x7A0B;&#x5E8F;&#x6D41;&#x7A0B;.png" alt=""></p>
+<h1 id="Android的编程框架"><a href="#Android的编程框架" class="headerlink" title="Android的编程框架"></a>Android的编程框架</h1><p>从开始接触Android开始，我们都是面向四大组件及四大组件的生命周期方法来进行编程。<br>但学过C程序开发的都知道，应用程序都是从main()方法开始执行，再执行一个while()循环，不停接收事件，再处理事件的过程。<br>Android的事件驱动流程：<br><img src="Android程序流程.png" alt=""></p>
 <ol>
-<li>&#x7531;AMS&#x521B;&#x5EFA;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x8FDB;&#x7A0B;&#xFF0C;&#x5E76;&#x521B;&#x5EFA;UIThread&#xFF0C;&#x901A;&#x8FC7;Looper.loop()&#xFF0C;&#x8BA9;UIThread&#x8FDB;&#x5165;&#x4E8B;&#x4EF6;&#x9A71;&#x52A8;&#x5FAA;&#x73AF;&#x4E2D;</li>
-<li>&#x56DB;&#x5927;&#x7EC4;&#x4EF6;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x65B9;&#x6CD5;&#xFF0C;&#x7528;&#x6237;&#x4EA4;&#x4E92;&#x7B49;&#x7B49;&#x90FD;&#x5F53;&#x4F5C;Message&#xFF0C;&#x8FDB;&#x5165;MessageQueue&#x91CC;&#xFF0C;&#x8FDB;&#x5165;UIThread&#x7684;&#x4E8B;&#x4EF6;&#x9A71;&#x52A8;&#x5FAA;&#x73AF;&#x4E2D;&#x3002;</li>
+<li>由AMS创建应用程序进程，并创建UIThread，通过Looper.loop()，让UIThread进入事件驱动循环中</li>
+<li>四大组件的生命周期方法，用户交互等等都当作Message，进入MessageQueue里，进入UIThread的事件驱动循环中。</li>
 </ol>
-<h1 id="ANR&#x5F02;&#x5E38;"><a href="#ANR&#x5F02;&#x5E38;" class="headerlink" title="ANR&#x5F02;&#x5E38;"></a>ANR&#x5F02;&#x5E38;</h1><p>&#x6982;&#x5FF5;&#xFF1A;ANR&#xFF08;Application No Response&#xFF09;&#x7528;&#x6237;&#x70B9;&#x51FB;&#x5C4F;&#x5E55;&#x540E;&#xFF0C;&#x5982;&#x679C;5s&#x6CA1;&#x6709;&#x5904;&#x7406;&#x5B8C;&#x6210;&#x6B64;&#x70B9;&#x51FB;Event&#xFF0C;&#x5C31;&#x4F1A;&#x62A5;ANR&#x5F02;&#x5E38;</p>
-<p>ANR&#x53D1;&#x751F;&#x7684;&#x60C5;&#x51B5;&#xFF1A;</p>
+<h1 id="ANR异常"><a href="#ANR异常" class="headerlink" title="ANR异常"></a>ANR异常</h1><p>概念：ANR（Application No Response）用户点击屏幕后，如果5s没有处理完成此点击Event，就会报ANR异常</p>
+<p>ANR发生的情况：</p>
 <ol>
-<li>&#x5728;UIThread&#x91CC;&#x6267;&#x884C;&#x7F51;&#x7EDC;&#x8BF7;&#x6C42;&#xFF0C;IO&#x64CD;&#x4F5C;&#x7B49;&#x7B49;&#x8017;&#x65F6;&#x64CD;&#x4F5C;</li>
-<li>UI&#x7ED8;&#x5236;&#x65F6;&#x95F4;&#x8FC7;&#x957F;&#xFF0C;&#x4E5F;&#x6709;&#x53EF;&#x80FD;&#x9020;&#x6210;ANR&#x5F02;&#x5E38;</li>
-<li>ANR&#x5F02;&#x5E38;&#x5F88;&#x591A;&#x65F6;&#x5019;&#x4E0D;&#x662F;&#x7531;&#x4E00;&#x4E2A;&#x8017;&#x65F6;&#x64CD;&#x4F5C;&#x9020;&#x6210;&#x7684;&#xFF0C;&#x5F88;&#x591A;&#x662F;&#x7531;&#x4E00;&#x7EC4;&#x64CD;&#x4F5C;&#xFF0C;&#x5982;&#x8FDB;&#x884C;10000&#x6B21;SP&#x8BFB;&#x5199;&#x64CD;&#x4F5C;&#x3002;</li>
+<li>在UIThread里执行网络请求，IO操作等等耗时操作</li>
+<li>UI绘制时间过长，也有可能造成ANR异常</li>
+<li>ANR异常很多时候不是由一个耗时操作造成的，很多是由一组操作，如进行10000次SP读写操作。</li>
 </ol>
   
 	</div>
@@ -254,11 +260,11 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
 			
 		
 			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
+				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
 			
 		
 			

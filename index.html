@@ -85,9 +85,10 @@
     <h1 itemprop="name">Android内核学习笔记：Android进程\线程管理</h1>
     
      
-           <p itemprop="description" >Android&amp;#x7A0B;&amp;#x5E8F;&amp;#x542F;&amp;#x52A8;&amp;#x8FC7;&amp;#x7A0B;
+           <p itemprop="description" >Android程序启动过程
 
-ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&amp;#x7ACB;&amp;#x7684;&amp;</p>
+ActivityManagerService与WindowManagerService在独立的进程里，与程序进度之间的通信通过Bindler进行
+每个应用程序都是运行在独立的进程里的，进程与进程之间无法直接通信，每个进程里都一个JVM虚拟机，不能通过</p>
         
     
     <time datetime="2016-08-13T08:37:13.000Z" itemprop="datePublished">2016-08-13</time>
@@ -107,8 +108,11 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
     <h1 itemprop="name">Android签名的过程</h1>
     
      
-           <p itemprop="description" >Android&amp;#x5BF9;apk&amp;#x7B7E;&amp;#x540D;&amp;#x8FC7;&amp;#x7A0B;Apk&amp;#x89E3;&amp;#x538B;&amp;#x540E;&amp;#x7684;&amp;#x7ED3;&amp;#x6784;&amp;#xFF1A;
-&amp;#x4F1A;&amp;#x751F;&amp;#x6210;&amp;#x4E0</p>
+           <p itemprop="description" >Android对apk签名过程Apk解压后的结构：
+会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文件都是我们对unsigin.apk签名时生成的。
+
+
+SHA1：安全哈希算法，对于长度小于2</p>
         
     
     <time datetime="2016-06-13T09:59:45.000Z" itemprop="datePublished">2016-06-13</time>
@@ -128,9 +132,17 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
     <h1 itemprop="name">58同城Hybrid框架的点点滴滴</h1>
     
      
-           <p itemprop="description" >Hybrid&amp;#x6846;&amp;#x67B6;&amp;#x7B80;&amp;#x4ECB;&amp;#x91C7;&amp;#x7528;Hybrid&amp;#x6A21;&amp;#x5F0F;&amp;#x7684;&amp;#x539F;&amp;#x56E0;&amp;#xFF1A;
+           <p itemprop="description" >Hybrid框架简介采用Hybrid模式的原因：
 
-&amp;#x7EAF;Native&amp;#x7684;&amp;#x8FED;</p>
+纯Native的迭代太慢，不能动态更新，且不能跨平台
+纯Web页，有很功能无法实现，有些动画效果实现其体验太差
+
+整体框架结构图
+
+WebView加载流程
+
+在Step1里有两个作用：
+可以拦截html请求，对Html请求进行白</p>
         
     
     <time datetime="2016-03-24T07:28:51.000Z" itemprop="datePublished">2016-03-24</time>
@@ -150,9 +162,14 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
     <h1 itemprop="name">Android收藏的好文章</h1>
     
      
-           <p itemprop="description" >&amp;#x5DE5;&amp;#x5177;&amp;#x7C7B;
-&amp;#x8FD9;&amp;#x4E9B;&amp;#x5C0F;&amp;#x5DE5;&amp;#x5177;&amp;#x8BA9;&amp;#x4F60;&amp;#x7684;Android&amp;#x5F00;&amp;#x53D1;&amp;#x66F4;&amp;#x9AD8;&amp;#x6548;
-&amp;#x</p>
+           <p itemprop="description" >工具类
+这些小工具让你的Android开发更高效
+分析内存溢出：LeakCanary
+分析ANR异常：BlockCanary
+反编译工具
+
+动画
+Android自绘动画实现与优化实战——以Tencent OS录音机波形动画为实例&amp;amp;version=11020201&amp;amp;</p>
         
     
     <time datetime="2016-03-22T02:42:49.000Z" itemprop="datePublished">2016-03-22</time>
@@ -172,10 +189,16 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
     <h1 itemprop="name">Markdown常用语法</h1>
     
      
-           <p itemprop="description" >&amp;#x6807;&amp;#x9898;
-&amp;#x5F15;&amp;#x7528;
-&amp;#x5E8F;&amp;#x5217;
-&amp;#x6CE8;&amp;#x610F;&amp;#xFF1A; &amp;#x5E8F;&amp;#x5217;&amp;#x7684;&amp;#x7F29;&amp;#x8FDB;&amp;#x4F7F;&amp;#x7528;Tab&amp;#x95</p>
+           <p itemprop="description" >标题
+引用
+序列
+注意： 序列的缩进使用Tab键或四个空格
+换行换行就直接空一行就行
+代码
+注意： 如果代码里有空行，会影响markdown排版，可以使用字符 ”[空行]“ 来替换
+链接
+图片
+注意： hexo里添加图片的方式：在source文件下创建一个img的文件夹，在md里</p>
         
     
     <time datetime="2016-03-17T05:05:47.000Z" itemprop="datePublished">2016-03-17</time>
@@ -195,7 +218,13 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
     <h1 itemprop="name">托管博客到Coding</h1>
     
      
-           <p itemprop="description" >&amp;#x539F;&amp;#x56E0;github&amp;#x4E0A;push&amp;#x4EE3;&amp;#x7801;&amp;#xFF0C;&amp;#x8BBF;&amp;#x95EE;&amp;#x901F;&amp;#x5EA6;&amp;#x90FD;&amp;#x6BD4;&amp;#x8F83;&amp;#x6162;&amp;#xFF0C;&amp;#x6240;&amp;#</p>
+           <p itemprop="description" >原因github上push代码，访问速度都比较慢，所以决定迁移到国内的Git托管服务：Coding
+迁移Repository步骤：
+进入Coding站点：https://coding.net，申请帐号
+创建一个Project，如下设置：
+项目名称为用户名
+设置为公开
+使用【导入仓</p>
         
     
     <time datetime="2016-03-16T14:01:41.000Z" itemprop="datePublished">2016-03-16</time>
@@ -215,8 +244,12 @@ ActivityManagerService&amp;#x4E0E;WindowManagerService&amp;#x5728;&amp;#x72EC;&a
     <h1 itemprop="name">Gradle分享</h1>
     
      
-           <p itemprop="description" >Gradle&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;
-Gradle&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x81EA;&amp;#x52A8;&amp;#x5316;&amp;#x6784;&amp;#x5EFA;&amp;#x5DE5;&amp;#x5177;&amp;#xFF0C;&amp;#x7528;&amp;#x6765</p>
+           <p itemprop="description" >Gradle是什么
+Gradle是一个自动化构建工具，用来替换ant及maven。
+Gradle的特点：
+具有表达性的语言和强大的API（Gradle的表达性语言称为DSL）
+Gradle就是Groovy，但高于Groovy
+灵活的约定（所有的配置属性都有其默认值，但也可以全部进</p>
         
     
     <time datetime="2016-03-16T10:15:29.000Z" itemprop="datePublished">2016-03-16</time>
@@ -236,10 +269,12 @@ Gradle&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x81EA;&amp;#x52A8;&amp;#x5316;&a
     <h1 itemprop="name">Hexo搭建个人博客</h1>
     
      
-           <p itemprop="description" >&amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;
-Github&amp;#x914D;&amp;#x7F6E;
-&amp;#x5728;Github&amp;#x4E0A;&amp;#x7533;&amp;#x8BF7;&amp;#x4E00;&amp;#x4E2A;&amp;#x5E10;&amp;#x53F7;
-&amp;#x521B;&amp;#x5E</p>
+           <p itemprop="description" >搭建过程
+Github配置
+在Github上申请一个帐号
+创建一个repository，其命名规则有两种
+&amp;lt;你的用户名&amp;gt;.github.io // 那你的博客地址就是 http://&amp;lt;你的用户名&amp;gt;.github.io 推荐
+&amp;lt;任意名称&amp;gt;  //</p>
         
     
     <time datetime="2016-03-16T06:08:36.000Z" itemprop="datePublished">2016-03-16</time>
@@ -259,8 +294,13 @@ Github&amp;#x914D;&amp;#x7F6E;
     <h1 itemprop="name">hexo理解</h1>
     
      
-           <p itemprop="description" >Hexo&amp;#x662F;&amp;#x4EC0;&amp;#x4E48;
-A fast, simple &amp;amp; powerful blog framework, powered by Node.js. &amp;#x57FA;&amp;#x4E8E;Node.js&amp;#x7684;&amp;#x4E00;&amp;#x4E2</p>
+           <p itemprop="description" >Hexo是什么
+A fast, simple &amp;amp; powerful blog framework, powered by Node.js. 基于Node.js的一个快速、简洁且高效的博客框架。
+
+我理解的Hexo是：
+
+是一个Node.js的命令行脚本工具
+一个把mark</p>
         
     
     <time datetime="2016-03-16T03:03:16.000Z" itemprop="datePublished">2016-03-16</time>
@@ -317,11 +357,11 @@ A fast, simple &amp;amp; powerful blog framework, powered by Node.js. &amp;#x57F
 			
 		
 			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
+				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
 			
 		
 			
