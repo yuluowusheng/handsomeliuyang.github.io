@@ -1,0 +1,699 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Hexo搭建个人博客 | LiuYang&#39;s blog</title>
+
+    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="LiuYang">
+    
+
+    
+    <meta name="description" content="&amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;
+Github&amp;#x914D;&amp;#x7F6E;
+&amp;#x5728;Github&amp;#x4E0A;&amp;#x7533;&amp;#x8BF7;&amp;#x4E00;&amp;#x4E2A;&amp;#x5E10;&amp;#x53F7;
+&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;repository&amp;#xFF0C;&amp;#x5176;&amp;#x547D;&amp;#x540D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo搭建个人博客">
+<meta property="og:url" content="http://yoursite.com/2016/03/16/Hexo搭建个人博客/index.html">
+<meta property="og:site_name" content="LiuYang's blog">
+<meta property="og:description" content="&amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;
+Github&amp;#x914D;&amp;#x7F6E;
+&amp;#x5728;Github&amp;#x4E0A;&amp;#x7533;&amp;#x8BF7;&amp;#x4E00;&amp;#x4E2A;&amp;#x5E10;&amp;#x53F7;
+&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;repository&amp;#xFF0C;&amp;#x5176;&amp;#x547D;&amp;#x540D">
+<meta property="og:image" content="http://yoursite.com/2016/03/16/Hexo搭建个人博客/img_markdown/13.png">
+<meta property="og:updated_time" content="2016-08-13T08:21:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo搭建个人博客">
+<meta name="twitter:description" content="&amp;#x642D;&amp;#x5EFA;&amp;#x8FC7;&amp;#x7A0B;
+Github&amp;#x914D;&amp;#x7F6E;
+&amp;#x5728;Github&amp;#x4E0A;&amp;#x7533;&amp;#x8BF7;&amp;#x4E00;&amp;#x4E2A;&amp;#x5E10;&amp;#x53F7;
+&amp;#x521B;&amp;#x5EFA;&amp;#x4E00;&amp;#x4E2A;repository&amp;#xFF0C;&amp;#x5176;&amp;#x547D;&amp;#x540D">
+<meta name="twitter:image" content="http://yoursite.com/2016/03/16/Hexo搭建个人博客/img_markdown/13.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
+				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/16/Hexo搭建个人博客/" title="Hexo搭建个人博客" itemprop="url">Hexo搭建个人博客</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
+		
+  <p class="article-time">
+    <time datetime="2016-03-16T06:08:36.000Z" itemprop="datePublished"> 发表于 2016-03-16</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建过程"><span class="toc-number">1.</span> <span class="toc-text">搭建过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo备份"><span class="toc-number">2.</span> <span class="toc-text">Hexo备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加新功能"><span class="toc-number">3.</span> <span class="toc-text">添加新功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo发布新文章"><span class="toc-number">4.</span> <span class="toc-text">hexo发布新文章</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F-amp-Q"><span class="toc-number">5.</span> <span class="toc-text">F&Q</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#图片支持"><span class="toc-number">5.1.</span> <span class="toc-text">图片支持</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h1 id="&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;"><a href="#&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;" class="headerlink" title="&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;"></a>&#x642D;&#x5EFA;&#x8FC7;&#x7A0B;</h1><ol>
+<li>Github&#x914D;&#x7F6E;<ol>
+<li>&#x5728;Github&#x4E0A;&#x7533;&#x8BF7;&#x4E00;&#x4E2A;&#x5E10;&#x53F7;</li>
+<li>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;repository&#xFF0C;&#x5176;&#x547D;&#x540D;&#x89C4;&#x5219;&#x6709;&#x4E24;&#x79CD;<ol>
+<li>&lt;&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;&gt;.github.io // &#x90A3;&#x4F60;&#x7684;&#x535A;&#x5BA2;&#x5730;&#x5740;&#x5C31;&#x662F; http://&lt;&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;&gt;.github.io <strong>&#x63A8;&#x8350;</strong></li>
+<li>&lt;&#x4EFB;&#x610F;&#x540D;&#x79F0;&gt;  // &#x90A3;&#x4F60;&#x7684;&#x535A;&#x5BA2;&#x5730;&#x5740;&#x5C06;&#x662F;&#xFF1A;http://&lt;&#x4F60;&#x7684;&#x7528;&#x6237;&#x540D;&gt;.github.io/&lt;&#x4EFB;&#x610F;&#x540D;&#x79F0;&gt;</li>
+</ol>
+</li>
+<li>&#x4F7F;&#x7528;ssh&#x8FDE;&#x63A5;&#xFF0C;&#x914D;&#x7F6E;ssh&#x7684;&#x516C;&#x94A5;&#x548C;&#x79C1;&#x94A5;&#xFF0C;&#x4EE5;&#x540E;&#x8FDE;&#x63A5;github&#x4E0D;&#x7528;&#x518D;&#x8F93;&#x5165;&#x5BC6;&#x7801;</li>
+</ol>
+</li>
+<li>Hexo&#x5B89;&#x88C5;<ol>
+<li>&#x8BF7;&#x6309;&#x6700;&#x65B0;&#x5B98;&#x7F51;&#x5B89;&#x88C5;&#x5E76;&#x914D;&#x7F6E;Hexo&#xFF0C;&#x5177;&#x4F53;&#x8BF7;&#x770B;&#xFF1A;<a href="https://hexo.io/" target="_blank" rel="external">https://hexo.io/</a></li>
+<li>&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF0C;&#x642D;&#x5EFA;&#x672C;&#x5730;Server&#xFF1A;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo clean  // &#x6E05;&#x9664;&#x521A;&#x521A;&#x521B;&#x5EFA;&#x7684;&#x9759;&#x6001;web&#x7F51;&#x9875;</div><div class="line">hexo g  // hexo generator&#x7684;&#x7F29;&#x5199;&#xFF0C;&#x751F;&#x6210;&#x9759;&#x6001;web&#x7F51;&#x9875;&#xFF0C;&#x751F;&#x6210;&#x7684;&#x76EE;&#x5F55;&#x662F;&#xFF1A;public</div><div class="line">hexo s  // hexo server&#x7684;&#x7F29;&#x5199;&#xFF0C;&#x751F;&#x6210;&#x672C;&#x5730;web&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE;&#xFF0C;&#x67E5;&#x770B;&#x6548;&#x679C;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<ol>
+<li>&#x5F00;&#x53D1;&#x73AF;&#x5883;<ol>
+<li>&#x4E0B;&#x8F7D;webstorm</li>
+<li>&#x7ED9;webstorm&#x5B89;&#x88C5;markdown&#x63D2;&#x4EF6;</li>
+<li>&#x901A;&#x8FC7;webstorm&#x52A0;&#x8F7D;hexo</li>
+</ol>
+</li>
+<li>Hexo&#x7684;&#x76EE;&#x5F55;&#x7ED3;&#x6784;<br><img src="/2016/03/16/Hexo&#x642D;&#x5EFA;&#x4E2A;&#x4EBA;&#x535A;&#x5BA2;/img_markdown/13.png" alt=""></li>
+<li><p>Hexo&#x7684;&#x914D;&#x7F6E;</p>
+<ol>
+<li>&#x5728;_config.yml&#x91CC;&#x8BBE;&#x7F6E;&#x5982;&#x4E0B;&#x53C2;&#x6570;&#xFF1A;<ol>
+<li>title</li>
+<li>subtitle</li>
+<li>description</li>
+<li>author</li>
+<li>email</li>
+<li>language</li>
+</ol>
+</li>
+<li><p>&#x5728;_config.yml&#x91CC;&#x914D;&#x7F6E;github&#x7684;&#x670D;&#x52A1;&#x5668;&#x53CA;&#x4E3B;&#x5206;&#x652F;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: git@github.com:xxx</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5728;_config.yml&#x91CC;&#x914D;&#x7F6E;&#x4E3B;&#x9898;&#x548C;&#x5BF9;css&#x6587;&#x4EF6;&#x7B49;&#x7B49;&#x7684;&#x538B;&#x7F29;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">theme: jacman // &#x8FD9;&#x4E2A;&#x662F;&#x6211;&#x4F7F;&#x7528;&#x7684;&#x4E3B;&#x9898;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5728;&#x7F51;&#x4E0A;&#x4E0B;&#x8F7D;&#x66F4;&#x591A;&#x7684;&#x4E3B;&#x9898;</div><div class="line">stylus:</div><div class="line">  compress: true // &#x5BF9;&#x6837;&#x5F0F;&#x6587;&#x4EF6;&#x8FDB;&#x884C;&#x538B;&#x7F29;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x6309;&#x5B98;&#x7F51;&#x6559;&#x7A0B;&#x5B89;&#x88C5;Hexo&#x540E;&#xFF0C;&#x6267;&#x884C;hexo d&#x547D;&#x4EE4;&#x4F1A;&#x62A5;&#x9519;&#xFF0C;&#x662F;&#x7531;&#x4E8E;&#x7F3A;&#x5C11;Module&#x5E93;&#xFF0C;&#x6267;&#x884C;&#x4E0B;&#x9762;&#x7684;&#x547D;&#x4EE4;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>&#x5B89;&#x88C5;&#x4E4B;&#x540E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x6267;&#x884C;hexo d&#x8FDB;&#x884C;&#x90E8;&#x7F72;&#x4E86;  </p>
+</li>
+</ol>
+</li>
+<li><p>&#x5199;&#x535A;&#x5BA2;</p>
+<ol>
+<li><p>&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x6587;&#x7AE0;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;&#x6587;&#x7AE0;&#x540D;&#x79F0;&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5728;source&#x6587;&#x4EF6;&#x4E0B;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5B58;&#x653E;&#x56FE;&#x7247;&#x76EE;&#x5F55;&#xFF0C;&#x5982;img&#xFF0C;&#x5728;&#x6587;&#x7AE0;&#x91CC;&#x5F15;&#x7528;&#x7684;&#x5730;&#x5740;&#x4E3A;&#xFF1A;/img/&#x56FE;&#x7247;&#x540D;</p>
+</li>
+<li>&#x5728;&#x76EE;&#x5F55;source/_posts&#x76EE;&#x5F55;&#x4E0B;&#x627E;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x7F16;&#x8F91;</li>
+<li>&#x6587;&#x7AE0;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;categories(&#x7C7B;&#x522B;)&#x548C;tags(&#x6807;&#x7B7E;)&#xFF0C;<strong>&#x6CE8;&#x610F;</strong>&#xFF1A;tags&#x4E0B;&#x9762;&#x53EA;&#x80FD;&#x662F;3&#x4E2A;&#x6A2A;&#x7EBF;&#xFF0C;&#x591A;&#x4E86;&#x5C11;&#x4E86;&#x90FD;&#x4E0D;&#x884C;</li>
+</ol>
+</li>
+<li>&#x67E5;&#x770B;&#x6548;&#x679C;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo g</div><div class="line">hexo s</div><div class="line">[&#x7A7A;&#x884C;]</div><div class="line">hexo d // hexo deployer&#x7684;&#x7F29;&#x5199; &#x53D1;&#x5E03;&#x5230;Github</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="Hexo&#x5907;&#x4EFD;"><a href="#Hexo&#x5907;&#x4EFD;" class="headerlink" title="Hexo&#x5907;&#x4EFD;"></a>Hexo&#x5907;&#x4EFD;</h1><p><strong>&#x4F7F;&#x7528;Github&#x6765;&#x5907;&#x4EFD;</strong></p>
+<ol>
+<li>&#x5728;github&#x4E0A;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;hexo&#x7684;&#x5206;&#x652F;</li>
+<li>&#x628A;&#x672C;&#x5730;&#x7684;hexo&#x9879;&#x76EE;&#x4E0A;&#x4F20;&#x5230;hexo&#x5206;&#x652F;&#x91CC;&#xFF0C;&#x4F46;&#x6CE8;&#x610F;&#x914D;&#x7F6E;.gitignore&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">.DS_Store</div><div class="line">Thumbs.db</div><div class="line">db.json</div><div class="line">*.log</div><div class="line">node_modules/</div><div class="line">public/</div><div class="line">.deploy*/</div><div class="line">.idea</div></pre></td></tr></table></figure>
+<h1 id="&#x6DFB;&#x52A0;&#x65B0;&#x529F;&#x80FD;"><a href="#&#x6DFB;&#x52A0;&#x65B0;&#x529F;&#x80FD;" class="headerlink" title="&#x6DFB;&#x52A0;&#x65B0;&#x529F;&#x80FD;"></a>&#x6DFB;&#x52A0;&#x65B0;&#x529F;&#x80FD;</h1><ol>
+<li>&#x6539;&#x4E3B;&#x9898;&#xFF0C;&#x6211;&#x4F7F;&#x7528;&#x7684;&#x662F;jacman</li>
+<li><p>&#x6DFB;&#x52A0;&#x5173;&#x4E8E;&#xFF0C;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x547D;&#x4EE4;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new page &quot;about&quot; // &#x8FD9;&#x6837;&#x521B;&#x5EFA;md&#x6587;&#x4EF6;&#xFF0C;&#x624D;&#x80FD;&#x4F7F;&#x7528;/about&#x6765;&#x5F15;&#x7528;&#x5230;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x6DFB;&#x52A0;&#x767E;&#x5EA6;&#x7EDF;&#x8BA1;&#xFF0C;&#x7528;&#x4E8E;&#x7EDF;&#x8BA1;&#x7F51;&#x7AD9;&#x6D41;&#x91CF;</p>
+</li>
+<li>&#x6DFB;&#x52A0;&#x7AD9;&#x5185;&#x641C;&#x7D22;</li>
+<li>&#x6DFB;&#x52A0;&#x8BC4;&#x4EF7;&#xFF0C;&#x63A8;&#x8350;&#x4F7F;&#x7528;<strong>&#x591A;&#x8BF4;</strong></li>
+<li>&#x6DFB;&#x52A0;&#x767E;&#x5EA6;&#x641C;&#x7D22;&#x3001;google&#x641C;&#x7D22;</li>
+<li>&#x6DFB;&#x52A0;sitemap.xml&#xFF0C;&#x4F9B;&#x641C;&#x7D22;&#x5F15;&#x64CE;&#x7684;&#x722C;&#x866B;&#x4F7F;&#x7528;</li>
+</ol>
+<h1 id="hexo&#x53D1;&#x5E03;&#x65B0;&#x6587;&#x7AE0;"><a href="#hexo&#x53D1;&#x5E03;&#x65B0;&#x6587;&#x7AE0;" class="headerlink" title="hexo&#x53D1;&#x5E03;&#x65B0;&#x6587;&#x7AE0;"></a>hexo&#x53D1;&#x5E03;&#x65B0;&#x6587;&#x7AE0;</h1><p>&#x65B9;&#x6CD5;&#x4E00;&#xFF1A;</p>
+<ol>
+<li><p>&#x521B;&#x5EFA;&#x6587;&#x7AE0;&#xFF0C;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new &quot;&#x6587;&#x7AE0;&#x540D;&#x79F0;&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5728;source/_posts&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x5C31;&#x4F1A;&#x521B;&#x5EFA;&#x6B64;&#x6587;&#x7AE0;&#xFF0C;&#x7F16;&#x8BD1;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x90E8;&#x7F72;&#xFF0C;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo clean</div><div class="line">hexo d -g // &#x76F8;&#x5F53;&#x4E8E;&#x5148;&#x6267;&#x884C;hexo g &#x518D;&#x6267;&#x884C;hexo d</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x65B9;&#x6CD5;&#x4E8C;&#xFF1A;</p>
+<ol>
+<li><p>&#x65B0;&#x521B;&#x5EFA;&#x8349;&#x7A3F;&#xFF0C;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new draft &quot;&#x6587;&#x7AE0;&#x540D;&#x79F0;&quot;</div></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5728;source/_drafts&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x4F1A;&#x521B;&#x5EFA;&#x76F8;&#x5E94;&#x7684;&#x6587;&#x7AE0;&#xFF0C;&#x7F16;&#x5199;&#x6587;&#x7AE0;&#xFF0C;&#x8349;&#x7A3F;&#x6587;&#x7AE0;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x4E0D;&#x4F1A;&#x88AB;&#x90E8;&#x7F72;&#x5230;&#x7AD9;&#x70B9;&#x91CC;</p>
+</li>
+<li>&#x628A;&#x8349;&#x7A3F;&#x53D1;&#x5E03;&#x4E3A;&#x6587;&#x7AE0;&#xFF0C;&#x547D;&#x4EE4;&#x5982;&#x4E0B;&#xFF1A;<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish &quot;&#x8349;&#x7A3F;&#x6587;&#x7AE0;&#x540D;&#x79F0;&quot;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="F-amp-Q"><a href="#F-amp-Q" class="headerlink" title="F&amp;Q"></a>F&amp;Q</h1><h2 id="&#x56FE;&#x7247;&#x652F;&#x6301;"><a href="#&#x56FE;&#x7247;&#x652F;&#x6301;" class="headerlink" title="&#x56FE;&#x7247;&#x652F;&#x6301;"></a>&#x56FE;&#x7247;&#x652F;&#x6301;</h2><p><a href="https://codefalling.com/2015/12/19/no-pains-with-hexo-local-image/" target="_blank" rel="external">https://codefalling.com/2015/12/19/no-pains-with-hexo-local-image/</a></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/hexo/">hexo</a>
+</div>
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/03/16/Hexo搭建个人博客/" data-title="Hexo搭建个人博客 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2016/03/16/Gradle分享/" title="Gradle分享">
+  <strong>上一篇：</strong><br/>
+  <span>
+  Gradle分享</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/16/hexo理解/"  title="hexo理解">
+ <strong>下一篇：</strong><br/> 
+ <span>hexo理解
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/03/16/Hexo搭建个人博客/" data-title="Hexo搭建个人博客" data-url="http://yoursite.com/2016/03/16/Hexo搭建个人博客/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#搭建过程"><span class="toc-number">1.</span> <span class="toc-text">搭建过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Hexo备份"><span class="toc-number">2.</span> <span class="toc-text">Hexo备份</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#添加新功能"><span class="toc-number">3.</span> <span class="toc-text">添加新功能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hexo发布新文章"><span class="toc-number">4.</span> <span class="toc-text">hexo发布新文章</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#F-amp-Q"><span class="toc-number">5.</span> <span class="toc-text">F&Q</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#图片支持"><span class="toc-number">5.1.</span> <span class="toc-text">图片支持</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"handsomeliuyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
