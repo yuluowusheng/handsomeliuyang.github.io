@@ -1,0 +1,797 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>前端学习系列：基于React的Robot框架的踩坑之旅 | LiuYang&#39;s blog</title>
+
+    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="LiuYang">
+    
+
+    
+    <meta name="description" content="背景上次给大家介绍Robot平台框架，其特点：
+
+由nodejs+express+react+bootstrap实现
+UI使用开源UI库：charisma
+React通过browserify+babel打包处理
+
+效果如下：
+其中遇到的一些问题：
+
+前端界面框架没有真正的React化，只使用很少一部分，html页面里，还有大量的js引用配置，css引用配置
+ 1234567891011121314">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端学习系列：基于React的Robot框架的踩坑之旅">
+<meta property="og:url" content="http://yoursite.com/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/index.html">
+<meta property="og:site_name" content="LiuYang's blog">
+<meta property="og:description" content="背景上次给大家介绍Robot平台框架，其特点：
+
+由nodejs+express+react+bootstrap实现
+UI使用开源UI库：charisma
+React通过browserify+babel打包处理
+
+效果如下：
+其中遇到的一些问题：
+
+前端界面框架没有真正的React化，只使用很少一部分，html页面里，还有大量的js引用配置，css引用配置
+ 1234567891011121314">
+<meta property="og:image" content="http://yoursite.com/robot界面.png">
+<meta property="og:image" content="http://yoursite.com/robot1html数量.png">
+<meta property="og:image" content="http://yoursite.com/robot1render方法.png">
+<meta property="og:image" content="http://yoursite.com/robot目录.png">
+<meta property="og:image" content="http://yoursite.com/express中间件.png">
+<meta property="og:image" content="http://yoursite.com/webpack开发方式一.png">
+<meta property="og:image" content="http://yoursite.com/webpack开发方式二.png">
+<meta property="og:image" content="http://yoursite.com/路由效果.gif">
+<meta property="og:image" content="http://yoursite.com/React的框架.png">
+<meta property="og:updated_time" content="2016-12-30T05:14:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端学习系列：基于React的Robot框架的踩坑之旅">
+<meta name="twitter:description" content="背景上次给大家介绍Robot平台框架，其特点：
+
+由nodejs+express+react+bootstrap实现
+UI使用开源UI库：charisma
+React通过browserify+babel打包处理
+
+效果如下：
+其中遇到的一些问题：
+
+前端界面框架没有真正的React化，只使用很少一部分，html页面里，还有大量的js引用配置，css引用配置
+ 1234567891011121314">
+<meta name="twitter:image" content="http://yoursite.com/robot界面.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
+				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/" title="前端学习系列：基于React的Robot框架的踩坑之旅" itemprop="url">前端学习系列：基于React的Robot框架的踩坑之旅</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
+		
+  <p class="article-time">
+    <time datetime="2016-12-30T05:00:00.000Z" itemprop="datePublished"> 发表于 2016-12-30</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Robot最新框架"><span class="toc-number">2.</span> <span class="toc-text">Robot最新框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#技术集"><span class="toc-number">2.1.</span> <span class="toc-text">技术集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架目录结构"><span class="toc-number">2.2.</span> <span class="toc-text">框架目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架界面"><span class="toc-number">2.3.</span> <span class="toc-text">框架界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体技术点"><span class="toc-number">2.4.</span> <span class="toc-text">具体技术点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#后端Server"><span class="toc-number">2.4.1.</span> <span class="toc-text">后端Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack打包配置"><span class="toc-number">2.4.2.</span> <span class="toc-text">webpack打包配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#高级特性"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">高级特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开发环境配置"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">开发环境配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#app的前端路由"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">app的前端路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-js框架的实现"><span class="toc-number">2.4.2.4.</span> <span class="toc-text">Master.js框架的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Material-UI理解-官网"><span class="toc-number">2.4.2.4.1.</span> <span class="toc-text">Material-UI理解 官网</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Material-UI作用"><span class="toc-number">2.4.2.4.2.</span> <span class="toc-text">Material-UI作用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Master-js代码分析"><span class="toc-number">2.4.2.4.3.</span> <span class="toc-text">Master.js代码分析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>上次给大家介绍Robot平台框架，其特点：</p>
+<ol>
+<li>由nodejs+express+react+bootstrap实现</li>
+<li>UI使用开源UI库：<a href="https://github.com/usmanhalalit/charisma" target="_blank" rel="external">charisma</a></li>
+<li>React通过browserify+babel打包处理</li>
+</ol>
+<p>效果如下：<br><img src="robot界面.png" alt=""></p>
+<p>其中遇到的一些问题：</p>
+<ol>
+<li><p>前端界面框架没有真正的React化，只使用很少一部分，html页面里，还有大量的js引用配置，css引用配置</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// html引用css部分</span></div><div class="line">&lt;link href=<span class="string">"../../other_js_lib/charisma/css/charisma-app.css"</span> rel=<span class="string">"stylesheet"</span>&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/bower_components/chosen/chosen.min.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/bower_components/colorbox/example3/colorbox.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/jquery.noty.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/noty_theme_default.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/elfinder.min.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/elfinder.theme.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/jquery.iphone.toggle.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/uploadify.css' rel='stylesheet'&gt;</div><div class="line">   &lt;link href='../../other_js_lib/charisma/css/animate.min.css' rel='stylesheet'&gt;</div><div class="line">   </div><div class="line">   // html中大量引用js的部分</div><div class="line">   &lt;!-- select or dropdown enhancer --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/bower_components/chosen/chosen.jquery.min.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- plugin for gallery image view --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/bower_components/colorbox/jquery.colorbox-min.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- notification plugin --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/jquery.noty.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- library for making tables responsive --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/bower_components/responsive-tables/responsive-tables.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- tour plugin --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- star rating plugin --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/jquery.raty.min.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- for iOS style toggle switch --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/jquery.iphone.toggle.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- autogrowing textarea plugin --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/jquery.autogrow-textarea.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- multiple file upload plugin --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/jquery.uploadify-3.1.min.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- history.js for cross-browser state change on ajax --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/jquery.history.js"&gt;&lt;/script&gt;</div><div class="line">   &lt;!-- application script for Charisma demo --&gt;</div><div class="line">   &lt;script src="../../other_js_lib/charisma/js/charisma.js"&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>html过多，每个一个界面就会有一个html页面<br> <img src="robot1html数量.png" alt=""></p>
+</li>
+<li>React界面大的方向使用的是Component开发模式，但每个组件内，还是大最使用最原生的方式开发，下面是其中一个组件的render()方法内部代码：<br> <img src="robot1render方法.png" alt=""></li>
+<li>界面很不好，由于css与js逻辑代码分离，在没有缓存时，经常出现先看到没有样式的界面，再看到整体界面，整体视觉效果很不好</li>
+<li>使用的是browserify的express的中间件：browserify-middleware，虽然能解决开发期间每次执行手动执行转换的功能，但问题是修改界面后，每次都手动需新才行。</li>
+<li>没有适配移动端，在手机版本上的体验很差</li>
+<li>还有很多其他的，都是由上面的问题衍生出来的</li>
+</ol>
+<p>#调研<br>为了解决上面的问题，花了几天时间进行调研，主要的调研点：</p>
+<ol>
+<li>browserify是否可以对css进行模块化支持？<br> 结论：webpack更加合适</li>
+<li>webpack的使用，有没有类似browserify-middleware功能？<br> 结论：webpack-dev-server</li>
+<li>双服务器配置：nodejs+express与webpack-dev-server的理解与如何工作？<br> 结论：思维需要变化，下面会具体介绍  </li>
+<li>React的UI库：<a href="http://www.material-ui.com/#/" target="_blank" rel="external">Material-UI</a>的使用？<br> 结论：官网demo例子只有基本组件的使用，学了后，还是无法创造出想要的效果</li>
+</ol>
+<h1 id="Robot最新框架"><a href="#Robot最新框架" class="headerlink" title="Robot最新框架"></a>Robot最新框架</h1><h2 id="技术集"><a href="#技术集" class="headerlink" title="技术集"></a>技术集</h2><ol>
+<li>后端：<ol>
+<li>Nodejs<ol>
+<li>nodemon</li>
+</ol>
+</li>
+<li>Express</li>
+</ol>
+</li>
+<li>前端:<ol>
+<li>React<ol>
+<li>react-router</li>
+</ol>
+</li>
+<li>Material-UI<ol>
+<li>react-tap-event-plugin</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>打包工具：<ol>
+<li>webpack<ol>
+<li>style-loader</li>
+<li>babel-loader</li>
+<li>webpack-dev-server</li>
+</ol>
+</li>
+<li>babel<ol>
+<li>babel-preset-es2015</li>
+<li>babel-preset-react</li>
+<li>babel-preset-stage-1</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="框架目录结构"><a href="#框架目录结构" class="headerlink" title="框架目录结构"></a>框架目录结构</h2><p><img src="robot目录.png" alt=""></p>
+<h2 id="框架界面"><a href="#框架界面" class="headerlink" title="框架界面"></a>框架界面</h2><iframe height="300" width="100%" src="robot界面视频.mp4" frameborder="0" allowfullscreen></iframe>
+
+<h2 id="具体技术点"><a href="#具体技术点" class="headerlink" title="具体技术点"></a>具体技术点</h2><h3 id="后端Server"><a href="#后端Server" class="headerlink" title="后端Server"></a>后端Server</h3><ol>
+<li>使用nodejs+express创建后台服务。网上很多教程</li>
+<li><p>关键点：</p>
+<ol>
+<li><p>server端的日志输出，把所有请求都通过日志输出</p>
+ <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过使用给express里添加morgan，就可以实现</span></div><div class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line">app.use(logger(<span class="string">'dev'</span>));</div></pre></td></tr></table></figure>
+</li>
+<li><p>实现Server的404异常，利用express的中间件机制原理，实现404找不到页面异常<br> <img src="express中间件.png" alt=""></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 工具中间件</span></div><div class="line">app.use(logger(<span class="string">'dev'</span>));</div><div class="line">app.use(bodyParser.json());</div><div class="line">app.use(bodyParser.urlencoded(&#123; extended: <span class="literal">false</span> &#125;));</div><div class="line">app.use(cookieParser());</div><div class="line"></div><div class="line"><span class="comment">// 业务中间件</span></div><div class="line">app.use(<span class="string">'/'</span>, index);</div><div class="line">app.use(<span class="string">'/users'</span>, users);</div><div class="line"></div><div class="line"><span class="comment">// catch 404 and forward to error handler</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);</div><div class="line">  err.status = <span class="number">404</span>;</div><div class="line">  next(err);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// error handler</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</div><div class="line">  <span class="comment">// set locals, only providing error in development</span></div><div class="line">  res.locals.message = err.message;</div><div class="line">  res.locals.error = req.app.get(<span class="string">'env'</span>) === <span class="string">'development'</span> ? err : &#123;&#125;;</div><div class="line"></div><div class="line">  <span class="comment">// render the error page</span></div><div class="line">  res.status(err.status || <span class="number">500</span>);</div><div class="line">  res.render(<span class="string">'error'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p><a href="https://nodemon.io/" target="_blank" rel="external">nodemon</a>实现改动server端代码后，实现自动重新加载</p>
+</li>
+</ol>
+</li>
+</ol>
+<h3 id="webpack打包配置"><a href="#webpack打包配置" class="headerlink" title="webpack打包配置"></a>webpack打包配置</h3><h4 id="高级特性"><a href="#高级特性" class="headerlink" title="高级特性"></a>高级特性</h4><p>在写React模块时，为了更加方便编写，使用了一些高级特性： </p>
+<ol>
+<li><p>ES6语法</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// es6的模块化引入</span></div><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="comment">// es6的类定义</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Master</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 模块化导出</span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> XXX;</div></pre></td></tr></table></figure>
+</li>
+<li><p>JSX标记</p>
+ <figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> (</div><div class="line">	<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">		...</div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+<li><p>class类的成员变量定义</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注意：在es6的规范中，并不支持成员变量，static变量直接在class里定义，只能如下定义</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Master</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">	<span class="keyword">constructor</span>()&#123;</div><div class="line">		<span class="keyword">this</span>.state = &#123;</div><div class="line">			navDrawerOpen: <span class="literal">false</span></div><div class="line">		&#125;;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 但我们希望使用下面的语法规则</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Master</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">	state = &#123;</div><div class="line">		navDrawerOpen: <span class="literal">false</span></div><div class="line">	&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>上面的高级特性，现在主流的浏览器都还不支持，为了使用，我们就需要进行转换：</p>
+<ol>
+<li>webpack<ul>
+<li>bable-loader // 用于加载babel<ul>
+<li>bable<ul>
+<li>babel-preset-es2015 // 转换es6语法</li>
+<li>babel-preset-react // 转换jsx语法</li>
+<li>babel-preset-stage-1 // 转换成员变量语法</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="开发环境配置"><a href="#开发环境配置" class="headerlink" title="开发环境配置"></a>开发环境配置</h4><ol>
+<li>通过自己搭后台服务与webpack的watch来实现<br> <img src="webpack开发方式一.png" alt=""></li>
+<li>webpack-dev-server，HotModuleReplacementPlugin实现热更新 — 推荐方式<br><img src="webpack开发方式二.png" alt=""></li>
+<li><p>webpack-dev-server.config.js的具体配置(<a href="https://webpack.github.io/docs/webpack-dev-server.html" target="_blank" rel="external">webpack-dev-server配置</a>)：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> webpack = <span class="built_in">require</span>(<span class="string">'webpack'</span>);</div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="comment">// 开发期间把www做为了输出目录，不与正式环境情况发生冲突</span></div><div class="line"><span class="keyword">const</span> buildPath = path.resolve(__dirname, <span class="string">'src/www'</span>);</div><div class="line"></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    entry: [</div><div class="line">        <span class="string">'webpack/hot/dev-server'</span>, <span class="comment">// 热修复配置，这个需要一起合并到app.js里</span></div><div class="line">        path.resolve(__dirname, <span class="string">'src/app/app.js'</span>) <span class="comment">// app的入口</span></div><div class="line">    ],</div><div class="line">    output: &#123;</div><div class="line">        path: buildPath,</div><div class="line">        filename: <span class="string">'app.js'</span></div><div class="line">        <span class="comment">//publicPath: buildPath // 不用特别指定publicPath路径</span></div><div class="line">    &#125;,</div><div class="line">    <span class="comment">// 这个是webpack-dev-server的运行参数</span></div><div class="line">    devServer: &#123;</div><div class="line">        contentBase: path.resolve(__dirname, <span class="string">'src/www'</span>),</div><div class="line">        hot:<span class="literal">true</span>, <span class="comment">// 热修复</span></div><div class="line">        inline: <span class="literal">true</span>, <span class="comment">// 使用热修复，必须是inline模式</span></div><div class="line">        port: <span class="number">8080</span> <span class="comment">// 创建的服务器的port，自由配置</span></div><div class="line">    &#125;,</div><div class="line">    resolve: &#123;</div><div class="line">        extensions: [<span class="string">''</span>, <span class="string">'.js'</span>, <span class="string">'.jsx'</span>, <span class="string">'.css'</span>, <span class="string">'.json'</span>]</div><div class="line">    &#125;,</div><div class="line">    plugins: [</div><div class="line">        <span class="comment">// 让webpack-dev-server支持热更新</span></div><div class="line">        <span class="keyword">new</span> webpack.HotModuleReplacementPlugin()</div><div class="line">    ],</div><div class="line">    <span class="built_in">module</span>: &#123;</div><div class="line">        loaders: [</div><div class="line">            &#123;</div><div class="line">                test: <span class="regexp">/\.js$/</span>,</div><div class="line">                loader: <span class="string">'babel-loader'</span>,</div><div class="line">                exclude: <span class="regexp">/node_modules/</span>,</div><div class="line">                query: &#123;</div><div class="line">                    <span class="string">"presets"</span>: [</div><div class="line">                        <span class="string">"react"</span>, <span class="comment">// 为了支持jsx的语法</span></div><div class="line">                        <span class="string">"es2015"</span>, <span class="comment">// 为了支持es6的语法</span></div><div class="line">                        <span class="string">"stage-1"</span> <span class="comment">// 为了支持class的成员变量与静态变量</span></div><div class="line">                    ]</div><div class="line">                &#125;</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                test: <span class="regexp">/\.css$/</span>,</div><div class="line">                loader: <span class="string">'style-loader!css-loader'</span></div><div class="line">            &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过下面命令运行webpack-dev-server，开发环境配置完成，即可实现修改了js文件后，主动推送更新浏览器</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">	// 先在package.json里配置</div><div class="line">	&quot;scripts&quot;: &#123;</div><div class="line">		&quot;start&quot;: &quot;nodemon ./bin/www&quot;,</div><div class="line">		&quot;browser:development&quot;: &quot;webpack-dev-server --config client/webpack-dev-server.config.js --progress --colors --inline&quot;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	// 命令行里运行</div><div class="line">	npm run browser:development</div><div class="line">	```	</div><div class="line">5. 通过这种方式启动的webpack-dev-server后，通过ctrl-z能停掉服务，但无法释放所占用的8080端口号，需求如下操作，kill掉此端口的占用，才能再次启动。</div></pre></td></tr></table></figure>
+<p> // 查找端口被哪些服务占用<br> lsof -i:8080</p>
+<p> // kill掉此进程<br> kill -9 进程pid</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">6. npm install --save与--save-dev的区别</div><div class="line">	TODO-ly </div><div class="line"></div><div class="line">	</div><div class="line">### 前端框架</div><div class="line">#### 基于React的开发思路变化</div><div class="line"></div><div class="line">**传统开发模式：**</div><div class="line">![](传统开发模式.png)</div><div class="line"></div><div class="line">**React开发模式：**</div><div class="line">![](React开发模式.png)</div><div class="line"></div><div class="line">#### app前端入口</div><div class="line">```javascript</div><div class="line">import React from &apos;react&apos;;</div><div class="line">import &#123;render&#125; from &apos;react-dom&apos;;</div><div class="line">import injectTapEventPlugin from &apos;react-tap-event-plugin&apos;;</div><div class="line"></div><div class="line">import &#123;Router, browserHistory&#125; from &apos;react-router&apos;;</div><div class="line">import &#123;createHashHistory&#125; from &apos;history&apos;;</div><div class="line">import AppRoutes from &apos;./AppRoutes.js&apos;;</div><div class="line"></div><div class="line">// Needed for onTouchTap</div><div class="line">// http://stackoverflow.com/a/34015469/988941</div><div class="line">injectTapEventPlugin();</div><div class="line"></div><div class="line">// &#123;/*没有弄懂这两个配置参数*/&#125;</div><div class="line">render(</div><div class="line">    &lt;Router</div><div class="line">        history=&#123;browserHistory&#125;</div><div class="line">        onUpdate=&#123;() =&gt; window.scrollTo(0, 0)&#125;</div><div class="line">        &gt;</div><div class="line">        &#123;AppRoutes&#125;</div><div class="line">    &lt;/Router&gt;,</div><div class="line">    document.getElementById(&apos;app&apos;)</div><div class="line">);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>app的入口职责很简单：</p>
+<ol>
+<li>路由配置</li>
+<li>通用处理，如material-ui库里的事件初始化：injectTapEventPlugin();</li>
+</ol>
+<p>app的此入口相当于Android里的Application</p>
+<h4 id="app的前端路由"><a href="#app的前端路由" class="headerlink" title="app的前端路由"></a>app的前端路由</h4><p>在android里，一个界面跳转到另外的界面，是通过协议intent与startActivity()方法来实现跳转，其中的核心实现是由系统自己封装掉了</p>
+<p>在前端，界面之前跳转的协议都是URL，再通过window.location.href重新向server请求并加载新页面。</p>
+<p>在React的模式下，跳转协议也是URL，但这个URL不用经过server请求，而是重新加载新模块实现，如下图所示：<br><img src="路由效果.gif" alt=""></p>
+<p>要想实现此效果，不使用React-Router开源框架，我们的写法为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> React = <span class="built_in">require</span>(<span class="string">'react'</span>);</div><div class="line"></div><div class="line"><span class="keyword">var</span> About = React.createClass(&#123;</div><div class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>About<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>这里将会出现N多介绍文字balabala<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> blogs = React.createClass(&#123;</div><div class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>blogs<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"＃"</span>&gt;</span>文章A<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"＃"</span>&gt;</span>文章B<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"＃"</span>&gt;</span>文章C<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">br</span> /&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"＃"</span>&gt;</span>文章D<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> Home = React.createClass(&#123;</div><div class="line">  render: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span>(</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Home<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>这里是首页<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  );&#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="keyword">var</span> App = React.createClass(&#123;</div><div class="line">  render () &#123;</div><div class="line">    <span class="keyword">var</span> Child;</div><div class="line">    <span class="keyword">switch</span> (<span class="keyword">this</span>.props.route) &#123;</div><div class="line">      <span class="keyword">case</span> <span class="string">'about'</span>: Child = About; <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">case</span> <span class="string">'blogs'</span>: Child = blogs; <span class="keyword">break</span>;</div><div class="line">      <span class="keyword">default</span>:      Child = Home;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> (</div><div class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">        <span class="tag">&lt;<span class="name">h1</span>&gt;</span>App<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">Child</span>/&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span> (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> route = <span class="built_in">window</span>.location.hash.substr(<span class="number">1</span>);</div><div class="line">  React.render(<span class="xml"><span class="tag">&lt;<span class="name">App</span> <span class="attr">route</span>=<span class="string">&#123;route&#125;</span> /&gt;</span>, document.body);</span></div><div class="line">&#125;</div><div class="line">window.addEventListener('hashchange', render);</div><div class="line">render();</div></pre></td></tr></table></figure>
+<p>这样实现，也比较容易，但当我们要进行复杂的路由时，就会变的非常麻烦了，所以我们需要使用<a href="https://github.com/ReactTraining/react-router/" target="_blank" rel="external">react-router</a>。</p>
+<p>我们的路由配置AppRoutes.js的代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123;Route, IndexRoute&#125; <span class="keyword">from</span> <span class="string">'react-router'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> Master <span class="keyword">from</span> <span class="string">'./components/Master'</span></div><div class="line"><span class="keyword">import</span> Home <span class="keyword">from</span> <span class="string">'./components/pages/Home'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> AppRouters = (</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">Route</span> <span class="attr">path</span>=<span class="string">"/"</span> <span class="attr">component</span>=<span class="string">&#123;Master&#125;</span>&gt;</span> // 其Master为整体框架</span></div><div class="line">        <span class="tag">&lt;<span class="name">IndexRoute</span> <span class="attr">component</span>=<span class="string">&#123;Home&#125;</span> /&gt;</span> // Home表示首页，注意是：嵌入到框架里的部份</div><div class="line">    <span class="tag">&lt;/<span class="name">Route</span>&gt;</span></div><div class="line">);</div><div class="line"></div><div class="line">export default AppRouters;</div></pre></td></tr></table></figure>
+<p><img src="React的框架.png" alt=""></p>
+<p>更多配置请点击：<a href="https://github.com/ReactTraining/react-router/blob/master/docs/guides/RouteConfiguration.md" target="_blank" rel="external">ReactRouteConfig</a></p>
+<h4 id="Master-js框架的实现"><a href="#Master-js框架的实现" class="headerlink" title="Master.js框架的实现"></a>Master.js框架的实现</h4><h5 id="Material-UI理解-官网"><a href="#Material-UI理解-官网" class="headerlink" title="Material-UI理解 官网"></a>Material-UI理解 <a href="http://www.material-ui.com/#/" target="_blank" rel="external">官网</a></h5><ol>
+<li>Material-UI提供了一套组件库。<a href="http://www.material-ui.com/#/components/app-bar" target="_blank" rel="external">具体请点击</a></li>
+<li>Material-UI还提供了一套样式主题库，颜色库。<a href="http://www.material-ui.com/#/customization/themes" target="_blank" rel="external">具体请点击</a></li>
+</ol>
+<h5 id="Material-UI作用"><a href="#Material-UI作用" class="headerlink" title="Material-UI作用"></a>Material-UI作用</h5><ol>
+<li>使用其提供的组件，可以开发出与Android原生的Design设计库一致的效果</li>
+<li>使用其样式及主题，统一所有的控件与界面的风格，方便统一风格切换</li>
+<li>能方便PC，App的适配，提供的控件及源码里有适配的解决方案</li>
+<li>对React-Native而言，方便统一PC，M，Android，Ios四端的风格样式</li>
+</ol>
+<h5 id="Master-js代码分析"><a href="#Master-js代码分析" class="headerlink" title="Master.js代码分析"></a>Master.js代码分析</h5><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 使用Material-UI的控件</span></div><div class="line"><span class="keyword">import</span> &#123;AppBar, MuiThemeProvider&#125; <span class="keyword">from</span> <span class="string">'material-ui'</span>;</div><div class="line"><span class="comment">// 使用Material-UI的样式主题</span></div><div class="line"><span class="keyword">import</span> &#123;getMuiTheme, colors, spacing&#125; <span class="keyword">from</span> <span class="string">'material-ui/styles'</span>;</div><div class="line"><span class="comment">// 使用Material-UI对屏幕适配</span></div><div class="line"><span class="keyword">import</span> withWidth, &#123;MEDIUM, LARGE&#125; <span class="keyword">from</span> <span class="string">'material-ui/utils/withWidth'</span>;</div><div class="line"></div><div class="line"><span class="comment">// 封装的抽屉Drawer</span></div><div class="line"><span class="keyword">import</span> AppNavDrawer <span class="keyword">from</span> <span class="string">'./AppNavDrawer.js'</span>;</div><div class="line"><span class="comment">// 用于对屏暮大小适配的包装模块</span></div><div class="line"><span class="keyword">import</span> FullWidthSection <span class="keyword">from</span> <span class="string">'./FullWidthSection.js'</span>;</div><div class="line"></div><div class="line"><span class="comment">// Material-UI主题</span></div><div class="line"><span class="keyword">const</span> muiTheme = getMuiTheme();</div><div class="line"><span class="comment">// 此框架页面的一些特殊样式，即样式主题无法满足的自定义部分</span></div><div class="line"><span class="keyword">const</span> styles = &#123;</div><div class="line">    appBar: &#123;</div><div class="line">        position: <span class="string">'fixed'</span>,</div><div class="line">        <span class="comment">// Needed to overlap t  he examples</span></div><div class="line">        zIndex: muiTheme.zIndex.appBar + <span class="number">1</span>,</div><div class="line">        top: <span class="number">0</span>, left: <span class="number">0</span>, right: <span class="number">0</span></div><div class="line">    &#125;,</div><div class="line">    root: &#123;</div><div class="line">        paddingTop: spacing.desktopKeylineIncrement,</div><div class="line">        minHeight: <span class="number">400</span>,</div><div class="line">    &#125;,</div><div class="line">    content: &#123;</div><div class="line">        margin: spacing.desktopGutter,</div><div class="line">    &#125;,</div><div class="line">    footer: &#123;</div><div class="line">        backgroundColor: colors.grey900,</div><div class="line">        textAlign: <span class="string">'center'</span>,</div><div class="line">        position: <span class="string">'fixed'</span>,</div><div class="line">        left:<span class="number">0</span>, right:<span class="number">0</span></div><div class="line">    &#125;,</div><div class="line">    p: &#123;</div><div class="line">        margin: <span class="string">'0 auto'</span>,</div><div class="line">        padding: <span class="number">0</span>,</div><div class="line">        color: colors.lightWhite,</div><div class="line">        maxWidth: <span class="number">356</span>,</div><div class="line">    &#125;,</div><div class="line">    p2: &#123;</div><div class="line">        margin: <span class="string">'0 auto'</span>,</div><div class="line">        padding: <span class="number">0</span>,</div><div class="line">        paddingTop: <span class="string">'5px'</span>,</div><div class="line">        color: colors.red800,</div><div class="line">        maxWidth: <span class="number">356</span>,</div><div class="line">    &#125;,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Master</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    <span class="comment">// React控件的state初始值</span></div><div class="line">    <span class="comment">// 所有的界面变化，都应该通过state来控件，而不是直接操作对应的dom元素</span></div><div class="line">    state = &#123;</div><div class="line">        navDrawerOpen: <span class="literal">false</span> <span class="comment">// 表明抽屉默认是关闭的</span></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">// 处理Drawer的状态变化</span></div><div class="line">    handleChangeRequestNavDrawer = (open)=&gt; &#123;</div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            navDrawerOpen: open</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">// 成员变量，用于处理AppBar左边图片点击事件</span></div><div class="line">    handleTouchTapLeftIconButton = ()=&gt; &#123;</div><div class="line">        <span class="keyword">this</span>.setState(&#123;</div><div class="line">            navDrawerOpen: !<span class="keyword">this</span>.state.navDrawerOpen</div><div class="line">        &#125;);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">// 框架界面</span></div><div class="line">    render()&#123;</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;MuiThemeProvider&gt; // 这个是使用Material-UI必须要添加的，用于提供Material-UI主题样式</div><div class="line">                &lt;div&gt;</div><div class="line">                    &lt;AppBar</div><div class="line">                        onLeftIconButtonTouchTap=&#123;this.handleTouchTapLeftIconButton&#125;</div><div class="line">                        title="Robot"</div><div class="line">                        style=&#123;styles.appBar&#125;/&gt;</div><div class="line">						// 子素元位置</div><div class="line">                    &#123;</div><div class="line">                        &lt;div style=&#123;muiTheme.prepareStyles(styles.root)&#125;&gt;</div><div class="line">                            &lt;div style=&#123;muiTheme.prepareStyles(styles.content)&#125;&gt;</div><div class="line">                                &#123;this.props.children&#125;</div><div class="line">                            &lt;/div&gt;</div><div class="line">                        &lt;/div&gt;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    &lt;AppNavDrawer</div><div class="line">                        onRequestChangeNavDrawer=&#123;this.handleChangeRequestNavDrawer&#125;</div><div class="line">                        open=&#123;this.state.navDrawerOpen&#125;/&gt;</div><div class="line">						// 用于适配屏幕宽度的</div><div class="line">                    &lt;FullWidthSection style=&#123;styles.footer&#125;&gt;</div><div class="line">                        &lt;p style=&#123;muiTheme.prepareStyles(styles.p)&#125;&gt;</div><div class="line">                            &#123;'58同城-用户增长部-无线技术部 '&#125;</div><div class="line">                        &lt;/p&gt;</div><div class="line">                        &lt;p style=&#123;muiTheme.prepareStyles(styles.p2)&#125;&gt;</div><div class="line">                            &#123;' Android组 '&#125;</div><div class="line">                        &lt;/p&gt;</div><div class="line">                    &lt;/FullWidthSection&gt;</div><div class="line">                &lt;/div&gt;</div><div class="line">            &lt;/MuiThemeProvider&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">export default withWidth()(Master);</div></pre></td></tr></table></figure>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://github.com/ReactTraining/react-router/" target="_blank" rel="external">React-Router</a></li>
+<li><a href="http://www.cnblogs.com/Leo_wl/p/4780758.html" target="_blank" rel="external">React 实践记录 03 React router</a></li>
+<li><a href="https://webpack.github.io/docs/webpack-dev-server.html" target="_blank" rel="external">webpack</a></li>
+<li><a href="http://www.material-ui.com/#/" target="_blank" rel="external">material-ui</a></li>
+<li><a href="http://expressjs.com/en/4x/api.html#app.use" target="_blank" rel="external">express</a></li>
+<li><a href="https://nighca.me/2015/12/29/Static-Properties-in-ES-Class/" target="_blank" rel="external">Static Properties in ES Class</a></li>
+<li></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/前端/">前端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/React/">React</a><a href="/tags/Robot/">Robot</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/" data-title="前端学习系列：基于React的Robot框架的踩坑之旅 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2016/11/15/React实现MergeRequest管理/"  title="React实现MergeRequest管理">
+ <strong>下一篇：</strong><br/> 
+ <span>React实现MergeRequest管理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/" data-title="前端学习系列：基于React的Robot框架的踩坑之旅" data-url="http://yoursite.com/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Robot最新框架"><span class="toc-number">2.</span> <span class="toc-text">Robot最新框架</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#技术集"><span class="toc-number">2.1.</span> <span class="toc-text">技术集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架目录结构"><span class="toc-number">2.2.</span> <span class="toc-text">框架目录结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#框架界面"><span class="toc-number">2.3.</span> <span class="toc-text">框架界面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#具体技术点"><span class="toc-number">2.4.</span> <span class="toc-text">具体技术点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#后端Server"><span class="toc-number">2.4.1.</span> <span class="toc-text">后端Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack打包配置"><span class="toc-number">2.4.2.</span> <span class="toc-text">webpack打包配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#高级特性"><span class="toc-number">2.4.2.1.</span> <span class="toc-text">高级特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#开发环境配置"><span class="toc-number">2.4.2.2.</span> <span class="toc-text">开发环境配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#app的前端路由"><span class="toc-number">2.4.2.3.</span> <span class="toc-text">app的前端路由</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Master-js框架的实现"><span class="toc-number">2.4.2.4.</span> <span class="toc-text">Master.js框架的实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Material-UI理解-官网"><span class="toc-number">2.4.2.4.1.</span> <span class="toc-text">Material-UI理解 官网</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Material-UI作用"><span class="toc-number">2.4.2.4.2.</span> <span class="toc-text">Material-UI作用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Master-js代码分析"><span class="toc-number">2.4.2.4.3.</span> <span class="toc-text">Master.js代码分析</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>4</sup></a></li>
+		  
+		
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/nodejs/" title="nodejs">nodejs<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/前端/" title="前端">前端<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot/" title="Robot">Robot<sup>1</sup></a></li>
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"handsomeliuyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
