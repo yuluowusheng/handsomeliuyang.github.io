@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/12/12/%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E6%95%B0%E6%8D%AE%E5%AE%9A%E6%97%B6%E6%B8%85%E7%90%86/</loc>
+    <lastmod>2017-12-14T06:14:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>微信聊天数据定时清理</title>
+        <pubTime>2017-12-12T02:42:49.000Z</pubTime>
+        
+        <tag>自动化测试</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/08/18/%E5%BC%82%E6%88%96%E6%80%BB%E7%BB%93/</loc>
     <lastmod>2017-09-19T09:48:28.000Z</lastmod>
     <data>
@@ -180,28 +200,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/03/16/Gradle%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>Gradle分享</title>
-        <pubTime>2016-03-16T10:15:29.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Gradle</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2016/06/13/2016-04-14-Android%E7%AD%BE%E5%90%8D%E7%9A%84%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
@@ -235,6 +233,24 @@
 
     
   <url>
+    <loc>http://yoursite.com/2016/03/17/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown常用语法</title>
+        <pubTime>2016-03-17T05:05:47.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="hexo" url="http://yoursite.com/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2016/03/16/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
@@ -253,17 +269,21 @@
 
     
   <url>
-    <loc>http://yoursite.com/2016/03/17/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</loc>
+    <loc>http://yoursite.com/2016/03/16/Gradle%E5%88%86%E4%BA%AB/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
         <display>
-        <title>Markdown常用语法</title>
-        <pubTime>2016-03-17T05:05:47.000Z</pubTime>
+        <title>Gradle分享</title>
+        <pubTime>2016-03-16T10:15:29.000Z</pubTime>
         
+        <tag>Android</tag>
+         
+        <tag>Gradle</tag>
+         
          
            
              
-              <breadCrumb title="hexo" url="http://yoursite.com/categories/hexo/"/>
+              <breadCrumb title="Android" url="http://yoursite.com/categories/Android/"/>
           
         </display>
     </data>
