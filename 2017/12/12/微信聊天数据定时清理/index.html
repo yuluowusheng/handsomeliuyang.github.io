@@ -32,8 +32,10 @@ Espresso：UI 测试框架；适合应用中的功能性 UI 测试。
 UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用功能性">
 <meta property="og:image" content="http://yoursite.com/1.png">
 <meta property="og:image" content="http://yoursite.com/无障碍服务框架.png">
+<meta property="og:image" content="http://yoursite.com/uiautomatorviewer.png">
+<meta property="og:image" content="http://yoursite.com/dumpsys.png">
 <meta property="og:image" content="http://yoursite.com/清理流程.png">
-<meta property="og:updated_time" content="2017-12-14T06:14:18.000Z">
+<meta property="og:updated_time" content="2017-12-14T06:48:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="微信聊天数据定时清理">
 <meta name="twitter:description" content="技术方案选择Android测试支持库有：
@@ -117,7 +119,7 @@ UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用�
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#技术方案选择"><span class="toc-number">1.</span> <span class="toc-text">技术方案选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现步骤"><span class="toc-number">2.</span> <span class="toc-text">实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定时机制"><span class="toc-number">2.1.</span> <span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动开启无障碍模式"><span class="toc-number">2.2.</span> <span class="toc-text">自动开启无障碍模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无障碍服务"><span class="toc-number">2.3.</span> <span class="toc-text">无障碍服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍的整体机制"><span class="toc-number">2.3.1.</span> <span class="toc-text">无障碍的整体机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍Api"><span class="toc-number">2.3.2.</span> <span class="toc-text">无障碍Api</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信自动清理聊天记录"><span class="toc-number">2.4.</span> <span class="toc-text">微信自动清理聊天记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#技术方案选择"><span class="toc-number">1.</span> <span class="toc-text">技术方案选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现步骤"><span class="toc-number">2.</span> <span class="toc-text">实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定时机制"><span class="toc-number">2.1.</span> <span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动开启无障碍模式"><span class="toc-number">2.2.</span> <span class="toc-text">自动开启无障碍模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无障碍服务"><span class="toc-number">2.3.</span> <span class="toc-text">无障碍服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍的整体机制"><span class="toc-number">2.3.1.</span> <span class="toc-text">无障碍的整体机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍Api"><span class="toc-number">2.3.2.</span> <span class="toc-text">无障碍Api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UIAutomatorViewer查看ID"><span class="toc-number">2.3.3.</span> <span class="toc-text">UIAutomatorViewer查看ID</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信自动清理聊天记录"><span class="toc-number">2.4.</span> <span class="toc-text">微信自动清理聊天记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
 		
 		</div>
 		
@@ -143,11 +145,16 @@ UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用�
 <h3 id="无障碍Api"><a href="#无障碍Api" class="headerlink" title="无障碍Api"></a>无障碍Api</h3><p>更加详细的文档，请查看<a href="http://informationaccessibilityassociation.github.io/androidAccessibility/services.htm#act-for-users" target="_blank" rel="external">Android开发无障碍指南</a></p>
 <p>总结一些关键点：</p>
 <ol>
-<li>默认情况下，只能看到TextView及其父类，基他ImageView等等都看不到，但通过设置flags |= FLAG_INCLUDE_NOT_IMPORTANT_VIEWS后，可以看到其他没有包含TextView的View</li>
+<li>默认情况下，只能看到TextView及其ParentView，基他ImageView等等都看不到，但通过设置flags |= FLAG_INCLUDE_NOT_IMPORTANT_VIEWS后，可以看到其他没有包含TextView的View</li>
 <li>只能看到标准View，即自定View的父类，无法看到自定View的类名</li>
 <li>只能获取View的Parent，children，Text，ClassName，屏幕坐标，大小，viewId，一些状态（checkable，checked，focusable，focused，selected，clickable，longClickable）</li>
 </ol>
 <p>注意：微信由于使用了资源id混淆技术，不同版本的微信apk，其viewid会变化</p>
+<h3 id="UIAutomatorViewer查看ID"><a href="#UIAutomatorViewer查看ID" class="headerlink" title="UIAutomatorViewer查看ID"></a>UIAutomatorViewer查看ID</h3><p>uiautomatorviewer工具所在目录：Android SDK/tools/bin/uiautomatorviewer</p>
+<p>与dumpsys比较：</p>
+<p><img src="uiautomatorviewer.png" alt=""></p>
+<p><img src="dumpsys.png" alt=""></p>
+<p>结论：uiautomator，uiautomatorviewer，无障碍Api都只能看到TextView及其ParentView，但dumpsys可以看到全部View</p>
 <h2 id="微信自动清理聊天记录"><a href="#微信自动清理聊天记录" class="headerlink" title="微信自动清理聊天记录"></a>微信自动清理聊天记录</h2><p><img src="清理流程.png" alt=""></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAccessibilityEvent</span><span class="params">(AccessibilityEvent event)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (event == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!WECHAT_PACKAGENAME.equals(event.getPackageName())) &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    String beginUUID = SharedPreferenceUtils.getBeginUUID(<span class="keyword">this</span>);</div><div class="line">    String endUUID = SharedPreferenceUtils.getEndUUID(<span class="keyword">this</span>);</div><div class="line">    <span class="keyword">if</span>(beginUUID == <span class="keyword">null</span>) &#123;</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">if</span>(!beginUUID.equals(endUUID)) &#123;</div><div class="line">        SharedPreferenceUtils.updateEndUUID(<span class="keyword">this</span>, beginUUID);</div><div class="line">        hasClickMe = <span class="keyword">false</span>;</div><div class="line">        hasClickSetting = <span class="keyword">false</span>;</div><div class="line">        hasClickChat = <span class="keyword">false</span>;</div><div class="line">        hasEnterClearDialog = <span class="keyword">false</span>;</div><div class="line">        hasClickClear = <span class="keyword">false</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    log(<span class="string">"0000:"</span> + event);</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!hasClickMe) &#123;</div><div class="line">        enterPerson(event);</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!hasClickSetting)&#123;</div><div class="line">        enterSetting(event);</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!hasClickChat)&#123;</div><div class="line">        enterChat(event);</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!hasEnterClearDialog)&#123;</div><div class="line">        enterClearDialog(event);</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(!hasClickClear)&#123;</div><div class="line">        clickClear(event);</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">enterPerson</span><span class="params">(AccessibilityEvent event)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(!<span class="string">"com.tencent.mm.ui.LauncherUI"</span>.equals(event.getClassName()))&#123;</div><div class="line">        <span class="keyword">return</span> ;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">if</span>(AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED == event.getEventType())&#123;</div><div class="line">        <span class="comment">// 查找当前窗口中包含“安装”文字的按钮</span></div><div class="line">        List&lt;AccessibilityNodeInfo&gt; nodes = getRootInActiveWindow().findAccessibilityNodeInfosByViewId(<span class="string">"com.tencent.mm:id/c3f"</span>);</div><div class="line">        AccessibilityNodeInfo myNode = <span class="keyword">null</span>;</div><div class="line">        <span class="keyword">for</span>(AccessibilityNodeInfo node : nodes)&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="string">"我"</span>.equals(node.getText())) &#123;</div><div class="line">                myNode = node;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(myNode == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> ;</div><div class="line">        &#125;</div><div class="line">        myNode.getParent().performAction(AccessibilityNodeInfo.ACTION_CLICK);</div><div class="line">        hasClickMe = <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
@@ -211,7 +218,7 @@ UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用�
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#技术方案选择"><span class="toc-number">1.</span> <span class="toc-text">技术方案选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现步骤"><span class="toc-number">2.</span> <span class="toc-text">实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定时机制"><span class="toc-number">2.1.</span> <span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动开启无障碍模式"><span class="toc-number">2.2.</span> <span class="toc-text">自动开启无障碍模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无障碍服务"><span class="toc-number">2.3.</span> <span class="toc-text">无障碍服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍的整体机制"><span class="toc-number">2.3.1.</span> <span class="toc-text">无障碍的整体机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍Api"><span class="toc-number">2.3.2.</span> <span class="toc-text">无障碍Api</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信自动清理聊天记录"><span class="toc-number">2.4.</span> <span class="toc-text">微信自动清理聊天记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#技术方案选择"><span class="toc-number">1.</span> <span class="toc-text">技术方案选择</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#实现步骤"><span class="toc-number">2.</span> <span class="toc-text">实现步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#定时机制"><span class="toc-number">2.1.</span> <span class="toc-text">定时机制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自动开启无障碍模式"><span class="toc-number">2.2.</span> <span class="toc-text">自动开启无障碍模式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#无障碍服务"><span class="toc-number">2.3.</span> <span class="toc-text">无障碍服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍的整体机制"><span class="toc-number">2.3.1.</span> <span class="toc-text">无障碍的整体机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#无障碍Api"><span class="toc-number">2.3.2.</span> <span class="toc-text">无障碍Api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#UIAutomatorViewer查看ID"><span class="toc-number">2.3.3.</span> <span class="toc-text">UIAutomatorViewer查看ID</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#微信自动清理聊天记录"><span class="toc-number">2.4.</span> <span class="toc-text">微信自动清理聊天记录</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">3.</span> <span class="toc-text">参考</span></a></li></ol>
  
   </div>
 
@@ -274,11 +281,11 @@ UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用�
 			
 		
 			
-				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
+				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
 			
 		
 			
@@ -286,7 +293,7 @@ UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用�
 			
 		
 			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
 			
 		
 			
@@ -294,19 +301,19 @@ UI Automator：UI 测试框架；适合跨系统和已安装应用的跨应用�
 			
 		
 			
+				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+			
+		
+			
 				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
 			
 		
 			
 				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
 			
 		
 		</ul>
