@@ -1,0 +1,781 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>抽屉效果实现三端化（android，ios，web）的历程 | LiuYang&#39;s blog</title>
+
+    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
+
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="LiuYang">
+    
+
+    
+    <meta name="description" content="ReactNative运行通过Native Code的运行命令是：
+1react-native run-android
+具体过程：
+
+启动js server: 用于生成本地打包服务Metro，地址：http://localhost:8081
+编译打包，并安装：cd android &amp;amp;&amp;amp; ./gradlew installDebug
+手机通过http://localhost:8081">
+<meta property="og:type" content="article">
+<meta property="og:title" content="抽屉效果实现三端化（android，ios，web）的历程">
+<meta property="og:url" content="http://yoursite.com/2018/03/04/抽屉效果实现三端化的历程/index.html">
+<meta property="og:site_name" content="LiuYang's blog">
+<meta property="og:description" content="ReactNative运行通过Native Code的运行命令是：
+1react-native run-android
+具体过程：
+
+启动js server: 用于生成本地打包服务Metro，地址：http://localhost:8081
+编译打包，并安装：cd android &amp;amp;&amp;amp; ./gradlew installDebug
+手机通过http://localhost:8081">
+<meta property="og:image" content="http://yoursite.com/drawer.png">
+<meta property="og:updated_time" content="2018-03-07T06:42:54.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="抽屉效果实现三端化（android，ios，web）的历程">
+<meta name="twitter:description" content="ReactNative运行通过Native Code的运行命令是：
+1react-native run-android
+具体过程：
+
+启动js server: 用于生成本地打包服务Metro，地址：http://localhost:8081
+编译打包，并安装：cd android &amp;amp;&amp;amp; ./gradlew installDebug
+手机通过http://localhost:8081">
+<meta name="twitter:image" content="http://yoursite.com/drawer.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
+				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">主页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
+							<label>Search</label>
+						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
+						</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2018/03/04/抽屉效果实现三端化的历程/" title="抽屉效果实现三端化（android，ios，web）的历程" itemprop="url">抽屉效果实现三端化（android，ios，web）的历程</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
+		
+  <p class="article-time">
+    <time datetime="2018-03-03T16:00:00.000Z" itemprop="datePublished"> 发表于 2018-03-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ReactNative运行"><span class="toc-number">1.</span> <span class="toc-text">ReactNative运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#react-native-web部署"><span class="toc-number">2.</span> <span class="toc-text">react-native-web部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三端实现：抽屉效果"><span class="toc-number">3.</span> <span class="toc-text">三端实现：抽屉效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#调研"><span class="toc-number">3.1.</span> <span class="toc-text">调研</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽屉效果实现（方案3）"><span class="toc-number">3.2.</span> <span class="toc-text">抽屉效果实现（方案3）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现弹窗效果"><span class="toc-number">3.2.1.</span> <span class="toc-text">实现弹窗效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现抽屉展开与收起动画"><span class="toc-number">3.2.2.</span> <span class="toc-text">实现抽屉展开与收起动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遮罩层的事件处理"><span class="toc-number">3.2.3.</span> <span class="toc-text">遮罩层的事件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#触发抽屉显示动画"><span class="toc-number">3.2.4.</span> <span class="toc-text">触发抽屉显示动画</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#学习到的技术点（记住）"><span class="toc-number">4.</span> <span class="toc-text">学习到的技术点（记住）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#端口映射-USB连接"><span class="toc-number">4.1.</span> <span class="toc-text">端口映射(USB连接)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数里的this的理解"><span class="toc-number">4.2.</span> <span class="toc-text">函数里的this的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox布局理解"><span class="toc-number">4.3.</span> <span class="toc-text">flexbox布局理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack的resolve-alias"><span class="toc-number">4.4.</span> <span class="toc-text">webpack的resolve.alias</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React的组件之间的交互方式"><span class="toc-number">4.5.</span> <span class="toc-text">React的组件之间的交互方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+		
+		</div>
+		
+		<h1 id="ReactNative运行"><a href="#ReactNative运行" class="headerlink" title="ReactNative运行"></a>ReactNative运行</h1><p>通过Native Code的运行命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">react-native run-android</div></pre></td></tr></table></figure>
+<p>具体过程：</p>
+<ol>
+<li>启动js server: 用于生成本地打包服务Metro，地址：<a href="http://localhost:8081" target="_blank" rel="external">http://localhost:8081</a></li>
+<li>编译打包，并安装：cd android &amp;&amp; ./gradlew installDebug</li>
+<li>手机通过<a href="http://localhost:8081访问js" target="_blank" rel="external">http://localhost:8081访问js</a> server：adb reverse tcp:8081 tcp:8081</li>
+<li>启动App：adb shell am start -n 包名/activity</li>
+<li>App运行时，默认请求bundle的地址为：<a href="http://ip:8081/xxx" target="_blank" rel="external">http://ip:8081/xxx</a></li>
+</ol>
+<p>问题：当电脑切换wifi后，模拟器无法连接js server？<br>原因：电脑的ip地址变了，但App请求bundle地址没有变<br>彻底解决方案：在App里，进入Developer Menu，修改bundle请求地址为：<a href="http://localhost:8081" target="_blank" rel="external">http://localhost:8081</a></p>
+<p><strong>android模拟器快捷键</strong></p>
+<ol>
+<li>Developer Menu： ⌘M</li>
+<li>Reload：two R</li>
+</ol>
+<p>注意：使用x86的模拟器，此模拟器的运行速度与真机一致</p>
+<h1 id="react-native-web部署"><a href="#react-native-web部署" class="headerlink" title="react-native-web部署"></a>react-native-web部署</h1><p>通过ReactNative的Metro编译出的bundle.js文件，只能在对应的App里运行，无法直接在浏览器里运行。</p>
+<p>在不考虑自定义View和Module的情况，要想生成的bundle.js可以直接在浏览器里运行，理论上只需要两步：</p>
+<ol>
+<li>实现一套在浏览器里支持运行的react-native-web库</li>
+<li>不通过Metro打包，通过webpack打包，把react-native-web库替换react-native库，同时打包在一起</li>
+</ol>
+<p>react-native-web已经有实现版本了，详情请查看<a href="https://github.com/necolas/react-native-web" target="_blank" rel="external">react-native-web</a></p>
+<p>相应的webpack的配置过程，请参考：<a href="https://github.com/ndbroadbent/react-native-web-webpack" target="_blank" rel="external">react-native-web-webpack</a></p>
+<p>配置完后，不用对ReactNative代码做任何改动，就能直接在浏览器上支持运行，主要是使用了webpack的alias功能（整体替换react-native库）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">    <span class="attr">alias</span>: &#123;</div><div class="line">        <span class="string">'react-native'</span>: <span class="string">'react-native-web'</span>,</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="三端实现：抽屉效果"><a href="#三端实现：抽屉效果" class="headerlink" title="三端实现：抽屉效果"></a>三端实现：抽屉效果</h1><h2 id="调研"><a href="#调研" class="headerlink" title="调研"></a>调研</h2><p><strong>方案1：</strong>仿照DrawerLayoutAndroid的Api，实现DrawerLayoutIOS和DrawerLayoutWeb两套View</p>
+<p><strong>方案2：</strong>react-navigation库也实现了DrawerLayoutWeb，在webpack如下配置，就可以使用了：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">resolve: &#123;</div><div class="line">    alias: &#123;</div><div class="line">        &apos;react-navigation&apos;: &apos;react-navigation/lib/react-navigation.js&apos;,</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：不是所有的react-navigation版本都能测试成功，1.0.0-beta.10测试通过，但beta.50测试失败<br>更详细的信息：<a href="https://medium.com/@locropulenton/navigating-in-all-platforms-with-react-navigation-673e9a6e963" target="_blank" rel="external">Navigating in all platforms</a></p>
+<p><strong>方案3：</strong>使用基本组件（View，Animated，TouchableWithoutFeedback等），实现DrawerLayout，即可满足三端运行（<a href="https://github.com/react-native-community/react-native-drawer-layout" target="_blank" rel="external">react-native-drawer-layout</a>）</p>
+<p>此方案有一定的适配的问题，可能在android4.x系统里，运行会有一些问题</p>
+<h2 id="抽屉效果实现（方案3）"><a href="#抽屉效果实现（方案3）" class="headerlink" title="抽屉效果实现（方案3）"></a>抽屉效果实现（方案3）</h2><h3 id="实现弹窗效果"><a href="#实现弹窗效果" class="headerlink" title="实现弹窗效果"></a>实现弹窗效果</h3><p><img src="drawer.png" alt=""></p>
+<p>实现分析：</p>
+<ol>
+<li>整体有三层View，最底层是首页，中间是遮罩层，最上层是抽屉</li>
+<li>正常Flexbox布局相当于Android里的LinearLayout布局，但通过position=absolute，与zindex可实现叠加效果，更多请参考<a href="https://www.w3schools.com/cssref/pr_class_position.asp" target="_blank" rel="external">CSS position Property</a></li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&lt;View</div><div class="line">    style=&#123;&#123; flex: 1, backgroundColor: &apos;transparent&apos;&#125;&#125;&gt;</div><div class="line">    &lt;View</div><div class="line">        style=&#123;&#123;</div><div class="line">            flex: 1,</div><div class="line">            zIndex: 0,</div><div class="line">        &#125;&#125;&gt;</div><div class="line">        &#123;this.props.children&#125; // 子布局</div><div class="line">    &lt;/View&gt;</div><div class="line">    &lt;View</div><div class="line">        style=&#123;&#123;</div><div class="line">            backgroundColor: &apos;#000000&apos;,</div><div class="line">            position: &apos;absolute&apos;,</div><div class="line">            top: 0,</div><div class="line">            left: 0,</div><div class="line">            bottom: 0,</div><div class="line">            right: 0,</div><div class="line">            zIndex: 1000,</div><div class="line">        &#125;&#125;&gt;</div><div class="line">    &lt;/View&gt;</div><div class="line">    &lt;View</div><div class="line">        style=&#123;&#123;</div><div class="line">            position: &apos;absolute&apos;,</div><div class="line">            top: 0,</div><div class="line">            bottom: 0,</div><div class="line">            zIndex: 1001</div><div class="line">        &#125;&#125;&gt;</div><div class="line">        &#123;this.props.renderNavigationView()&#125; // 抽屉布局</div><div class="line">    &lt;/View&gt;</div><div class="line">&lt;/View&gt;</div></pre></td></tr></table></figure>
+<h3 id="实现抽屉展开与收起动画"><a href="#实现抽屉展开与收起动画" class="headerlink" title="实现抽屉展开与收起动画"></a>实现抽屉展开与收起动画</h3><iframe height="300" width="100%" src="drawer.mp4" frameborder="0" allowfullscreen></iframe>
+
+<p>两个动画：</p>
+<ol>
+<li>遮罩层渐隐和渐现动画</li>
+<li>抽屉水平移动动画</li>
+</ol>
+<p>2维动画实现的思路比较简单，以遮罩层的渐隐动画为例：</p>
+<ol>
+<li><p>假设当前的透明度为变量x，例用Animated.View的opacity样式</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">..........</div><div class="line">    &lt;Animated.View</div><div class="line">        style=&#123;&#123;</div><div class="line">            backgroundColor: &apos;#000000&apos;,</div><div class="line">            position: &apos;absolute&apos;,</div><div class="line">            top: 0,</div><div class="line">            left: 0,</div><div class="line">            bottom: 0,</div><div class="line">            right: 0,</div><div class="line">            zIndex: 1000,</div><div class="line">            opacity: x  // 设置透明度</div><div class="line">        &#125;&#125;&gt;</div><div class="line">    &lt;/Animated.View&gt;</div><div class="line">   ..........</div></pre></td></tr></table></figure>
+</li>
+<li><p>定时修改变量x，并重新渲染，动画就行成了</p>
+</li>
+</ol>
+<p><strong>真正的实现：</strong></p>
+<ol>
+<li><p>通过变量设置透明度与水平移动理</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">render()&#123;</div><div class="line">    const &#123;drawerWidth, drawerBackgroundColor&#125; = this.props;</div><div class="line"></div><div class="line">    const &#123;openValue, drawerShown&#125; = this.state;</div><div class="line"></div><div class="line">    const dynamicDrawerStyles = &#123;</div><div class="line">        backgroundColor: drawerBackgroundColor,</div><div class="line">        width: drawerWidth,</div><div class="line">        left: 0,</div><div class="line">    &#125;;</div><div class="line">    let drawerTranslateX = openValue.interpolate(&#123;</div><div class="line">        inputRange: [0, 1],</div><div class="line">        outputRange: [-drawerWidth, 0],</div><div class="line">    &#125;);</div><div class="line">    const animatedDrawerStyles = &#123;</div><div class="line">        transform: [&#123; translateX: drawerTranslateX&#125;],</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    const overlayOpacity = openValue.interpolate(&#123;</div><div class="line">        inputRange: [0, 1],</div><div class="line">        outputRange: [0, 0.7],</div><div class="line">    &#125;);</div><div class="line">    const animatedOverlayStyles = &#123;opacity: overlayOpacity&#125;;</div><div class="line"></div><div class="line"></div><div class="line">    const pointerEvents = drawerShown ? &quot;auto&quot; : &quot;none&quot;;</div><div class="line"></div><div class="line">    return (</div><div class="line">        &lt;View</div><div class="line">            style=&#123;&#123; flex: 1, backgroundColor: &apos;transparent&apos;&#125;&#125;&gt;</div><div class="line">            &lt;Animated.View</div><div class="line">                style=&#123;styles.main&#125;&gt;</div><div class="line">                &#123;this.props.children&#125;</div><div class="line">            &lt;/Animated.View&gt;</div><div class="line">            &lt;TouchableWithoutFeedback</div><div class="line">                pointerEvents=&#123;pointerEvents&#125;</div><div class="line">                onPress=&#123;this._onOverlayClick&#125;&gt;</div><div class="line">                &lt;Animated.View</div><div class="line">                    pointerEvents=&#123;pointerEvents&#125;</div><div class="line">                    style=&#123;[styles.overlay, animatedOverlayStyles]&#125;&gt;</div><div class="line">                &lt;/Animated.View&gt;</div><div class="line">            &lt;/TouchableWithoutFeedback&gt;</div><div class="line">            &lt;Animated.View</div><div class="line">                style=&#123;[styles.drawer, dynamicDrawerStyles, animatedDrawerStyles]&#125;&gt;</div><div class="line">                &#123;this.props.renderNavigationView()&#125;</div><div class="line">            &lt;/Animated.View&gt;</div><div class="line">        &lt;/View&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>定时修改变量</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Animated.spring(this.state.openValue, &#123;</div><div class="line">       toValue: 1,</div><div class="line">       bounciness: 0,</div><div class="line">       // restSpeedThreshold: 0.1,</div><div class="line">       useNativeDriver: true</div><div class="line">   &#125;).start();</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>重点知识点：</p>
+<ol>
+<li>css3也有一个transform属性，但这个是ReactNative的transform属性，有区别，其分别对应的文档：<ol>
+<li><a href="https://facebook.github.io/react-native/docs/0.43/transforms.html#transform" target="_blank" rel="external">ReactNative的transform</a></li>
+<li><a href="http://css.cuishifeng.cn/" target="_blank" rel="external">css3的transform</a></li>
+</ol>
+</li>
+<li>translateX属性的范围不是0–1，而实际抽屉的宽度</li>
+<li>渐隐取值范围：[0–0.7]，水平移动画的取值范围：[0–抽屉的宽广]，变量openValue的取值范围：[0–1]。Animated.Value()的interpolate()方法进行转换，使其在同一个维度</li>
+</ol>
+<p><strong>特别注意：</strong>使用Animated.Value变量时，只能在Animated.View里使用，不能直接在View里使用，会出现各种想像不到的问题</p>
+<h3 id="遮罩层的事件处理"><a href="#遮罩层的事件处理" class="headerlink" title="遮罩层的事件处理"></a>遮罩层的事件处理</h3><p>这个比较简单，通过TouchableWithoutFeedback就可以实现</p>
+<p><strong>注意：</strong>overlay设置为全透明后，还是一样可以拦截或透传事件，通过View的pointerEvents属性配制事件传递</p>
+<h3 id="触发抽屉显示动画"><a href="#触发抽屉显示动画" class="headerlink" title="触发抽屉显示动画"></a>触发抽屉显示动画</h3><p>下面是真正的使用DrawerLayout的代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">render()&#123;</div><div class="line">    const navigationView = React.createElement(NavigationScreen); // 抽屉View</div><div class="line">    return (</div><div class="line">        &lt;DrawerLayout</div><div class="line">            drawerWidth=&#123;300&#125;</div><div class="line">            drawerBackgroundColor=&apos;#DAE8FC&apos;</div><div class="line">            renderNavigationView=&#123;()=&gt;navigationView&#125;</div><div class="line">            ref=&#123;(drawer)=&gt;&#123;this.drawerLayout = drawer;&#125;&#125;&gt;</div><div class="line">            &lt;HomeScreen navigate=&#123;this.navigate&#125;/&gt; // 首页</div><div class="line">        &lt;/DrawerLayout&gt;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>真正触发抽屉显示动画的是HomeScreen(首页)，并不是DrawerLayout自已，所以需要使用React的ref属性，把DrawLayout的引用传递给其他View，才能调用其对外提供的Api。</p>
+<h1 id="学习到的技术点（记住）"><a href="#学习到的技术点（记住）" class="headerlink" title="学习到的技术点（记住）"></a>学习到的技术点（记住）</h1><h2 id="端口映射-USB连接"><a href="#端口映射-USB连接" class="headerlink" title="端口映射(USB连接)"></a>端口映射(USB连接)</h2><ol>
+<li><p>在手机设备里通过<a href="http://localhost:port/访问pc上的服务时，使用如下命令：" target="_blank" rel="external">http://localhost:port/访问pc上的服务时，使用如下命令：</a></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb reverse (remote) (local)</div><div class="line">例子：adb -s 设备 reverse tcp:8081 tcp:8081</div></pre></td></tr></table></figure>
+</li>
+<li><p>在pc上通过<a href="http://localhost:port/，访问手机设备上的服务时，使用如下命令：" target="_blank" rel="external">http://localhost:port/，访问手机设备上的服务时，使用如下命令：</a></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">adb forward (local) (remote)</div><div class="line">例子：adb forward tcp:8081 tcp:8081</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h2 id="函数里的this的理解"><a href="#函数里的this的理解" class="headerlink" title="函数里的this的理解"></a>函数里的this的理解</h2><ol>
+<li>this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，实际上this的最终指向的是那个调用它的对象。<a href="http://www.cnblogs.com/pssp/p/5216085.html" target="_blank" rel="external">更多信息</a></li>
+<li>通过.bind()可以修改this的指向</li>
+<li>箭头函数的this，是由定义时的上下文决定，而不是由运行时决定。</li>
+</ol>
+<p>在ES6里，定义类时，其函数的写法有下面两种：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">	constructor()&#123;</div><div class="line">		this.name = &quot;Li&quot;;</div><div class="line">		this.age = &quot;18&quot;;</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	getName()&#123;</div><div class="line">		console.log(&quot;Person.name=&quot; + this.name);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	getAge = ()=&gt;&#123;</div><div class="line">		console.log(&quot;Person.age=&quot; + this.age);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>getName()方法，在下面的场景下会执行有问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">const person = new Person(xxx);</div><div class="line">const tempGetName = person.getName;</div><div class="line">tempGetName(); // this为window</div></pre></td></tr></table></figure>
+<p>要解决这个问题，需要在构造函数里添加：this.getName = this.getName.bind(this)</p>
+<p>getName()与getAge()方法的其他不同点：</p>
+<ol>
+<li><p>getName()定义在原型上，getAge()定义在对象上，当类的对象很多时，比较占内存</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">// getAge()方法相当于在构造函数里创建</div><div class="line">constructor(props)&#123;</div><div class="line">	super(props);</div><div class="line">	</div><div class="line">	this.name = &quot;Li&quot;;</div><div class="line">	this.age = &quot;18&quot;;</div><div class="line">	this.getAge = ()=&gt;&#123;</div><div class="line">		console.log(&quot;Person.age=&quot; + this.age);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// getName()相当于在原型上定义</div><div class="line">Person.prototype.getName = function()&#123;</div><div class="line">	console.log(&quot;Person.age=&quot; + this.age);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>箭头函数的继承的三种情况：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">// 继承1</div><div class="line">class Student extends Person&#123;</div><div class="line">	getAge = ()=&gt;&#123;</div><div class="line">		super.getAge();</div><div class="line">		console.log(&quot;Student.age&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">new Student().getAge();</div><div class="line">// Uncaught TypeError: (intermediate value).getAge is not a function</div><div class="line"></div><div class="line">// 继承2</div><div class="line">class Student extends Person&#123;</div><div class="line">	getAge()&#123;</div><div class="line">		super.getAge();</div><div class="line">		console.log(&quot;Student.age&quot;);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">new Student().getAge();</div><div class="line">// Person.age=18</div><div class="line"></div><div class="line">// 继承3</div><div class="line">class Student extends Person&#123;</div><div class="line">	</div><div class="line">&#125;</div><div class="line">new Student().getAge();</div><div class="line">// Person.age=18</div><div class="line"></div><div class="line">// 继承4</div><div class="line">class Student extends Person&#123;</div><div class="line">	getName()&#123;</div><div class="line">   		super.getName();</div><div class="line">	  	console.log(&quot;Student.name&quot;);</div><div class="line">  	&#125;</div><div class="line">&#125;</div><div class="line">new Student().getName();</div><div class="line">// Person.name=Li</div><div class="line">// Student.name</div><div class="line"></div><div class="line">// 继承5</div><div class="line">class Student extends Person&#123;</div><div class="line">	getName=()=&gt;&#123;</div><div class="line">   		super.getName();</div><div class="line">	  	console.log(&quot;Student.name&quot;);</div><div class="line">  	&#125;</div><div class="line">&#125;</div><div class="line">new Student().getName();</div><div class="line">// Person.name=Li</div><div class="line">// Student.name</div></pre></td></tr></table></figure>
+<p> 结论就是：<font color="#ff0000">箭头函数可以继承，但无法被重写</font></p>
+</li>
+</ol>
+<h2 id="flexbox布局理解"><a href="#flexbox布局理解" class="headerlink" title="flexbox布局理解"></a>flexbox布局理解</h2><ol>
+<li>Flex布局类似于Android里的LinearLayout布局，flexDirection，justifyContent，alignItems，alignSelf</li>
+<li>width，height的值尖似于dip，会依据手机的屏幕进行转换，<a href="https://facebook.github.io/react-native/docs/pixelratio.html" target="_blank" rel="external">PixelRatio更多信息</a></li>
+<li>Flex的布局，默认是一层布局，通过position=absolute，与zindex可实现Android里的RelativeLayout效果。<a href="https://www.w3schools.com/cssref/pr_class_position.asp" target="_blank" rel="external">CSS position Property</a></li>
+</ol>
+<h2 id="webpack的resolve-alias"><a href="#webpack的resolve-alias" class="headerlink" title="webpack的resolve.alias"></a>webpack的resolve.alias</h2><p>可以给import或require设置别名，利用此特性，可以把引入库修改掉，但同时又不用修改源码，<a href="https://doc.webpack-china.org/configuration/resolve/" target="_blank" rel="external">更多信息</a></p>
+<h2 id="React的组件之间的交互方式"><a href="#React的组件之间的交互方式" class="headerlink" title="React的组件之间的交互方式"></a>React的组件之间的交互方式</h2><p>默认情况下，props是父组件与子组件交互的唯一方式，父组件要修改子组件，通过新的props去重新渲染子组件。这种方案可以起到很好的解耦，但在少数情况下，无法满足需求，如抽屉的展开与收起动画。</p>
+<p>这种情况下，可以使用Refs，比较适合使用refs的场景：</p>
+<ol>
+<li>处理focus、文本选择或者媒体播放</li>
+<li>触发强制动画</li>
+<li>集成第三方DOM库</li>
+</ol>
+<p><a href="http://www.css88.com/react/docs/refs-and-the-dom.html" target="_blank" rel="external">更多请参考</a></p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="http://babeljs.io/repl/" target="_blank" rel="external">BABEL在线转换工具</a></li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/大前端/">大前端</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/ReactNative/">ReactNative</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2018/03/04/抽屉效果实现三端化的历程/" data-title="抽屉效果实现三端化（android，ios，web）的历程 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/12/12/微信聊天数据定时清理/"  title="微信聊天数据定时清理">
+ <strong>下一篇：</strong><br/> 
+ <span>微信聊天数据定时清理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section id="comments" class="comment">
+	<div class="ds-thread" data-thread-key="2018/03/04/抽屉效果实现三端化的历程/" data-title="抽屉效果实现三端化（android，ios，web）的历程" data-url="http://yoursite.com/2018/03/04/抽屉效果实现三端化的历程/"></div>
+</section>
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ReactNative运行"><span class="toc-number">1.</span> <span class="toc-text">ReactNative运行</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#react-native-web部署"><span class="toc-number">2.</span> <span class="toc-text">react-native-web部署</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#三端实现：抽屉效果"><span class="toc-number">3.</span> <span class="toc-text">三端实现：抽屉效果</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#调研"><span class="toc-number">3.1.</span> <span class="toc-text">调研</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#抽屉效果实现（方案3）"><span class="toc-number">3.2.</span> <span class="toc-text">抽屉效果实现（方案3）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实现弹窗效果"><span class="toc-number">3.2.1.</span> <span class="toc-text">实现弹窗效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#实现抽屉展开与收起动画"><span class="toc-number">3.2.2.</span> <span class="toc-text">实现抽屉展开与收起动画</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#遮罩层的事件处理"><span class="toc-number">3.2.3.</span> <span class="toc-text">遮罩层的事件处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#触发抽屉显示动画"><span class="toc-number">3.2.4.</span> <span class="toc-text">触发抽屉显示动画</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#学习到的技术点（记住）"><span class="toc-number">4.</span> <span class="toc-text">学习到的技术点（记住）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#端口映射-USB连接"><span class="toc-number">4.1.</span> <span class="toc-text">端口映射(USB连接)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#函数里的this的理解"><span class="toc-number">4.2.</span> <span class="toc-text">函数里的this的理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flexbox布局理解"><span class="toc-number">4.3.</span> <span class="toc-text">flexbox布局理解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#webpack的resolve-alias"><span class="toc-number">4.4.</span> <span class="toc-text">webpack的resolve.alias</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#React的组件之间的交互方式"><span class="toc-number">4.5.</span> <span class="toc-text">React的组件之间的交互方式</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Server/" title="Server">Server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/大前端/" title="大前端">大前端<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/设计/" title="设计">设计<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Robot/" title="Robot">Robot<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/ReactNative/" title="ReactNative">ReactNative<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
+		
+		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"handsomeliuyang"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
