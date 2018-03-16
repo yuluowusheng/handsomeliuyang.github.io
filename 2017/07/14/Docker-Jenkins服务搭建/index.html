@@ -1,124 +1,204 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  
-    <title>Docker-Jenkins服务搭建 | LiuYang&#39;s blog</title>
-
-    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
-
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="LiuYang">
     
 
     
-    <meta name="description" content="Docker介绍Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
-Docker理解
 
-Dockerfile面向开发，Do">
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Docker-Jenkins服务搭建 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="jenkins,docker">
+    <meta name="description" content="Docker介绍Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。 Docker理解">
+<meta name="keywords" content="jenkins,docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker-Jenkins服务搭建">
-<meta property="og:url" content="http://yoursite.com/2017/07/14/Docker-Jenkins服务搭建/index.html">
-<meta property="og:site_name" content="LiuYang's blog">
-<meta property="og:description" content="Docker介绍Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
-Docker理解
-
-Dockerfile面向开发，Do">
-<meta property="og:image" content="http://yoursite.com/docker理解.png">
-<meta property="og:image" content="http://yoursite.com/Docker容器文件系统.png">
-<meta property="og:image" content="http://yoursite.com/docker与虚拟机比较.png">
-<meta property="og:image" content="http://yoursite.com/计算效率.png">
-<meta property="og:image" content="http://yoursite.com/虚拟内存.png">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="Docker介绍Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。 Docker理解">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/docker理解.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/Docker容器文件系统.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/docker与虚拟机比较.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/计算效率.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/虚拟内存.png">
 <meta property="og:updated_time" content="2017-07-25T02:55:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker-Jenkins服务搭建">
-<meta name="twitter:description" content="Docker介绍Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。
-Docker理解
+<meta name="twitter:description" content="Docker介绍Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。 Docker理解">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2017/07/14/Docker-Jenkins服务搭建/docker理解.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
 
-Dockerfile面向开发，Do">
-<meta name="twitter:image" content="http://yoursite.com/docker理解.png">
+    <!-- custom head -->
+    
 
-    
-    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
-    
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
-				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
- 					
-						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/07/14/Docker-Jenkins服务搭建/" title="Docker-Jenkins服务搭建" itemprop="url">Docker-Jenkins服务搭建</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
-		
-  <p class="article-time">
-    <time datetime="2017-07-14T05:28:44.000Z" itemprop="datePublished"> 发表于 2017-07-14</time>
-    
-  </p>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Docker-Jenkins服务搭建</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker介绍"><span class="toc-number">1.</span> <span class="toc-text">Docker介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker理解"><span class="toc-number">1.1.</span> <span class="toc-text">Docker理解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过Docker部署Jenkins的好处"><span class="toc-number">2.</span> <span class="toc-text">通过Docker部署Jenkins的好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker入门介绍"><span class="toc-number">3.</span> <span class="toc-text">Docker入门介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker安装"><span class="toc-number">3.1.</span> <span class="toc-text">Docker安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">3.2.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DockerFile生成Docker镜像"><span class="toc-number">3.2.1.</span> <span class="toc-text">DockerFile生成Docker镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从Docker镜像创建Docker容器"><span class="toc-number">3.2.2.</span> <span class="toc-text">从Docker镜像创建Docker容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据备份"><span class="toc-number">3.2.3.</span> <span class="toc-text">数据备份</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Docker-容器文件系统"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">Docker 容器文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Volume-命令"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">Volume 命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他常用命令"><span class="toc-number">3.2.4.</span> <span class="toc-text">其他常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DockerFile脚本语言"><span class="toc-number">3.3.</span> <span class="toc-text">DockerFile脚本语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">3.3.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FROM-命令"><span class="toc-number">3.3.2.</span> <span class="toc-text">FROM 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAINTAINER-命令"><span class="toc-number">3.3.3.</span> <span class="toc-text">MAINTAINER 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RUN-命令"><span class="toc-number">3.3.4.</span> <span class="toc-text">RUN 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADD-命令"><span class="toc-number">3.3.5.</span> <span class="toc-text">ADD 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#COPY指令"><span class="toc-number">3.3.6.</span> <span class="toc-text">COPY指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ENV-命令"><span class="toc-number">3.3.7.</span> <span class="toc-text">ENV 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXPOSE-命令"><span class="toc-number">3.3.8.</span> <span class="toc-text">EXPOSE 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ENTRYPOINT-命令"><span class="toc-number">3.3.9.</span> <span class="toc-text">ENTRYPOINT 命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成DockerFile的流程"><span class="toc-number">4.</span> <span class="toc-text">生成DockerFile的流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker的容器的性能"><span class="toc-number">5.</span> <span class="toc-text">Docker的容器的性能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
-		
-		</div>
-		
-		<h1 id="Docker介绍"><a href="#Docker介绍" class="headerlink" title="Docker介绍"></a>Docker介绍</h1><p>Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。<br>容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。</p>
-<h2 id="Docker理解"><a href="#Docker理解" class="headerlink" title="Docker理解"></a>Docker理解</h2><p><img src="docker理解.png" alt=""></p>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Docker-Jenkins服务搭建</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-07-14T05:28:44.000Z" itemprop="datePublished" class="page-time">
+  2017-07-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Server/">Server</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Docker介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">Docker介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Docker理解"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Docker理解</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#通过Docker部署Jenkins的好处"><span class="post-toc-number">2.</span> <span class="post-toc-text">通过Docker部署Jenkins的好处</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Docker入门介绍"><span class="post-toc-number">3.</span> <span class="post-toc-text">Docker入门介绍</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Docker安装"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Docker安装</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用命令"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">常用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#DockerFile生成Docker镜像"><span class="post-toc-number">3.2.1.</span> <span class="post-toc-text">DockerFile生成Docker镜像</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#从Docker镜像创建Docker容器"><span class="post-toc-number">3.2.2.</span> <span class="post-toc-text">从Docker镜像创建Docker容器</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#数据备份"><span class="post-toc-number">3.2.3.</span> <span class="post-toc-text">数据备份</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Docker-容器文件系统"><span class="post-toc-number">3.2.3.1.</span> <span class="post-toc-text">Docker 容器文件系统</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#Volume-命令"><span class="post-toc-number">3.2.3.2.</span> <span class="post-toc-text">Volume 命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#其他常用命令"><span class="post-toc-number">3.2.4.</span> <span class="post-toc-text">其他常用命令</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DockerFile脚本语言"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">DockerFile脚本语言</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#格式"><span class="post-toc-number">3.3.1.</span> <span class="post-toc-text">格式</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FROM-命令"><span class="post-toc-number">3.3.2.</span> <span class="post-toc-text">FROM 命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#MAINTAINER-命令"><span class="post-toc-number">3.3.3.</span> <span class="post-toc-text">MAINTAINER 命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#RUN-命令"><span class="post-toc-number">3.3.4.</span> <span class="post-toc-text">RUN 命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ADD-命令"><span class="post-toc-number">3.3.5.</span> <span class="post-toc-text">ADD 命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#COPY指令"><span class="post-toc-number">3.3.6.</span> <span class="post-toc-text">COPY指令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ENV-命令"><span class="post-toc-number">3.3.7.</span> <span class="post-toc-text">ENV 命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#EXPOSE-命令"><span class="post-toc-number">3.3.8.</span> <span class="post-toc-text">EXPOSE 命令</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ENTRYPOINT-命令"><span class="post-toc-number">3.3.9.</span> <span class="post-toc-text">ENTRYPOINT 命令</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#生成DockerFile的流程"><span class="post-toc-number">4.</span> <span class="post-toc-text">生成DockerFile的流程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Docker的容器的性能"><span class="post-toc-number">5.</span> <span class="post-toc-text">Docker的容器的性能</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Docker-Jenkins服务搭建"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Docker-Jenkins服务搭建</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-07-14 13:28:44" datetime="2017-07-14T05:28:44.000Z"  itemprop="datePublished">2017-07-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Server/">Server</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Docker介绍"><a href="#Docker介绍" class="headerlink" title="Docker介绍"></a>Docker介绍</h1><p>Docker 是一个开源的应用容器引擎，基于 Go 语言 并遵从Apache2.0协议开源。可以让开发者打包他们的应用以及依赖包到一个轻量级、可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。<br>容器是完全使用沙箱机制，相互之间不会有任何接口（类似 iPhone 的 app）,更重要的是容器性能开销极低。</p>
+<h2 id="Docker理解"><a href="#Docker理解" class="headerlink" title="Docker理解"></a>Docker理解</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="docker理解.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <ol>
 <li>Dockerfile面向开发，Docker 镜像成为交付标准，Docker 容器则涉及部署与运维</li>
 <li>Docker类似于一个虚拟机，实现资源和系统环境的隔离</li>
@@ -159,7 +239,13 @@ Dockerfile面向开发，Do">
 <li>容器会变的非常的大</li>
 <li>无法共享容器间的数据</li>
 </ol>
-<h4 id="Docker-容器文件系统"><a href="#Docker-容器文件系统" class="headerlink" title="Docker 容器文件系统"></a>Docker 容器文件系统</h4><p><img src="Docker容器文件系统.png" alt=""></p>
+<h4 id="Docker-容器文件系统"><a href="#Docker-容器文件系统" class="headerlink" title="Docker 容器文件系统"></a>Docker 容器文件系统</h4><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="Docker容器文件系统.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <ol>
 <li>Dockerfile  中的每一条命令，都在 Docker 镜像中以一个独立镜像层的形式存在</li>
 <li>Docker 镜像是由 Dockerfile 构建而成，但并不是每一层 Docker 镜像中都含有相应的文件系统文件</li>
@@ -222,8 +308,14 @@ Dockerfile面向开发，Do">
 <li>创建一个最初的容器，再执行成功一个命令后，就添加到DockerFile文件里，等全部OK后，DockerFile也就创建完了</li>
 <li>再整体执行DockerFile文件，查看创建镜像是否成功</li>
 </ol>
-<h1 id="Docker的容器的性能"><a href="#Docker的容器的性能" class="headerlink" title="Docker的容器的性能"></a>Docker的容器的性能</h1><p>具体内容请查看：<a href="http://blog.csdn.net/cbl709/article/details/43955687" target="_blank" rel="external">docker与虚拟机性能比较</a></p>
-<p><img src="docker与虚拟机比较.png" alt=""></p>
+<h1 id="Docker的容器的性能"><a href="#Docker的容器的性能" class="headerlink" title="Docker的容器的性能"></a>Docker的容器的性能</h1><p>具体内容请查看：<a href="http://blog.csdn.net/cbl709/article/details/43955687" target="_blank" rel="noopener">docker与虚拟机性能比较</a></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="docker与虚拟机比较.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <ol>
 <li>docker比虚拟机的优势：<ol>
 <li>docker有着比虚拟机更少的抽象层</li>
@@ -241,547 +333,222 @@ Dockerfile面向开发，Do">
 </li>
 </ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="http://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="external">Docker 教程</a></li>
-<li><a href="http://guide.daocloud.io/dcs/docker-9153976.html" target="_blank" rel="external">一图看尽 docker 容器文件系统</a></li>
-<li><a href="http://blog.csdn.net/cbl709/article/details/43955687" target="_blank" rel="external">docker与虚拟机性能比较</a></li>
+<li><a href="http://www.runoob.com/docker/docker-tutorial.html" target="_blank" rel="noopener">Docker 教程</a></li>
+<li><a href="http://guide.daocloud.io/dcs/docker-9153976.html" target="_blank" rel="noopener">一图看尽 docker 容器文件系统</a></li>
+<li><a href="http://blog.csdn.net/cbl709/article/details/43955687" target="_blank" rel="noopener">docker与虚拟机性能比较</a></li>
 </ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-07-25T02:55:48.000Z" itemprop="dateUpdated">2017-07-25 10:55:48</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jenkins/">jenkins</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Server/">Server</a>
-</div>
-
-
-  <div class="article-tags">
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/08/18/异或总结/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">异或总结</h4>
+      </a>
+    </div>
   
-  <span></span> <a href="/tags/jenkins/">jenkins</a><a href="/tags/docker/">docker</a>
-  </div>
 
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2017/07/14/Docker-Jenkins服务搭建/" data-title="Docker-Jenkins服务搭建 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2017/08/18/异或总结/" title="异或总结">
-  <strong>上一篇：</strong><br/>
-  <span>
-  异或总结</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2017/03/14/Axure设计原型图/"  title="如何设计高保真原型图">
- <strong>下一篇：</strong><br/> 
- <span>如何设计高保真原型图
-</span>
-</a>
-</div>
-
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/03/14/Axure设计原型图/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">如何设计高保真原型图</h4>
+      </a>
+    </div>
+  
 </nav>
 
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/07/14/Docker-Jenkins服务搭建/" data-title="Docker-Jenkins服务搭建" data-url="http://yoursite.com/2017/07/14/Docker-Jenkins服务搭建/"></div>
-</section>
 
 
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+    
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker介绍"><span class="toc-number">1.</span> <span class="toc-text">Docker介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker理解"><span class="toc-number">1.1.</span> <span class="toc-text">Docker理解</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#通过Docker部署Jenkins的好处"><span class="toc-number">2.</span> <span class="toc-text">通过Docker部署Jenkins的好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker入门介绍"><span class="toc-number">3.</span> <span class="toc-text">Docker入门介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Docker安装"><span class="toc-number">3.1.</span> <span class="toc-text">Docker安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常用命令"><span class="toc-number">3.2.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#DockerFile生成Docker镜像"><span class="toc-number">3.2.1.</span> <span class="toc-text">DockerFile生成Docker镜像</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#从Docker镜像创建Docker容器"><span class="toc-number">3.2.2.</span> <span class="toc-text">从Docker镜像创建Docker容器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#数据备份"><span class="toc-number">3.2.3.</span> <span class="toc-text">数据备份</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Docker-容器文件系统"><span class="toc-number">3.2.3.1.</span> <span class="toc-text">Docker 容器文件系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Volume-命令"><span class="toc-number">3.2.3.2.</span> <span class="toc-text">Volume 命令</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他常用命令"><span class="toc-number">3.2.4.</span> <span class="toc-text">其他常用命令</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DockerFile脚本语言"><span class="toc-number">3.3.</span> <span class="toc-text">DockerFile脚本语言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#格式"><span class="toc-number">3.3.1.</span> <span class="toc-text">格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FROM-命令"><span class="toc-number">3.3.2.</span> <span class="toc-text">FROM 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MAINTAINER-命令"><span class="toc-number">3.3.3.</span> <span class="toc-text">MAINTAINER 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RUN-命令"><span class="toc-number">3.3.4.</span> <span class="toc-text">RUN 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ADD-命令"><span class="toc-number">3.3.5.</span> <span class="toc-text">ADD 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#COPY指令"><span class="toc-number">3.3.6.</span> <span class="toc-text">COPY指令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ENV-命令"><span class="toc-number">3.3.7.</span> <span class="toc-text">ENV 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#EXPOSE-命令"><span class="toc-number">3.3.8.</span> <span class="toc-text">EXPOSE 命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ENTRYPOINT-命令"><span class="toc-number">3.3.9.</span> <span class="toc-text">ENTRYPOINT 命令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#生成DockerFile的流程"><span class="toc-number">4.</span> <span class="toc-text">生成DockerFile的流程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Docker的容器的性能"><span class="toc-number">5.</span> <span class="toc-text">Docker的容器的性能</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
- 
-  </div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Server/" title="Server">Server<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/大前端/" title="大前端">大前端<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/设计/" title="设计">设计<sup>1</sup></a></li>
-		  
-		
-		</ul>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
 </div>
 
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Robot/" title="Robot">Robot<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ReactNative/" title="ReactNative">ReactNative<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
-		
-		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
-		
-		
-		</p>
-</div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-});
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3aQW7cQAwEwP3/pxMgpwDJSk1yKOtQOhnGWpqSgSG3h59PfP36c337/d/Xv79PPvntWdefPHbh4eHhtZb+7bpeRMK4ZidryJ/yn1eAh4eHt8a7LgbzRVdf6PV9kjXj4eHhvYF3vejrglFtrCefx8PDw3sPrxo6JCFCb+l4eHh4b+BVm+Ze2egFEA9lLXh4eHi17/uFA7A3/Lx4voeHh4d3dGvO2+7JuEB+t5vV4uHh4S3w8oclEW0eNFSp+auM5sXw8PDwBrykAFRHr6oRRj52kBetm7qHh4eHN+DlB1F5E5wHu/NWPnkpeHh4eBu86sadb/fV+5xqx/Hw8PD2eMnX/l6b27tPtQAcmCbDw8PD62SzzcH9yWF/Xjx6ww14eHh427ze4VNv0qn34ubBBx4eHt6TvMmA1OTgqjegcPN5PDw8vDGvFwpMQttTR2WFGBcPDw9vgdfb4jea6epoV7PK4eHh4Q14vUP63vhUL8jojXnh4eHhPcNLisepsjEZzyoHzXh4eHhrvPwW+dF+NYBI7l9t0PHw8PDO8nqYfGsuRK5x01yIifHw8PAWePm2Xg0LqkdWkyJRjTzw8PDwJrxqG10dIOiVmfz13fxj8PDw8NZ4xypJ6+z+VKsd5dN4eHh4C7y8ta0eVk3GsD6T94qHh4f3CG8jJshfWTUyvkmp8fDw8I7y8qUkcUBvu6+2y+WRLDw8PLyjvN6D80Y8+as8gCh3znh4eHjLvGp5mGz01QLTjJjx8PDwFnhnA99JqFFt4vNGHw8PD2+D13tMXhh6bfT8yA0PDw9vm1fd0KtB7WTpByIJPDw8vB/iJaRk6UmZmRy24eHh4b2Tl0e0eYGpYqJwBA8PD2+Nd+rQKz/uOtWO4+Hh4T3Pq37VrxaAyaLzxv3Y6AAeHh7e1fUbCBppzr7IAUUAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
 
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"handsomeliuyang"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
 
 
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
-
-
-
-<!-- Analytics Begin -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 <script>
-var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
 })();
 </script>
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+</body>
 </html>

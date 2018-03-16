@@ -1,142 +1,204 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  
-    <title>Gradle分享 | LiuYang&#39;s blog</title>
-
-    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
-
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="LiuYang">
     
 
     
-    <meta name="description" content="Gradle是什么
-Gradle是一个自动化构建工具，用来替换ant及maven。
-Gradle的特点：
-具有表达性的语言和强大的API（Gradle的表达性语言称为DSL）
-Gradle就是Groovy，但高于Groovy
-灵活的约定（所有的配置属性都有其默认值，但也可以全部进行配置）
-和其他构建工具的集成（可以与Ant，Maven集成，迁移成功比较低）
-强大的依赖管理（Gradle没有其专有的">
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Gradle分享 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="Android,Gradle">
+    <meta name="description" content="Gradle是什么 Gradle是一个自动化构建工具，用来替换ant及maven。 Gradle的特点： 具有表达性的语言和强大的API（Gradle的表达性语言称为DSL） Gradle就是Groovy，但高于Groovy 灵活的约定（所有的配置属性都有其默认值，但也可以全部进行配置） 和其他构建工具的集成（可以与Ant，Maven集成，迁移成功比较低） 强大的依赖管理（Gradle没有其专有的">
+<meta name="keywords" content="Android,Gradle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Gradle分享">
-<meta property="og:url" content="http://yoursite.com/2016/03/16/Gradle分享/index.html">
-<meta property="og:site_name" content="LiuYang's blog">
-<meta property="og:description" content="Gradle是什么
-Gradle是一个自动化构建工具，用来替换ant及maven。
-Gradle的特点：
-具有表达性的语言和强大的API（Gradle的表达性语言称为DSL）
-Gradle就是Groovy，但高于Groovy
-灵活的约定（所有的配置属性都有其默认值，但也可以全部进行配置）
-和其他构建工具的集成（可以与Ant，Maven集成，迁移成功比较低）
-强大的依赖管理（Gradle没有其专有的">
-<meta property="og:image" content="http://yoursite.com/img_markdown/1.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/2.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/3.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/4.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/5.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/6.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/7.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/8.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/9.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/10.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/11.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/12.png">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2016/03/16/Gradle分享/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="Gradle是什么 Gradle是一个自动化构建工具，用来替换ant及maven。 Gradle的特点： 具有表达性的语言和强大的API（Gradle的表达性语言称为DSL） Gradle就是Groovy，但高于Groovy 灵活的约定（所有的配置属性都有其默认值，但也可以全部进行配置） 和其他构建工具的集成（可以与Ant，Maven集成，迁移成功比较低） 强大的依赖管理（Gradle没有其专有的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/1.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/2.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/3.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/4.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/5.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/6.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/7.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/8.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/9.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/10.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/11.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/12.png">
 <meta property="og:updated_time" content="2016-08-13T08:21:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gradle分享">
-<meta name="twitter:description" content="Gradle是什么
-Gradle是一个自动化构建工具，用来替换ant及maven。
-Gradle的特点：
-具有表达性的语言和强大的API（Gradle的表达性语言称为DSL）
-Gradle就是Groovy，但高于Groovy
-灵活的约定（所有的配置属性都有其默认值，但也可以全部进行配置）
-和其他构建工具的集成（可以与Ant，Maven集成，迁移成功比较低）
-强大的依赖管理（Gradle没有其专有的">
-<meta name="twitter:image" content="http://yoursite.com/img_markdown/1.png">
+<meta name="twitter:description" content="Gradle是什么 Gradle是一个自动化构建工具，用来替换ant及maven。 Gradle的特点： 具有表达性的语言和强大的API（Gradle的表达性语言称为DSL） Gradle就是Groovy，但高于Groovy 灵活的约定（所有的配置属性都有其默认值，但也可以全部进行配置） 和其他构建工具的集成（可以与Ant，Maven集成，迁移成功比较低） 强大的依赖管理（Gradle没有其专有的">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/img_markdown/1.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
 
+    <!-- custom head -->
     
-    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
-    
-    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
-				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
- 					
-						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/03/16/Gradle分享/" title="Gradle分享" itemprop="url">Gradle分享</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
-		
-  <p class="article-time">
-    <time datetime="2016-03-16T10:15:29.000Z" itemprop="datePublished"> 发表于 2016-03-16</time>
-    
-  </p>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Gradle分享</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Gradle是什么"><span class="toc-number">1.</span> <span class="toc-text">Gradle是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gradle的脚本里的语法"><span class="toc-number">2.</span> <span class="toc-text">Gradle的脚本里的语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradle脚本例子"><span class="toc-number">2.1.</span> <span class="toc-text">Gradle脚本例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradle的DSL与API对应"><span class="toc-number">2.2.</span> <span class="toc-text">Gradle的DSL与API对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义Task的几种方法"><span class="toc-number">2.3.</span> <span class="toc-text">定义Task的几种方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Gradle插件相关："><span class="toc-number">2.4.</span> <span class="toc-text">Android-Gradle插件相关：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gradle的生命周期"><span class="toc-number">3.</span> <span class="toc-text">Gradle的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gradle运行例子"><span class="toc-number">3.1.</span> <span class="toc-text">gradle运行例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradle的底层运行过程："><span class="toc-number">3.2.</span> <span class="toc-text">Gradle的底层运行过程：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task相关"><span class="toc-number">4.</span> <span class="toc-text">Task相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#依赖管理"><span class="toc-number">5.</span> <span class="toc-text">依赖管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参与文档："><span class="toc-number">6.</span> <span class="toc-text">参与文档：</span></a></li></ol>
-		
-		</div>
-		
-		<h1 id="Gradle是什么"><a href="#Gradle是什么" class="headerlink" title="Gradle是什么"></a>Gradle是什么</h1><ol>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Gradle分享</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-03-16T10:15:29.000Z" itemprop="datePublished" class="page-time">
+  2016-03-16
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Gradle是什么"><span class="post-toc-number">1.</span> <span class="post-toc-text">Gradle是什么</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Gradle的脚本里的语法"><span class="post-toc-number">2.</span> <span class="post-toc-text">Gradle的脚本里的语法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle脚本例子"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">Gradle脚本例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle的DSL与API对应"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Gradle的DSL与API对应</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定义Task的几种方法"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">定义Task的几种方法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Android-Gradle插件相关："><span class="post-toc-number">2.4.</span> <span class="post-toc-text">Android-Gradle插件相关：</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Gradle的生命周期"><span class="post-toc-number">3.</span> <span class="post-toc-text">Gradle的生命周期</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#gradle运行例子"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">gradle运行例子</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Gradle的底层运行过程："><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Gradle的底层运行过程：</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Task相关"><span class="post-toc-number">4.</span> <span class="post-toc-text">Task相关</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#依赖管理"><span class="post-toc-number">5.</span> <span class="post-toc-text">依赖管理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参与文档："><span class="post-toc-number">6.</span> <span class="post-toc-text">参与文档：</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Gradle分享"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Gradle分享</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-03-16 18:15:29" datetime="2016-03-16T10:15:29.000Z"  itemprop="datePublished">2016-03-16</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Android/">Android</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Gradle是什么"><a href="#Gradle是什么" class="headerlink" title="Gradle是什么"></a>Gradle是什么</h1><ol>
 <li>Gradle是一个自动化构建工具，用来替换ant及maven。</li>
 <li>Gradle的特点：<ol>
 <li>具有表达性的语言和强大的API（Gradle的表达性语言称为DSL）</li>
@@ -147,7 +209,14 @@ Gradle就是Groovy，但高于Groovy
 <li>扩展非常方便</li>
 </ol>
 </li>
-<li>Groovy与Java的关系：<br><img src="/img_markdown/1.png" alt=""></li>
+<li>Groovy与Java的关系：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
 </ol>
 <h1 id="Gradle的脚本里的语法"><a href="#Gradle的脚本里的语法" class="headerlink" title="Gradle的脚本里的语法"></a>Gradle的脚本里的语法</h1><h2 id="Gradle脚本例子"><a href="#Gradle脚本例子" class="headerlink" title="Gradle脚本例子"></a>Gradle脚本例子</h2><p>脚本build.gradle, 如：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">task</span> hello1 &lt;&lt; &#123;</div><div class="line">    <span class="keyword">println</span> <span class="string">'hello1'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>上面的代码使用DSL定义了一个Task</p>
@@ -174,30 +243,74 @@ Gradle就是Groovy，但高于Groovy
 4. 每个task都是interface Task的子类，上面创建的hello1是DefaultTask的对象
 5. 在build.gradle里可以使用DSL写代码，也可以使用Java语法或Groovy语法来写代码。
 </code></pre><h2 id="定义Task的几种方法"><a href="#定义Task的几种方法" class="headerlink" title="定义Task的几种方法"></a>定义Task的几种方法</h2><ol>
-<li>使用DSL方式来定义<br><img src="/img_markdown/2.png" alt=""><br> 特点：<ol>
+<li>使用DSL方式来定义<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+ 特点：<ol>
 <li>都是DefaultTask类的子类</li>
 <li>都是相当于调用doLast()方法，把闭包传入一个队列里，当task的方法执行完后，再进行调用，和Android的Hander比较类似。</li>
 <li>注意：上面都不是方法定义，都是方法调用，</li>
 </ol>
 </li>
-<li>自定义Task类和方法<br><img src="/img_markdown/3.png" alt=""><br> 特点：<ol>
+<li>自定义Task类和方法<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/3.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+ 特点：<ol>
 <li>由于Gradle使用的是Groovy，所以只有在定义类时，才能定义方法，其他DSL里的，都是调用方法。</li>
 <li>由于Gradle是一种脚本语言，其运行时，不用手动将java类转化为class文件，才能执行，而是可以直接编译，解释执行。</li>
 </ol>
 </li>
 </ol>
 <h2 id="Android-Gradle插件相关："><a href="#Android-Gradle插件相关：" class="headerlink" title="Android-Gradle插件相关："></a>Android-Gradle插件相关：</h2><ol>
-<li>Android插件的DSL：<a href="http://google.github.io/android-gradle-dsl/" target="_blank" rel="external">http://google.github.io/android-gradle-dsl/</a></li>
+<li>Android插件的DSL：<a href="http://google.github.io/android-gradle-dsl/" target="_blank" rel="noopener">http://google.github.io/android-gradle-dsl/</a></li>
 </ol>
 <h1 id="Gradle的生命周期"><a href="#Gradle的生命周期" class="headerlink" title="Gradle的生命周期"></a>Gradle的生命周期</h1><h2 id="gradle运行例子"><a href="#gradle运行例子" class="headerlink" title="gradle运行例子"></a>gradle运行例子</h2><p>当我们有一个build.gradle的脚本，内容如下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">task</span> helloWorld &lt;&lt; &#123;</div><div class="line">    <span class="keyword">println</span> <span class="string">'hello, world'</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>执行Task:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ gradle -q helloWorld</div><div class="line">hello, world</div></pre></td></tr></table></figure></p>
-<h2 id="Gradle的底层运行过程："><a href="#Gradle的底层运行过程：" class="headerlink" title="Gradle的底层运行过程："></a>Gradle的底层运行过程：</h2><p><img src="/img_markdown/4.png" alt=""></p>
+<h2 id="Gradle的底层运行过程："><a href="#Gradle的底层运行过程：" class="headerlink" title="Gradle的底层运行过程："></a>Gradle的底层运行过程：</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/4.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h1 id="Task相关"><a href="#Task相关" class="headerlink" title="Task相关"></a>Task相关</h1><ol>
-<li>为了方便对编译过程进行干预，每个Task都有一个doFirst()和doLast()方法，可以不断的给Task的两个执行对列添加闭包对象，等Task执行时，再依次执行，如下图所示：<br><img src="/img_markdown/5.png" alt=""></li>
+<li>为了方便对编译过程进行干预，每个Task都有一个doFirst()和doLast()方法，可以不断的给Task的两个执行对列添加闭包对象，等Task执行时，再依次执行，如下图所示：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/5.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
 <li>可以访问DefaultTask里的任何属性，在Groovy里，属性会自动创建对应的getXXX()，setXXX()方法</li>
-<li>默认创建的task对象，都是DefaultTask类的对象，可以修改其对象类型，如下：<br><img src="/img_markdown/6.png" alt=""></li>
-<li>Task之间可以创建其依赖，等特其他Task执行完之后，再进行执行，定义依赖：<br><img src="/img_markdown/7.png" alt=""></li>
-<li>理解Task的配置阶段及执行阶段<br><img src="/img_markdown/8.png" alt=""></li>
+<li>默认创建的task对象，都是DefaultTask类的对象，可以修改其对象类型，如下：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/6.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>Task之间可以创建其依赖，等特其他Task执行完之后，再进行执行，定义依赖：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/7.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>理解Task的配置阶段及执行阶段<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/8.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
 <li>task的inputs及outputs</li>
 </ol>
 <p>判断一个Task是否执行，是通过判断其inputs及outputs是否有改动，如果有改动时，才会执行。<br>定议Task的的inputs和outputs是在定义Task类时，通过注解添加的，对应DefaultTask里有两个属性：inputs: TaskInputs  outputs: TaskOutputs<br>通过gradle xxx -d可以看到task的inputs及outputs</p>
@@ -209,9 +322,16 @@ Gradle就是Groovy，但高于Groovy
 <li>经常出现依赖jar版本不合适的问题<br>依赖管理就是为了解上面这些问题，而引入的。</li>
 </ol>
 </li>
-<li>Gradle的依赖管理，Maven仓库，本地依赖缓存<br><img src="/img_markdown/9.png" alt=""><br> 总结：<ol>
-<li>Android-Cradle插件的Maven仓库地址：<a href="http://mvnrepository.com/artifact/com.android.tools.build/gradle" target="_blank" rel="external">http://mvnrepository.com/artifact/com.android.tools.build/gradle</a></li>
-<li>58同城的Maven仓库地址：<a href="http://artifactory.58corp.com:8081/artifactory/webapp/browserepo.html?6" target="_blank" rel="external">http://artifactory.58corp.com:8081/artifactory/webapp/browserepo.html?6</a></li>
+<li>Gradle的依赖管理，Maven仓库，本地依赖缓存<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/9.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+ 总结：<ol>
+<li>Android-Cradle插件的Maven仓库地址：<a href="http://mvnrepository.com/artifact/com.android.tools.build/gradle" target="_blank" rel="noopener">http://mvnrepository.com/artifact/com.android.tools.build/gradle</a></li>
+<li>58同城的Maven仓库地址：<a href="http://artifactory.58corp.com:8081/artifactory/webapp/browserepo.html?6" target="_blank" rel="noopener">http://artifactory.58corp.com:8081/artifactory/webapp/browserepo.html?6</a></li>
 <li>本地的依赖缓存的地址：.gradle/caches/modules-2/files-2.1<ol>
 <li>查看本地缓存地址的方法：输出configurations里的dependency对象，就可以知道其保存地址</li>
 <li>通过gradle xxx -d输出完整地址，仔细去读里面的日志，也可以知道其保存地址</li>
@@ -234,552 +354,227 @@ Gradle就是Groovy，但高于Groovy
 <li>a库关联b库，同时关联c的源码，b库关系c库的aar<br>问题原因：c的源码库及c库的aar不是同一个库，会当作不同的库进行处理，因为其group不一样<br>解决方案：</li>
 <li>只引入b库的aar，不引入b库的关联库c，如下所示：<br><img src="/img_markdown/10.png" alt=""></li>
 <li>使用排除法，排除b库的c库就行，如下所示：<br><img src="/img_markdown/11.png" alt=""></li>
-<li>更多的配置文档：<a href="https://docs.gradle.org/current/javadoc/" target="_blank" rel="external">https://docs.gradle.org/current/javadoc/</a>里的DependencyHandler</li>
+<li>更多的配置文档：<a href="https://docs.gradle.org/current/javadoc/" target="_blank" rel="noopener">https://docs.gradle.org/current/javadoc/</a>里的DependencyHandler</li>
 </ol>
 </li>
 <li>灵活的版本号及本地缓存更新<br> 如果想一直使用最新版本，可以使用动态版本本声明：com.wuba.wuxian.lib:WubaCommonsLib:2.0.0+，但希望不要这样使用，如果最新的版本，其兼容有问题，这样会影响现有代码运行。<br> 如果正在开发调试WubaCommonsLib期间，这时，定义版本号时，可以使用快照版本号，-SNAPSHOT。把版本号定义为-SNAPSHOT时，gradle的依赖管理，会使用最新的快照库<br> 如果本地版本库有缓存后，如果想使用最新的依赖版本，这时，就要修改本地缓存策略，如下所示：<br> <img src="/img_markdown/12.png" alt=""></li>
 </ol>
 <h1 id="参与文档："><a href="#参与文档：" class="headerlink" title="参与文档："></a>参与文档：</h1><ol>
-<li>Gradle深入与实战：<a href="http://benweizhu.github.io/blog/2015/03/31/deep-into-gradle-in-action-6/" target="_blank" rel="external">http://benweizhu.github.io/blog/2015/03/31/deep-into-gradle-in-action-6/</a></li>
+<li>Gradle深入与实战：<a href="http://benweizhu.github.io/blog/2015/03/31/deep-into-gradle-in-action-6/" target="_blank" rel="noopener">http://benweizhu.github.io/blog/2015/03/31/deep-into-gradle-in-action-6/</a></li>
 <li>《实战Gradle》</li>
 </ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-08-13T08:21:13.000Z" itemprop="dateUpdated">2016-08-13 16:21:13</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Gradle/">Gradle</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/Android/">Android</a>
-</div>
-
-
-  <div class="article-tags">
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/03/16/托管博客到Coding/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">托管博客到Coding</h4>
+      </a>
+    </div>
   
-  <span></span> <a href="/tags/Android/">Android</a><a href="/tags/Gradle/">Gradle</a>
-  </div>
 
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2016/03/16/Gradle分享/" data-title="Gradle分享 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/03/16/托管博客到Coding/" title="托管博客到Coding">
-  <strong>上一篇：</strong><br/>
-  <span>
-  托管博客到Coding</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2016/03/16/Hexo搭建个人博客/"  title="Hexo搭建个人博客">
- <strong>下一篇：</strong><br/> 
- <span>Hexo搭建个人博客
-</span>
-</a>
-</div>
-
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/16/Hexo搭建个人博客/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Hexo搭建个人博客</h4>
+      </a>
+    </div>
+  
 </nav>
 
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/03/16/Gradle分享/" data-title="Gradle分享" data-url="http://yoursite.com/2016/03/16/Gradle分享/"></div>
-</section>
 
 
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+    
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Gradle是什么"><span class="toc-number">1.</span> <span class="toc-text">Gradle是什么</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gradle的脚本里的语法"><span class="toc-number">2.</span> <span class="toc-text">Gradle的脚本里的语法</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradle脚本例子"><span class="toc-number">2.1.</span> <span class="toc-text">Gradle脚本例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradle的DSL与API对应"><span class="toc-number">2.2.</span> <span class="toc-text">Gradle的DSL与API对应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#定义Task的几种方法"><span class="toc-number">2.3.</span> <span class="toc-text">定义Task的几种方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android-Gradle插件相关："><span class="toc-number">2.4.</span> <span class="toc-text">Android-Gradle插件相关：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Gradle的生命周期"><span class="toc-number">3.</span> <span class="toc-text">Gradle的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#gradle运行例子"><span class="toc-number">3.1.</span> <span class="toc-text">gradle运行例子</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Gradle的底层运行过程："><span class="toc-number">3.2.</span> <span class="toc-text">Gradle的底层运行过程：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Task相关"><span class="toc-number">4.</span> <span class="toc-text">Task相关</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#依赖管理"><span class="toc-number">5.</span> <span class="toc-text">依赖管理</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参与文档："><span class="toc-number">6.</span> <span class="toc-text">参与文档：</span></a></li></ol>
- 
-  </div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Server/" title="Server">Server<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/大前端/" title="大前端">大前端<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/设计/" title="设计">设计<sup>1</sup></a></li>
-		  
-		
-		</ul>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
 </div>
 
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Robot/" title="Robot">Robot<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ReactNative/" title="ReactNative">ReactNative<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
-		
-		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
-		
-		
-		</p>
-</div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-});
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMYAAADGCAAAAACs8KCBAAACLElEQVR42u3aQW7DMAwF0dz/0u62QGtnPqmmEDVaBYkt+bkAS4p6vfC4vo27X8mVz3Pye4tDhgwZ2zKux0GueV745zzPeL6uDBkyTmPw5UncqwVuvq4MGTJkkOl4SkeuJEFZhgwZMvqB7y6xI2noP//fkCFDxiYMUsTWHp2HbFLcLqjFZciQsSEjLU0/+flP+hsyZMjYinGFo9NOSDfjgqeSIUPGaAYPcCRlJKkhb1XGhz9kyJAxlNEPo2kB3G8b/PKNDBkyDmDwmztbb3wLL15LhgwZBzNIUA7CIriXv0qUt8qQIWMoo9OATJugZIbWMQsZMmSMYPAH6oTF+IFKB9RkyJAxm9EvUEn/Ib1+8V9GhgwZ2zL6KVqtkZAG5TehX4YMGccweApIvidJZP/QRmKVIUPG3oz0c9oS+OiZERkyZIxj8IV5eVnbvFuGkSFDxjhGf9O/s1lG2hJoNhkyZIxmFNMvzHgud8mvvJCWIUPGbAYpWdMmAS9lO0mnDBkyTmOkB0xXUTvz33Y5ZMiQcQCDB0RyV+1wWHwoTYYMGccw0mRucXeiUTDLkCFjKuMKR61V2W98vgncMmTIGM2ohbn+xlna1FwWsmXIkLEtgwdZvnFGWpiLX5kMGTIOYPAtM/4KyF21gx0Ldv5kyJAxmlFrbQb7fzWqDBkyZICt/zQ0dxLK2/aADBkyRjPSZkAacPkMaSEtQ4aMExit0rEUItO0b1kjU4YMGfsxvgDlL7wqaEO+hQAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
 
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"handsomeliuyang"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
 
 
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
-
-
-
-<!-- Analytics Begin -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 <script>
-var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
 })();
 </script>
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+</body>
 </html>

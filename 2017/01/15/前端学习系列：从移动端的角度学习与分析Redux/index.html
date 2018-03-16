@@ -1,128 +1,199 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  
-    <title>前端学习系列2：从移动端的角度学习与分析Redux | LiuYang&#39;s blog</title>
-
-    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
-
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="LiuYang">
     
 
     
-    <meta name="description" content="遇到的问题通过上往篇文章前端学习系列：基于React的Robot框架的踩坑之旅介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：
 
-所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题
-子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法）
-无法">
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>前端学习系列2：从移动端的角度学习与分析Redux | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="React,Robot,nodejs">
+    <meta name="description" content="遇到的问题通过上往篇文章前端学习系列：基于React的Robot框架的踩坑之旅介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：  所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题 子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法） 无法">
+<meta name="keywords" content="React,Robot,nodejs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="前端学习系列2：从移动端的角度学习与分析Redux">
-<meta property="og:url" content="http://yoursite.com/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/index.html">
-<meta property="og:site_name" content="LiuYang's blog">
-<meta property="og:description" content="遇到的问题通过上往篇文章前端学习系列：基于React的Robot框架的踩坑之旅介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：
-
-所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题
-子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法）
-无法">
-<meta property="og:image" content="http://yoursite.com/redux框架.png">
-<meta property="og:image" content="http://yoursite.com/todos例子.png">
-<meta property="og:image" content="http://yoursite.com/redux_reducer.png">
-<meta property="og:image" content="http://yoursite.com/redux框架_1.png">
-<meta property="og:image" content="http://yoursite.com/容器组件与展示组件区别.png">
-<meta property="og:image" content="http://yoursite.com/provider.png">
-<meta property="og:image" content="http://yoursite.com/中间件.png">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="遇到的问题通过上往篇文章前端学习系列：基于React的Robot框架的踩坑之旅介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：  所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题 子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法） 无法">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/redux框架.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/todos例子.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/redux_reducer.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/redux框架_1.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/容器组件与展示组件区别.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/provider.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/中间件.png">
 <meta property="og:updated_time" content="2017-02-20T12:24:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="前端学习系列2：从移动端的角度学习与分析Redux">
-<meta name="twitter:description" content="遇到的问题通过上往篇文章前端学习系列：基于React的Robot框架的踩坑之旅介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：
+<meta name="twitter:description" content="遇到的问题通过上往篇文章前端学习系列：基于React的Robot框架的踩坑之旅介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：  所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题 子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法） 无法">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/redux框架.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
 
-所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题
-子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法）
-无法">
-<meta name="twitter:image" content="http://yoursite.com/redux框架.png">
+    <!-- custom head -->
+    
 
-    
-    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
-    
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
-				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
- 					
-						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/" title="前端学习系列2：从移动端的角度学习与分析Redux" itemprop="url">前端学习系列2：从移动端的角度学习与分析Redux</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
-		
-  <p class="article-time">
-    <time datetime="2017-01-15T08:00:00.000Z" itemprop="datePublished"> 发表于 2017-01-15</time>
-    
-  </p>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">前端学习系列2：从移动端的角度学习与分析Redux</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到的问题"><span class="toc-number">1.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux动机"><span class="toc-number">2.</span> <span class="toc-text">Redux动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运行todos例子"><span class="toc-number">3.</span> <span class="toc-text">运行todos例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux实现"><span class="toc-number">4.</span> <span class="toc-text">Redux实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux扩展"><span class="toc-number">5.</span> <span class="toc-text">Redux扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#reducer的拆分"><span class="toc-number">5.1.</span> <span class="toc-text">reducer的拆分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#combineReducers-reducers"><span class="toc-number">5.1.1.</span> <span class="toc-text">combineReducers(reducers)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用与监听优化"><span class="toc-number">5.2.</span> <span class="toc-text">调用与监听优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#react-redux"><span class="toc-number">5.2.1.</span> <span class="toc-text">react-redux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Middleware中间件"><span class="toc-number">5.3.</span> <span class="toc-text">Middleware中间件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux在实际项目中的好处"><span class="toc-number">6.</span> <span class="toc-text">Redux在实际项目中的好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
-		
-		</div>
-		
-		<h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>通过上往篇文章<a href="https://handsomeliuyang.github.io/2016/12/30/Robot%E6%A1%86%E6%9E%B6-Nodejs+Express+React+MaterialUI/" target="_blank" rel="external">前端学习系列：基于React的Robot框架的踩坑之旅</a>介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：</p>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">前端学习系列2：从移动端的角度学习与分析Redux</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-01-15T08:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-01-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#遇到的问题"><span class="post-toc-number">1.</span> <span class="post-toc-text">遇到的问题</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Redux动机"><span class="post-toc-number">2.</span> <span class="post-toc-text">Redux动机</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行todos例子"><span class="post-toc-number">3.</span> <span class="post-toc-text">运行todos例子</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Redux实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">Redux实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Redux扩展"><span class="post-toc-number">5.</span> <span class="post-toc-text">Redux扩展</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reducer的拆分"><span class="post-toc-number">5.1.</span> <span class="post-toc-text">reducer的拆分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#combineReducers-reducers"><span class="post-toc-number">5.1.1.</span> <span class="post-toc-text">combineReducers(reducers)</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#调用与监听优化"><span class="post-toc-number">5.2.</span> <span class="post-toc-text">调用与监听优化</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#react-redux"><span class="post-toc-number">5.2.1.</span> <span class="post-toc-text">react-redux</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Middleware中间件"><span class="post-toc-number">5.3.</span> <span class="post-toc-text">Middleware中间件</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Redux在实际项目中的好处"><span class="post-toc-number">6.</span> <span class="post-toc-text">Redux在实际项目中的好处</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">7.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-前端学习系列：从移动端的角度学习与分析Redux"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">前端学习系列2：从移动端的角度学习与分析Redux</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-01-15 16:00:00" datetime="2017-01-15T08:00:00.000Z"  itemprop="datePublished">2017-01-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h1><p>通过上往篇文章<a href="https://handsomeliuyang.github.io/2016/12/30/Robot%E6%A1%86%E6%9E%B6-Nodejs+Express+React+MaterialUI/">前端学习系列：基于React的Robot框架的踩坑之旅</a>介绍，已经搭建起React的整体环境，但在进行具体业务开发时，还是遇到如下问题：</p>
 <ol>
 <li>所有界面操作，如网络请求，点击事件等等都在同一个组件里完成，出现组件过于庞大的问题</li>
 <li>子组件与父组件只能通过回调方法进行通信，没有一个消息总线机制（如：子组件想决定框架Master里的title，除了通过回调方法，尽没有找到其他方法）</li>
@@ -135,8 +206,8 @@
 <li>React开发时，state的变化与异步是混在一起的（异步可以理解为业务逻辑，如用户交互，网络请求，具体业务功能等等）。只有把state的变化与异步进行分离，才能很好的进行管理。—- <font color="#ff0000">客户端开发，为什么会有MVC，MVVM，MVP等等框架，其实也是同样的出发点，尽量把展示与数据进行分离</font></li>
 </ol>
 <h1 id="运行todos例子"><a href="#运行todos例子" class="headerlink" title="运行todos例子"></a>运行todos例子</h1><ol>
-<li>下载redux的原码。<a href="https://github.com/reactjs/redux" target="_blank" rel="external">github的地址</a></li>
-<li>安装node，注意node的版本号一定要&gt;4.0。因为0.x版本不支持es6等等高级语法。或者进行node版本升级，<a href="http://www.jianshu.com/p/31d4f9a7f401" target="_blank" rel="external">node升级教程</a></li>
+<li>下载redux的原码。<a href="https://github.com/reactjs/redux" target="_blank" rel="noopener">github的地址</a></li>
+<li>安装node，注意node的版本号一定要&gt;4.0。因为0.x版本不支持es6等等高级语法。或者进行node版本升级，<a href="http://www.jianshu.com/p/31d4f9a7f401" target="_blank" rel="noopener">node升级教程</a></li>
 <li><p>进入todos的目录，执行以下命令，安装dependencies</p>
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">node install</div></pre></td></tr></table></figure>
 </li>
@@ -151,7 +222,13 @@
 </blockquote>
 <p>Redux里的state其实就是一个对象，或者可以理解为一个json数据，如下所示：</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	todos: [</div><div class="line">		&#123;</div><div class="line">			text: 'Eat food',</div><div class="line">			completed: true</div><div class="line">  		&#125;, </div><div class="line">  		&#123;</div><div class="line">    		text: 'Exercise',</div><div class="line">    		completed: false</div><div class="line">  		&#125;</div><div class="line">	],</div><div class="line">  	visibilityFilter: 'SHOW_COMPLETED'</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>Redux的核心思想很容易理解，只有三大概率：Action，Reducer，Store。其关系如下：<br><img src="redux框架.png" alt=""></p>
+<p>Redux的核心思想很容易理解，只有三大概率：Action，Reducer，Store。其关系如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="redux框架.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <ol>
 <li>React组件通过Store监听state的变化</li>
 <li>调用方通过调用Store的dispatch()方法发送动作action</li>
@@ -160,9 +237,21 @@
 </ol>
 <p>具体代码如下：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> &#123; render &#125; <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"><span class="keyword">import</span> &#123; createStore &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"></div><div class="line"><span class="comment">// reducers，用来把action转换为state</span></div><div class="line"><span class="keyword">const</span> reducers = <span class="function">(<span class="params">state = [], action</span>) =&gt;</span> &#123;</div><div class="line">  	<span class="keyword">switch</span> (action.type) &#123;</div><div class="line">    	<span class="keyword">case</span> <span class="string">'ADD_TODO'</span>:</div><div class="line">      		<span class="keyword">return</span> &#123;</div><div class="line">      			<span class="attr">todos</span>: [</div><div class="line">		        	...state,</div><div class="line">		        	&#123;</div><div class="line">				        <span class="attr">text</span>: action.text</div><div class="line">			      	&#125;</div><div class="line">      			]</div><div class="line">      		&#125;</div><div class="line">	    <span class="keyword">default</span>:</div><div class="line">	    	<span class="keyword">return</span> state</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 创建store，全局只有一个store单例</span></div><div class="line"><span class="keyword">const</span> store = createStore(reducers)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">constructor</span>(props) &#123;</div><div class="line">    	<span class="keyword">super</span>(props);</div><div class="line"></div><div class="line">    	<span class="comment">// 当前组件的state的默认值</span></div><div class="line">    	<span class="keyword">this</span>.state = &#123;<span class="attr">todos</span>:[]&#125;;</div><div class="line"></div><div class="line">    	<span class="comment">// 对state进行订阅</span></div><div class="line">		store.subscribe(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</div><div class="line">			<span class="keyword">let</span> reduxState = store.getState();</div><div class="line">			<span class="built_in">console</span>.log(<span class="string">"redux's state"</span>, reduxState);</div><div class="line"></div><div class="line">			<span class="keyword">let</span> currentTodos = store.getState().todos;</div><div class="line"></div><div class="line">		  	<span class="keyword">if</span> (<span class="keyword">this</span>.state.todos !== currentTodos) &#123;</div><div class="line">		  		<span class="keyword">this</span>.setState(&#123;<span class="attr">todos</span>:currentTodos&#125;);</div><div class="line">		  	&#125;</div><div class="line">		&#125;);</div><div class="line">  	&#125;</div><div class="line"></div><div class="line">	addTodo = <span class="function">(<span class="params">text</span>) =&gt;</span> (&#123;</div><div class="line">	  	<span class="attr">type</span>: <span class="string">'ADD_TODO'</span>,</div><div class="line">	  	text</div><div class="line">	&#125;);</div><div class="line"></div><div class="line">	render()&#123;</div><div class="line">		<span class="keyword">let</span> input;</div><div class="line">		<span class="keyword">const</span> &#123; todos &#125; = <span class="keyword">this</span>.state;</div><div class="line">		<span class="keyword">return</span> (</div><div class="line">			<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">			    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">			    	<span class="tag">&lt;<span class="name">form</span> <span class="attr">onSubmit</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;</div><div class="line">			      		e.preventDefault()</div><div class="line">		        		if (!input.value.trim()) &#123;</div><div class="line">			          		return</div><div class="line">			        	&#125;</div><div class="line">			        	// 发送action</div><div class="line">			        	store.dispatch(this.addTodo(input.value))</div><div class="line">			        	input.value = ''</div><div class="line">			      	&#125;&#125;&gt;</div><div class="line">			        	<span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&#123;node</span> =&gt;</span> &#123;</div><div class="line">			          		input = node</div><div class="line">			        	&#125;&#125; /&gt;</div><div class="line">			        	<span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">			          		Add Todo</div><div class="line">		        		<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">			      	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">			    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">			    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">				    &#123;todos.map(todo =&gt;</div><div class="line">				    	<span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;todo.text&#125;</span>&gt;</span></div><div class="line">    						&#123;todo.text&#125;</div><div class="line">  						<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">				    )&#125;</div><div class="line">				<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">render(</div><div class="line">	<span class="tag">&lt;<span class="name">App</span> /&gt;</span>,</div><div class="line">	document.getElementById('root')</div><div class="line">)</div></pre></td></tr></table></figure>
-<p>运行效果如下：<br><img src="todos例子.png" alt=""></p>
+<p>运行效果如下：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="todos例子.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h1 id="Redux扩展"><a href="#Redux扩展" class="headerlink" title="Redux扩展"></a>Redux扩展</h1><h2 id="reducer的拆分"><a href="#reducer的拆分" class="headerlink" title="reducer的拆分"></a>reducer的拆分</h2><p>reducer的作用是把action转换为state，当app变大后，需要对reducer进行拆分。</p>
-<p><img src="redux_reducer.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="redux_reducer.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>redux的整体特点：</p>
 <ol>
 <li>Store里保持的state是整体程序app的所有状态</li>
@@ -191,18 +280,36 @@
 </ol>
 <p>解决方案：进行封装</p>
 <ol>
-<li>store的传递封装，React里给组件传递对象，除了使用props属性外，还提供了一个全局传递方案：Context。<a href="https://facebook.github.io/react/docs/context.html" target="_blank" rel="external">具体请查看</a></li>
+<li>store的传递封装，React里给组件传递对象，除了使用props属性外，还提供了一个全局传递方案：Context。<a href="https://facebook.github.io/react/docs/context.html" target="_blank" rel="noopener">具体请查看</a></li>
 <li>包装一个容器组件，里面封装监听redux，并进行数据转换的工作</li>
 </ol>
-<p>改进后的流程图：<br><img src="redux框架_1.png" alt=""></p>
-<h3 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h3><p>在学习react-redux时，需要先了解一下容器组件与展示组件的概念。<br><img src="容器组件与展示组件区别.png" alt=""></p>
+<p>改进后的流程图：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="redux框架_1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="react-redux"><a href="#react-redux" class="headerlink" title="react-redux"></a>react-redux</h3><p>在学习react-redux时，需要先了解一下容器组件与展示组件的概念。<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="容器组件与展示组件区别.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>技术上讲你可以直接使用 store.subscribe() 来编写容器组件。但不建议这么做因为就无法使用 React Redux 带来的性能优化。也因此，不要手写容器组件，都是使用 React Redux 的 connect() 方法来生成。</p>
-<p><a href="https://github.com/reactjs/react-redux" target="_blank" rel="external">react-redux</a>的作用就是上面的解决方案的具体实现，我们看一下使用了react-redux的代码</p>
+<p><a href="https://github.com/reactjs/react-redux" target="_blank" rel="noopener">react-redux</a>的作用就是上面的解决方案的具体实现，我们看一下使用了react-redux的代码</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React, &#123;Component&#125; <span class="keyword">from</span> <span class="string">'react'</span></div><div class="line"><span class="keyword">import</span> &#123; render &#125; <span class="keyword">from</span> <span class="string">'react-dom'</span></div><div class="line"><span class="keyword">import</span> &#123; createStore, combineReducers &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"><span class="keyword">import</span> &#123; Provider, connect &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></div><div class="line"><span class="comment">// import App from './components/App'</span></div><div class="line"><span class="comment">// import reducer from './reducers'</span></div><div class="line"></div><div class="line"><span class="comment">// reducers，用来把action转换为state</span></div><div class="line"><span class="keyword">const</span> todos = <span class="function">(<span class="params">state = [], action</span>) =&gt;</span> &#123;</div><div class="line">  	<span class="keyword">switch</span> (action.type) &#123;</div><div class="line">    	<span class="keyword">case</span> <span class="string">'ADD_TODO'</span>:</div><div class="line">      		<span class="keyword">return</span> [</div><div class="line">	        	...state,</div><div class="line">	        	&#123;</div><div class="line">			        <span class="attr">text</span>: action.text</div><div class="line">		      	&#125;</div><div class="line">  			]</div><div class="line">	    <span class="keyword">default</span>:</div><div class="line">	    	<span class="keyword">return</span> state</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">const</span> reducer_root = combineReducers(&#123;</div><div class="line">	todos</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// 创建store，全局只有一个store单例</span></div><div class="line"><span class="keyword">const</span> store = createStore(reducer_root)</div><div class="line"></div><div class="line"><span class="comment">// actions</span></div><div class="line"><span class="keyword">const</span> addTodo = <span class="function">(<span class="params">text</span>) =&gt;</span> (&#123;</div><div class="line">  	<span class="attr">type</span>: <span class="string">'ADD_TODO'</span>,</div><div class="line">  	text</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="keyword">constructor</span>(props) &#123;</div><div class="line">    	<span class="keyword">super</span>(props);</div><div class="line"></div><div class="line">    	<span class="comment">// 当前组件的state的默认值</span></div><div class="line">    	<span class="comment">// this.state = &#123;todos:[]&#125;;</span></div><div class="line"></div><div class="line">    	<span class="comment">// 对state进行订阅</span></div><div class="line">		<span class="comment">// store.subscribe(()=&gt;&#123;</span></div><div class="line">		<span class="comment">// 	let reduxState = store.getState();</span></div><div class="line">		<span class="comment">// 	console.log("redux's state", reduxState);</span></div><div class="line"></div><div class="line">		<span class="comment">// 	let currentTodos = store.getState().todos;</span></div><div class="line"></div><div class="line">		<span class="comment">//   	if (this.state.todos !== currentTodos) &#123;</span></div><div class="line">		<span class="comment">//   		this.setState(&#123;todos:currentTodos&#125;);</span></div><div class="line">		<span class="comment">//   	&#125;</span></div><div class="line">		<span class="comment">// &#125;);</span></div><div class="line">  	&#125;</div><div class="line"></div><div class="line">	render()&#123; <span class="comment">// React的界面布局</span></div><div class="line">		<span class="keyword">let</span> input;</div><div class="line">		<span class="keyword">const</span> &#123; todos, addTodo &#125; = <span class="keyword">this</span>.props;<span class="comment">//this.state;</span></div><div class="line">		<span class="keyword">return</span> (</div><div class="line">			<span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">			    <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">			    	<span class="tag">&lt;<span class="name">form</span> <span class="attr">onSubmit</span>=<span class="string">&#123;e</span> =&gt;</span> &#123;</div><div class="line">			      		e.preventDefault()</div><div class="line">		        		if (!input.value.trim()) &#123;</div><div class="line">			          		return</div><div class="line">			        	&#125;</div><div class="line">			        	// 发送action</div><div class="line">			        	// store.dispatch(this.addTodo(input.value))</div><div class="line">			        	addTodo(input.value);</div><div class="line">			        	input.value = ''</div><div class="line">			      	&#125;&#125;&gt;</div><div class="line">			        	<span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">&#123;node</span> =&gt;</span> &#123;</div><div class="line">			          		input = node</div><div class="line">			        	&#125;&#125; /&gt;</div><div class="line">			        	<span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line">			          		Add Todo</div><div class="line">		        		<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">			      	<span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line">			    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">			    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">				    &#123;todos.map(todo =&gt;</div><div class="line">				    	<span class="tag">&lt;<span class="name">li</span> <span class="attr">key</span>=<span class="string">&#123;todo.text&#125;</span>&gt;</span></div><div class="line">    						&#123;todo.text&#125;</div><div class="line">  						<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">				    )&#125;</div><div class="line">				<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">		);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">const mapStateToProps = (state, ownProps) =&gt; &#123;</div><div class="line">	console.log('state value is ', state);</div><div class="line">	return &#123;</div><div class="line">		todos: state.todos</div><div class="line">	&#125;;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">App = connect(mapStateToProps, &#123;</div><div class="line">	addTodo</div><div class="line">&#125;)(App);</div><div class="line"></div><div class="line">render(</div><div class="line">  <span class="tag">&lt;<span class="name">Provider</span> <span class="attr">store</span>=<span class="string">&#123;store&#125;</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">App</span> /&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">Provider</span>&gt;</span>,</div><div class="line">  document.getElementById('root')</div><div class="line">)</div></pre></td></tr></table></figure>
 <p>要点：</p>
 <ol>
 <li>react-redux通过提供Provider与connect()方法实现接入层的解耦</li>
-<li>Provider的作用比较简单，用来实现全局的store对象的传递，里面的实现原理就是通过React的Context来实现的，如下面就是Provider的原码<br> <img src="provider.png" alt=""></li>
+<li>Provider的作用比较简单，用来实现全局的store对象的传递，里面的实现原理就是通过React的Context来实现的，如下面就是Provider的原码 <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="provider.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
 <li><p>connect()比较复杂，其主要是两件事情：</p>
 <ol>
 <li>把redux的state转换为React组件的props属性</li>
@@ -217,7 +324,13 @@
 <li>对于React组件而言，外界有仅只能通过组件的props对此组件进行控制，内部的state不对外进行暴露，一切都是通过外界传入的props参数来进行控制，真正实现业务与界面分离解耦</li>
 <li>组件可以做到与Redux解耦，组件能快速脱离Redux，并为一个共用组件</li>
 </ol>
-<h2 id="Middleware中间件"><a href="#Middleware中间件" class="headerlink" title="Middleware中间件"></a>Middleware中间件</h2><p><img src="中间件.png" alt=""></p>
+<h2 id="Middleware中间件"><a href="#Middleware中间件" class="headerlink" title="Middleware中间件"></a>Middleware中间件</h2><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="中间件.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <p>中间件：提供的是位于 action 被发起之后，到达 reducer 之前的扩展点。那么利用中间件，我们就可以做很多的事情，如：</p>
 <ol>
 <li>网络请求</li>
@@ -231,7 +344,7 @@
 <li>中间件的注册是有顺序的</li>
 <li>中间件可以决定是否再传递action</li>
 </ol>
-<p>通过学习：<a href="http://cn.redux.js.org/docs/advanced/Middleware.html" target="_blank" rel="external">中间件实现的具体演化过程</a>可以了解javascript的一些语言特点：Monkey-Patching。相当于Java里的hook，对对象里方法进行proxy。但具体原因不一样：</p>
+<p>通过学习：<a href="http://cn.redux.js.org/docs/advanced/Middleware.html" target="_blank" rel="noopener">中间件实现的具体演化过程</a>可以了解javascript的一些语言特点：Monkey-Patching。相当于Java里的hook，对对象里方法进行proxy。但具体原因不一样：</p>
 <ol>
 <li>javascript的Monkey-Patching是利用javascript的函数也是一个变量，可以被修改特点来实现的</li>
 <li>java里的hook，是通过子类可以重写父类的方法来实现的。</li>
@@ -244,547 +357,222 @@
 <li>可实现录制与回放—-此好处还没有实现</li>
 </ol>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="http://cn.redux.js.org/index.html" target="_blank" rel="external">Redux 中文文档</a></li>
-<li><a href="https://github.com/reactjs/redux" target="_blank" rel="external">Redux</a></li>
-<li><a href="https://github.com/reactjs/redux/tree/master/examples/real-world" target="_blank" rel="external">redux例子：real-world</a></li>
+<li><a href="http://cn.redux.js.org/index.html" target="_blank" rel="noopener">Redux 中文文档</a></li>
+<li><a href="https://github.com/reactjs/redux" target="_blank" rel="noopener">Redux</a></li>
+<li><a href="https://github.com/reactjs/redux/tree/master/examples/real-world" target="_blank" rel="noopener">redux例子：real-world</a></li>
 </ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-02-20T12:24:12.000Z" itemprop="dateUpdated">2017-02-20 20:24:12</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Robot/">Robot</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/前端/">前端</a>
-</div>
-
-
-  <div class="article-tags">
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/03/14/Axure设计原型图/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">如何设计高保真原型图</h4>
+      </a>
+    </div>
   
-  <span></span> <a href="/tags/React/">React</a><a href="/tags/Robot/">Robot</a><a href="/tags/nodejs/">nodejs</a>
-  </div>
 
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/" data-title="前端学习系列2：从移动端的角度学习与分析Redux | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2017/03/14/Axure设计原型图/" title="如何设计高保真原型图">
-  <strong>上一篇：</strong><br/>
-  <span>
-  如何设计高保真原型图</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/"  title="前端学习系列：基于React的Robot框架的踩坑之旅">
- <strong>下一篇：</strong><br/> 
- <span>前端学习系列：基于React的Robot框架的踩坑之旅
-</span>
-</a>
-</div>
-
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">前端学习系列：基于React的Robot框架的踩坑之旅</h4>
+      </a>
+    </div>
+  
 </nav>
 
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/" data-title="前端学习系列2：从移动端的角度学习与分析Redux" data-url="http://yoursite.com/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/"></div>
-</section>
 
 
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+    
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#遇到的问题"><span class="toc-number">1.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux动机"><span class="toc-number">2.</span> <span class="toc-text">Redux动机</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#运行todos例子"><span class="toc-number">3.</span> <span class="toc-text">运行todos例子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux实现"><span class="toc-number">4.</span> <span class="toc-text">Redux实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux扩展"><span class="toc-number">5.</span> <span class="toc-text">Redux扩展</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#reducer的拆分"><span class="toc-number">5.1.</span> <span class="toc-text">reducer的拆分</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#combineReducers-reducers"><span class="toc-number">5.1.1.</span> <span class="toc-text">combineReducers(reducers)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#调用与监听优化"><span class="toc-number">5.2.</span> <span class="toc-text">调用与监听优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#react-redux"><span class="toc-number">5.2.1.</span> <span class="toc-text">react-redux</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Middleware中间件"><span class="toc-number">5.3.</span> <span class="toc-text">Middleware中间件</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Redux在实际项目中的好处"><span class="toc-number">6.</span> <span class="toc-text">Redux在实际项目中的好处</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">7.</span> <span class="toc-text">参考</span></a></li></ol>
- 
-  </div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Server/" title="Server">Server<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/大前端/" title="大前端">大前端<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/设计/" title="设计">设计<sup>1</sup></a></li>
-		  
-		
-		</ul>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
 </div>
 
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Robot/" title="Robot">Robot<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ReactNative/" title="ReactNative">ReactNative<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
-		
-		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
-		
-		
-		</p>
-</div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-});
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAQ4AAAEOCAAAAABd2qZ5AAAD70lEQVR42u3aS3LbQAwFQN3/0s4mC6ciUg94Izmpaq5cNM2ZaS5gfB6P+Pr6dn2/8/dvv99P3pD/bbK3qx0evnDgwIEDR3zU+1dfbTo50v3qV3d2ZDn9k7fhwIEDB45DHMkC0wCcH6kJuveHz8+IAwcOHDh+imMamJOAOv0AyfM4cODAgeN/4ZhubpraJSE5LxriwIEDB46f4kgCZ5LCTdOq5Ni7kt/ba6U4cODAgWPTFRoH1H/z57fMd+DAgQMHjiBZekfhbzoksUy9inP9fhsOHDhw4Kg58oCUjxrkiLsVd6snq+DAgQMHjp6jKd4lh8wPcypY7v5ReCS9Mhw4cODAEXPkaVKSbuXhLS8+ToPoNPF7ktHiwIEDB46C49QAXEKzGyNIOKYf70UKhwMHDhw4Co6+1TQ9dnKYUx/jfm9PqqQ4cODAgaPgSJbPw1u+fB4sp4lfs38cOHDgwHGWIy/Y7RCnwxDTA/fpHA4cOHDgOMXRDwQk6VO+oSag5h+yymtx4MCBA0fAsRtomLap+sJiEj7zz4kDBw4cOM5y5MHy1MK7ouHuyt+DAwcOHDhOcewOloe96XanBcS+ffXkSRw4cODAUXDsXt0kY9OBg11YXa6LAwcOHDg+wrHr+J8NwMv/IIaFRRw4cODAcYojP3aT8iXFwTx89qXJyxQOBw4cOHC8maMZO5gedVcEvOfIz4IDBw4cOD7DMU3MmsC5u38qkOPAgQMHjrMcffFu2naaliDv33mgBIkDBw4cOA5xnE2TmqGEXXNrGqqrLhwOHDhw4BjutinknUr87vewKzgun8SBAwcOHEc5mgG4PvVKgmVTdozCLQ4cOHDgWHHsglyeICWJYj6CMB13GCdvOHDgwIGj4GjGApLld6XD3RDDdPXLEIsDBw4cOGqOPLxNi4l9K6vBrbpwOHDgwIFjxbEbCEjC3m6ILV9rNwwXfQAcOHDgwFFwJElOHlzzZ5oEbxoT88YYDhw4cOB4B0f0Z8Oxsyn09MmmTPnHb3HgwIEDxyGOfEChSfCSYDkdXJhCvPh4OHDgwIHjEMeubTM93i4E7t6clx0vi4M4cODAgWPFkQekacLWNJ92qWNTuMSBAwcOHKc4voZXjpI8uUveTgXmQUaLAwcOHDhijn50YBqYzzarms/QDFLgwIEDB457jmmDZxq6dkMJefGxef+T+zhw4MCB4xDHNBC+Y7hh2pp6FNflDnHgwIEDx49y9M2n3aBeU0Z8wYoDBw4cOD7OsTv8dOt50N01k16MyuHAgQMHjpqjCVT583lba9qgmo44HGg74cCBAweOeqBh2viZUu4+wK7tlH8qHDhw4MARc/wCjMloOvXlfDgAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
 
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"handsomeliuyang"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
 
 
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
-
-
-
-<!-- Analytics Begin -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 <script>
-var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
 })();
 </script>
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+</body>
 </html>

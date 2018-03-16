@@ -1,126 +1,204 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  
-    <title>Android签名的过程 | LiuYang&#39;s blog</title>
-
-    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
-
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="LiuYang">
     
 
     
-    <meta name="description" content="Android对apk签名过程Apk解压后的结构：
-会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文件都是我们对unsigin.apk签名时生成的。
+
+    
 
 
-SHA1：安全哈希算法，对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。当接收到消息的时候，这个消息摘要可以用来验证数据的完整性。在传输的">
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Android签名的过程 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Android对apk签名过程Apk解压后的结构：                                                                                                           会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android签名的过程">
-<meta property="og:url" content="http://yoursite.com/2016/06/13/2016-04-14-Android签名的过程/index.html">
-<meta property="og:site_name" content="LiuYang's blog">
-<meta property="og:description" content="Android对apk签名过程Apk解压后的结构：
-会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文件都是我们对unsigin.apk签名时生成的。
-
-
-SHA1：安全哈希算法，对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。当接收到消息的时候，这个消息摘要可以用来验证数据的完整性。在传输的">
-<meta property="og:image" content="http://yoursite.com/img_markdown/27.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/28.png">
-<meta property="og:image" content="http://yoursite.com/img_markdown/29.png">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2016/06/13/2016-04-14-Android签名的过程/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="Android对apk签名过程Apk解压后的结构：                                                                                                           会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/27.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/28.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/img_markdown/29.png">
 <meta property="og:updated_time" content="2016-08-13T08:21:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android签名的过程">
-<meta name="twitter:description" content="Android对apk签名过程Apk解压后的结构：
-会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文件都是我们对unsigin.apk签名时生成的。
+<meta name="twitter:description" content="Android对apk签名过程Apk解压后的结构：                                                                                                           会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/img_markdown/27.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
 
+    <!-- custom head -->
+    
 
-SHA1：安全哈希算法，对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。当接收到消息的时候，这个消息摘要可以用来验证数据的完整性。在传输的">
-<meta name="twitter:image" content="http://yoursite.com/img_markdown/27.png">
-
-    
-    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
-    
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
-				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
- 					
-						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2016/06/13/2016-04-14-Android签名的过程/" title="Android签名的过程" itemprop="url">Android签名的过程</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
-		
-  <p class="article-time">
-    <time datetime="2016-06-13T09:59:45.000Z" itemprop="datePublished"> 发表于 2016-06-13</time>
-    
-  </p>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Android签名的过程</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android对apk签名过程"><span class="toc-number">1.</span> <span class="toc-text">Android对apk签名过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android系统签验证机制"><span class="toc-number">2.</span> <span class="toc-text">Android系统签验证机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#了解签名流程后，能做的事情"><span class="toc-number">3.</span> <span class="toc-text">了解签名流程后，能做的事情</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#打批量包"><span class="toc-number">3.1.</span> <span class="toc-text">打批量包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签名认证"><span class="toc-number">3.2.</span> <span class="toc-text">签名认证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Keystore文件生成过程"><span class="toc-number">4.</span> <span class="toc-text">Keystore文件生成过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改Keystore的密码的影响"><span class="toc-number">5.</span> <span class="toc-text">修改Keystore的密码的影响</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
-		
-		</div>
-		
-		<h1 id="Android对apk签名过程"><a href="#Android对apk签名过程" class="headerlink" title="Android对apk签名过程"></a>Android对apk签名过程</h1><p>Apk解压后的结构：<br><img src="/img_markdown/27.png" alt=""></p>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Android签名的过程</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2016-06-13T09:59:45.000Z" itemprop="datePublished" class="page-time">
+  2016-06-13
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android对apk签名过程"><span class="post-toc-number">1.</span> <span class="post-toc-text">Android对apk签名过程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Android系统签验证机制"><span class="post-toc-number">2.</span> <span class="post-toc-text">Android系统签验证机制</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#了解签名流程后，能做的事情"><span class="post-toc-number">3.</span> <span class="post-toc-text">了解签名流程后，能做的事情</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打批量包"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">打批量包</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#签名认证"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">签名认证</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Keystore文件生成过程"><span class="post-toc-number">4.</span> <span class="post-toc-text">Keystore文件生成过程</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#修改Keystore的密码的影响"><span class="post-toc-number">5.</span> <span class="post-toc-text">修改Keystore的密码的影响</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-2016-04-14-Android签名的过程"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Android签名的过程</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2016-06-13 17:59:45" datetime="2016-06-13T09:59:45.000Z"  itemprop="datePublished">2016-06-13</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Android对apk签名过程"><a href="#Android对apk签名过程" class="headerlink" title="Android对apk签名过程"></a>Android对apk签名过程</h1><p>Apk解压后的结构：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/27.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>会生成一个META-INF的文件夹存放签名相关的数据：MANIFEST.MF WUBA_KEY.RSA WUBA_KEY.SF。此三个文件都是我们对unsigin.apk签名时生成的。</p>
-<p><img src="/img_markdown/28.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/28.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <ol>
 <li>SHA1：安全哈希算法，对于长度小于2^64位的消息，SHA1会产生一个160位的消息摘要。当接收到消息的时候，这个消息摘要可以用来验证数据的完整性。在传输的过程中，数据很可能会发生变化，那么这时候就会产生不同的消息摘要。SHA1有如下特性：不可以从消息摘要中复原信息；两个不同的消息不会产生同样的消息摘要。</li>
 </ol>
@@ -131,7 +209,13 @@ SHA1：安全哈希算法，对于长度小于2^64位的消息，SHA1会产生�
 <li>并行性，校验可以并行进行，WUBA_KEY.RSA对WUBA_KEY.SF的校验与WUBA_KEY.SF对MANIFEST.MF校验可以并行执行</li>
 </ol>
 <h1 id="Android系统签验证机制"><a href="#Android系统签验证机制" class="headerlink" title="Android系统签验证机制"></a>Android系统签验证机制</h1><p>系统验证流程刚好与签名过程相反：</p>
-<p><img src="/img_markdown/29.png" alt=""></p>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/img_markdown/29.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
 <h1 id="了解签名流程后，能做的事情"><a href="#了解签名流程后，能做的事情" class="headerlink" title="了解签名流程后，能做的事情"></a>了解签名流程后，能做的事情</h1><h2 id="打批量包"><a href="#打批量包" class="headerlink" title="打批量包"></a>打批量包</h2><p>为了区分不同的渠道用于统计分析，apk里需要内置携带一个渠道号，各种方式的比较：</p>
 <table>
 <thead>
@@ -196,536 +280,219 @@ SHA1：安全哈希算法，对于长度小于2^64位的消息，SHA1会产生�
 <p>而我们可以修改keystore文件的storepass和keypass两种密码，都不影响对apk的签名，也不出现签名的apk不相同，因为keystore里面所包含的公钥和私钥是没有变化的。</p>
 <p>keystore内部的信息是不会变化的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">- XXX.Keystore的信息：</div><div class="line">    - Keystore 类型： JKS</div><div class="line">    - Keystore 提供者： SUN</div><div class="line">    - 您的 keystore 包含 1 输入</div><div class="line">    - 别名名称： XXXX</div><div class="line">    - 创建日期： XXXX</div><div class="line">    - 项类型: PrivateKeyEntry</div><div class="line">    - 认证链长度： 1</div><div class="line">    - 认证 [1]:</div><div class="line">    - 所有者:CN=XXX, OU=XXX, O=XXX, L=XXX, ST=XXX, C=XXX</div><div class="line">    - 签发人:CN=XXX, OU=XXX, O=XXX, L=XXX, ST=XXX, C=XXX</div><div class="line">    - 序列号:XXX</div><div class="line">    - 有效期: XXX</div><div class="line">    - 证书指纹:</div><div class="line">    -          MD5:XXX</div><div class="line">    -          SHA1:XXX</div><div class="line">    -          签名算法名称:SHA1withRSA</div><div class="line">    -          版本: 3</div></pre></td></tr></table></figure></p>
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
-<li><a href="http://www.docin.com/p-771857516.html" target="_blank" rel="external">Android系统代码签名验证机制的实现及安全性分析</a></li>
-<li><a href="http://www.cnblogs.com/wanqieddy/p/3556060.html" target="_blank" rel="external">Android签名总结</a></li>
+<li><a href="http://www.docin.com/p-771857516.html" target="_blank" rel="noopener">Android系统代码签名验证机制的实现及安全性分析</a></li>
+<li><a href="http://www.cnblogs.com/wanqieddy/p/3556060.html" target="_blank" rel="noopener">Android签名总结</a></li>
 </ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2016-08-13T08:21:13.000Z" itemprop="dateUpdated">2016-08-13 16:21:13</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
+    <div class="waves-block waves-effect prev">
+      <a href="/2016/08/13/Android内核学习笔记：Android进程线程管理/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Android内核学习笔记：Android进程\线程管理</h4>
+      </a>
+    </div>
+  
 
-
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2016/06/13/2016-04-14-Android签名的过程/" data-title="Android签名的过程 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2016/08/13/Android内核学习笔记：Android进程线程管理/" title="Android内核学习笔记：Android进程\线程管理">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Android内核学习笔记：Android进程\线程管理</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2016/03/24/2016-03-24-58同城Hybrid框架的点点滴滴/"  title="58同城Hybrid框架的点点滴滴">
- <strong>下一篇：</strong><br/> 
- <span>58同城Hybrid框架的点点滴滴
-</span>
-</a>
-</div>
-
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2016/03/24/2016-03-24-58同城Hybrid框架的点点滴滴/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">58同城Hybrid框架的点点滴滴</h4>
+      </a>
+    </div>
+  
 </nav>
 
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2016/06/13/2016-04-14-Android签名的过程/" data-title="Android签名的过程" data-url="http://yoursite.com/2016/06/13/2016-04-14-Android签名的过程/"></div>
-</section>
 
 
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+    
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Android对apk签名过程"><span class="toc-number">1.</span> <span class="toc-text">Android对apk签名过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Android系统签验证机制"><span class="toc-number">2.</span> <span class="toc-text">Android系统签验证机制</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#了解签名流程后，能做的事情"><span class="toc-number">3.</span> <span class="toc-text">了解签名流程后，能做的事情</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#打批量包"><span class="toc-number">3.1.</span> <span class="toc-text">打批量包</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#签名认证"><span class="toc-number">3.2.</span> <span class="toc-text">签名认证</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Keystore文件生成过程"><span class="toc-number">4.</span> <span class="toc-text">Keystore文件生成过程</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#修改Keystore的密码的影响"><span class="toc-number">5.</span> <span class="toc-text">修改Keystore的密码的影响</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">6.</span> <span class="toc-text">参考</span></a></li></ol>
- 
-  </div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Server/" title="Server">Server<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/大前端/" title="大前端">大前端<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/设计/" title="设计">设计<sup>1</sup></a></li>
-		  
-		
-		</ul>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
 </div>
 
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Robot/" title="Robot">Robot<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ReactNative/" title="ReactNative">ReactNative<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
-		
-		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
-		
-		
-		</p>
-</div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-});
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuklEQVR42u3aQW7CQAwFUO5/6VbqCokm+bZnEhYvK5RSMm+Qxsb26xVfP3/X++v3O5/3P9//+froTvKZiy88PDy81tKPrnyJ50tPFnr+/uSv/3wyHh4e3jZe8rA8SCRLTNjJdl9Y8PDw8B7lTQ76SVBJghMeHh7ed/Kqv/rnwSNP6/Hw8PDu5/V+/Fc3pbrEW2steHh4eDGv1wB79vX2/h4eHh5eq6s+CRVJWbYXSArrxMPDw9vAS4oF5+dt3sTKn1UdU7hYOR4eHt4GXvWf5yNWO4YVIjAeHh7emNc74ucF33woofoFXCTTeHh4eGPeqof1Bg7KZYVgTCHK0PHw8PAGvF4BonfQz4e08kCFh4eHt5vXS517AweT0ahquo+Hh4e3gzcp4Obl3clkVJK4R1k0Hh4e3mZetVybB4PeYMGkkYaHh4e3llc9XvPWfm+Pqyl4s4yLh4eHN+D1HpMsole6rRZ5o3CFh4eHt5TXa/NPWl/VMa882Fx8b3h4eHiLeEli2ktnq8d6b9gratHh4eHh3c6rho1qopwEm14LDQ8PD28HrzrGlB/r+QBWXiYuDxbg4eHhbeD1WkrzxDcPNvlYWBJC8PDw8FbxJoGhWmYt5/txWh9Nk+Hh4eEt4vWO3WoTa9JIqxZB8PDw8J7l5SXXvKzwKl7z0jAeHh7eDl6vSDEpyC5OmicXHh4e3uBUrBZP88LrZLCgGpwOJyPw8PDwNvDm6fJkO3oB4CLw4OHh4S3l9QaqegWL6qbkuTEeHh7enbx5ITWH9cYLknJwk4SHh4c34PWCQa+F3ysEJ4HhcIV4eHh423jz9n+eaucBoNecw8PDw/tO3qpAUk2yyyVjPDw8vEd5a5Pm3pDW+R08PDy8O3nJQZ/Xg6tbNgkYF+vBw8PD28CbNMB6ja4E0yvsNql4eHh4Ke8XH64NATJt6DwAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
 
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"handsomeliuyang"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
 
 
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
-
-
-
-<!-- Analytics Begin -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 <script>
-var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
 })();
 </script>
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+</body>
 </html>

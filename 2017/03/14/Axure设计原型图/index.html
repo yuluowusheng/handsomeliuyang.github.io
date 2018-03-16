@@ -1,146 +1,205 @@
-
- <!DOCTYPE HTML>
-<html lang="zh-CN">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  
-    <title>如何设计高保真原型图 | LiuYang&#39;s blog</title>
-
-    <meta name="baidu-site-verification" content="LvcJyEHEaO" >
-
-    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
-    
-    <meta name="author" content="LiuYang">
     
 
     
-    <meta name="description" content="背景在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：
 
-文档不够详细，没有交互，没有各种出错的处理情况
-没有一个平台的功能流程全貌，无法提前给上级审核
-需求评审的效率很低
+    
 
-通过分析，发现主要原因是出在需求文档上，现在的静态word文档，能表达的信息很有限，那有没有更好的方式。这就是今天要分享的：高保真原型图。
 
-注意：实现高保真原型图的软件有很多，完全不限于Axu">
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>如何设计高保真原型图 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="axure">
+    <meta name="description" content="背景在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：  文档不够详细，没有交互，没有各种出错的处理情况 没有一个平台的功能流程全貌，无法提前给上级审核 需求评审的效率很低  通过分析，发现主要原因是出在需求文档上，现在的静态word文档，能表达的信息很有限，那有没有更好的方式。这就是今天要分享的：高保真原型图。  注意：实现高保真原型图的软件有很多，完全不限于Axu">
+<meta name="keywords" content="axure">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何设计高保真原型图">
-<meta property="og:url" content="http://yoursite.com/2017/03/14/Axure设计原型图/index.html">
-<meta property="og:site_name" content="LiuYang's blog">
-<meta property="og:description" content="背景在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：
-
-文档不够详细，没有交互，没有各种出错的处理情况
-没有一个平台的功能流程全貌，无法提前给上级审核
-需求评审的效率很低
-
-通过分析，发现主要原因是出在需求文档上，现在的静态word文档，能表达的信息很有限，那有没有更好的方式。这就是今天要分享的：高保真原型图。
-
-注意：实现高保真原型图的软件有很多，完全不限于Axu">
-<meta property="og:image" content="http://yoursite.com/线框图.png">
-<meta property="og:image" content="http://yoursite.com/高保真原型图.png">
-<meta property="og:image" content="http://yoursite.com/母版.png">
-<meta property="og:image" content="http://yoursite.com/元件库.png">
-<meta property="og:image" content="http://yoursite.com/动态图1.png">
-<meta property="og:image" content="http://yoursite.com/动态面板.png">
-<meta property="og:image" content="http://yoursite.com/连线.png">
-<meta property="og:image" content="http://yoursite.com/交互1.png">
-<meta property="og:image" content="http://yoursite.com/所有的事件.png">
-<meta property="og:image" content="http://yoursite.com/用例.png">
-<meta property="og:image" content="http://yoursite.com/控件文档.png">
-<meta property="og:image" content="http://yoursite.com/页面说明文档.png">
-<meta property="og:image" content="http://yoursite.com/合并编辑.png">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="背景在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：  文档不够详细，没有交互，没有各种出错的处理情况 没有一个平台的功能流程全貌，无法提前给上级审核 需求评审的效率很低  通过分析，发现主要原因是出在需求文档上，现在的静态word文档，能表达的信息很有限，那有没有更好的方式。这就是今天要分享的：高保真原型图。  注意：实现高保真原型图的软件有很多，完全不限于Axu">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/线框图.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/高保真原型图.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/母版.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/元件库.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/动态图1.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/动态面板.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/连线.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/交互1.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/所有的事件.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/用例.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/控件文档.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/页面说明文档.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/合并编辑.png">
 <meta property="og:updated_time" content="2017-03-20T05:27:20.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何设计高保真原型图">
-<meta name="twitter:description" content="背景在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：
+<meta name="twitter:description" content="背景在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：  文档不够详细，没有交互，没有各种出错的处理情况 没有一个平台的功能流程全貌，无法提前给上级审核 需求评审的效率很低  通过分析，发现主要原因是出在需求文档上，现在的静态word文档，能表达的信息很有限，那有没有更好的方式。这就是今天要分享的：高保真原型图。  注意：实现高保真原型图的软件有很多，完全不限于Axu">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2017/03/14/Axure设计原型图/线框图.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
 
-文档不够详细，没有交互，没有各种出错的处理情况
-没有一个平台的功能流程全貌，无法提前给上级审核
-需求评审的效率很低
+    <!-- custom head -->
+    
 
-通过分析，发现主要原因是出在需求文档上，现在的静态word文档，能表达的信息很有限，那有没有更好的方式。这就是今天要分享的：高保真原型图。
-
-注意：实现高保真原型图的软件有很多，完全不限于Axu">
-<meta name="twitter:image" content="http://yoursite.com/线框图.png">
-
-    
-    <link rel="alternative" href="/atom.xml" title="LiuYang&#39;s blog" type="application/atom+xml">
-    
-    
-    <link rel="icon" href="/img/favicon.ico">
-    
-    
-    <link rel="apple-touch-icon" href="/img/jacman.png">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
-    
-    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-  <body>
-    <header>
-      
-<div>
-		
-			<div id="imglogo">
-				<a href="/"><img src="/img/logo.png" alt="LiuYang&#39;s blog" title="LiuYang&#39;s blog"/></a>
-			</div>
-			
-			<div id="textlogo">
-				<h1 class="site-name"><a href="/" title="LiuYang&#39;s blog">LiuYang&#39;s blog</a></h1>
-				<h2 class="blog-motto">探索，分享，创新——追求卓越</h2>
-			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
-			</a></div>
-			<nav class="animated">
-				<ul>
-					<ul>
-					 
-						<li><a href="/">主页</a></li>
-					
-						<li><a href="/archives">归档</a></li>
-					
-						<li><a href="/about">关于</a></li>
-					
-					<li>
- 					
-						<form class="search" action="http://znsv.baidu.com/customer_search/api/js" target="_blank">
-							<label>Search</label>
-						<input name="s" type="hidden" value= 3672352745781234000 ><input type="text" name="q" size="30" placeholder="搜索"><br>
-						</form>
-					
-					</li>
-				</ul>
-			</nav>			
-</div>
-    </header>
-    <div id="container">
-      <div id="main" class="post" itemscope itemprop="blogPost">
-  
-	<article itemprop="articleBody"> 
-		<header class="article-info clearfix">
-  <h1 itemprop="name">
-    
-      <a href="/2017/03/14/Axure设计原型图/" title="如何设计高保真原型图" itemprop="url">如何设计高保真原型图</a>
-  </h1>
-  <p class="article-author">By
-       
-		<a href="/about" title="LiuYang" target="_blank" itemprop="author">LiuYang</a>
-		
-  <p class="article-time">
-    <time datetime="2017-03-14T08:00:00.000Z" itemprop="datePublished"> 发表于 2017-03-14</time>
-    
-  </p>
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">如何设计高保真原型图</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
 </header>
-	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目录</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#高保真原型图Axure"><span class="toc-number">2.</span> <span class="toc-text">高保真原型图Axure</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#意义"><span class="toc-number">2.1.</span> <span class="toc-text">意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Axure版本"><span class="toc-number">2.2.</span> <span class="toc-text">Axure版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Axure的主要功能"><span class="toc-number">2.3.</span> <span class="toc-text">Axure的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线框图-设计"><span class="toc-number">2.3.1.</span> <span class="toc-text">线框图+设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#母版"><span class="toc-number">2.3.2.</span> <span class="toc-text">母版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元件库"><span class="toc-number">2.3.3.</span> <span class="toc-text">元件库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态面板"><span class="toc-number">2.3.4.</span> <span class="toc-text">动态面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控件连线"><span class="toc-number">2.3.5.</span> <span class="toc-text">控件连线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互"><span class="toc-number">2.3.6.</span> <span class="toc-text">交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器展示"><span class="toc-number">2.3.7.</span> <span class="toc-text">浏览器展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档"><span class="toc-number">2.3.8.</span> <span class="toc-text">文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合作"><span class="toc-number">2.3.9.</span> <span class="toc-text">合作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工具对比"><span class="toc-number">3.</span> <span class="toc-text">工具对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#谁来制作高保真原型"><span class="toc-number">4.</span> <span class="toc-text">谁来制作高保真原型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
-		
-		</div>
-		
-		<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：</p>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">如何设计高保真原型图</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2017-03-14T08:00:00.000Z" itemprop="datePublished" class="page-time">
+  2017-03-14
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计/">设计</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#高保真原型图Axure"><span class="post-toc-number">2.</span> <span class="post-toc-text">高保真原型图Axure</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#意义"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">意义</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Axure版本"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">Axure版本</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Axure的主要功能"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">Axure的主要功能</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#线框图-设计"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">线框图+设计</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#母版"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">母版</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#元件库"><span class="post-toc-number">2.3.3.</span> <span class="post-toc-text">元件库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#动态面板"><span class="post-toc-number">2.3.4.</span> <span class="post-toc-text">动态面板</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#控件连线"><span class="post-toc-number">2.3.5.</span> <span class="post-toc-text">控件连线</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#交互"><span class="post-toc-number">2.3.6.</span> <span class="post-toc-text">交互</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#浏览器展示"><span class="post-toc-number">2.3.7.</span> <span class="post-toc-text">浏览器展示</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#文档"><span class="post-toc-number">2.3.8.</span> <span class="post-toc-text">文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#合作"><span class="post-toc-number">2.3.9.</span> <span class="post-toc-text">合作</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#工具对比"><span class="post-toc-number">3.</span> <span class="post-toc-text">工具对比</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#谁来制作高保真原型"><span class="post-toc-number">4.</span> <span class="post-toc-text">谁来制作高保真原型</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">5.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Axure设计原型图"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">如何设计高保真原型图</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2017-03-14 16:00:00" datetime="2017-03-14T08:00:00.000Z"  itemprop="datePublished">2017-03-14</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/设计/">设计</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>在设计“专项测试平台项目”的需求文档时，按传统的word设计需求文档带来的问题：</p>
 <ol>
 <li>文档不够详细，没有交互，没有各种出错的处理情况</li>
 <li>没有一个平台的功能流程全貌，无法提前给上级审核</li>
@@ -162,22 +221,83 @@
 <li>使用的是AxureRP Pro 7.0版本，同时下载注册机</li>
 <li>下载对应版本的汉化包</li>
 </ol>
-<h2 id="Axure的主要功能"><a href="#Axure的主要功能" class="headerlink" title="Axure的主要功能"></a>Axure的主要功能</h2><h3 id="线框图-设计"><a href="#线框图-设计" class="headerlink" title="线框图+设计"></a>线框图+设计</h3><p>仅仅使用方块，占位符，形状和文本设计的，称之为线框图，如下图所示：<br><img src="线框图.png" alt=""></p>
-<p>对线框图进行视觉美化设计后，称之为高保真原型图，如下图所示：<br><img src="高保真原型图.png" alt=""></p>
+<h2 id="Axure的主要功能"><a href="#Axure的主要功能" class="headerlink" title="Axure的主要功能"></a>Axure的主要功能</h2><h3 id="线框图-设计"><a href="#线框图-设计" class="headerlink" title="线框图+设计"></a>线框图+设计</h3><p>仅仅使用方块，占位符，形状和文本设计的，称之为线框图，如下图所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="线框图.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>对线框图进行视觉美化设计后，称之为高保真原型图，如下图所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="高保真原型图.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>线框图与高保真原型图的差别，仅仅是真实程序不一样而已</p>
-<h3 id="母版"><a href="#母版" class="headerlink" title="母版"></a>母版</h3><p>母版可以理解为PPT里的母版，是可以复用部分。设计网站时，网站的导航栏，Footer等等都是通用的组件，每个页面都有，这时可以创建一个母版，实现复用，如下所示：<br><img src="母版.png" alt=""></p>
-<h3 id="元件库"><a href="#元件库" class="headerlink" title="元件库"></a>元件库</h3><p>原生自带的元件库只适合做线框图，要做手机app的原型图设计的话，工作量会比较大，这时可以导入其他的元件库，如下导入了ios8组合元件库：<br><img src="元件库.png" alt=""></p>
-<h3 id="动态面板"><a href="#动态面板" class="headerlink" title="动态面板"></a>动态面板</h3><p><img src="动态图1.png" alt=""><br>上面的功能模块，在原型图里实现，就可以使用动态面板，动态面板是指在同一个区域里，有多种展示形态：<br><img src="动态面板.png" alt=""></p>
-<h3 id="控件连线"><a href="#控件连线" class="headerlink" title="控件连线"></a>控件连线</h3><p>通过如下可以把两个控件进行连接：<br><img src="连线.png" alt=""></p>
+<h3 id="母版"><a href="#母版" class="headerlink" title="母版"></a>母版</h3><p>母版可以理解为PPT里的母版，是可以复用部分。设计网站时，网站的导航栏，Footer等等都是通用的组件，每个页面都有，这时可以创建一个母版，实现复用，如下所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="母版.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="元件库"><a href="#元件库" class="headerlink" title="元件库"></a>元件库</h3><p>原生自带的元件库只适合做线框图，要做手机app的原型图设计的话，工作量会比较大，这时可以导入其他的元件库，如下导入了ios8组合元件库：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="元件库.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="动态面板"><a href="#动态面板" class="headerlink" title="动态面板"></a>动态面板</h3><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="动态图1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<p>上面的功能模块，在原型图里实现，就可以使用动态面板，动态面板是指在同一个区域里，有多种展示形态：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="动态面板.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h3 id="控件连线"><a href="#控件连线" class="headerlink" title="控件连线"></a>控件连线</h3><p>通过如下可以把两个控件进行连接：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="连线.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h3 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h3><p>给控件添加交互，就是给此控件添加：事件(event)，用例(case)，动作(action)。</p>
 <ol>
 <li>事件，如鼠标点击事件，鼠标移入时，鼠标移出时等等</li>
 <li>用例，发生事件后，做什么样的业务逻辑判断</li>
 <li>动作，即这个用例下，执行什么下的动作</li>
 </ol>
-<p>如下创建的交互：<br><img src="交互1.png" alt=""></p>
-<p>事件的种类：<br><img src="所有的事件.png" alt=""></p>
-<p>用例与其条件：<br><img src="用例.png" alt=""></p>
+<p>如下创建的交互：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="交互1.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>事件的种类：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="所有的事件.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>用例与其条件：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="用例.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <p>常用的动作有：</p>
 <ol>
 <li>打开新的链接</li>
@@ -185,10 +305,28 @@
 <li>设置显示/隐藏</li>
 </ol>
 <h3 id="浏览器展示"><a href="#浏览器展示" class="headerlink" title="浏览器展示"></a>浏览器展示</h3><p>直接可以在预览，但为了不出现显示问题，建议使用chrome浏览器进行预览</p>
-<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>每个控件可以添加文档<br><img src="控件文档.png" alt=""></p>
-<p>当前页面也可以添加文档<br><img src="页面说明文档.png" alt=""></p>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><p>每个控件可以添加文档<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="控件文档.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>当前页面也可以添加文档<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="页面说明文档.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
 <h3 id="合作"><a href="#合作" class="headerlink" title="合作"></a>合作</h3><ol>
-<li>通过AxShare可以实现合作编辑<br> <img src="合并编辑.png" alt=""></li>
+<li>通过AxShare可以实现合作编辑 <figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="合并编辑.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
 <li>通过版本管理来保存原文件，进行合作编辑</li>
 </ol>
 <h1 id="工具对比"><a href="#工具对比" class="headerlink" title="工具对比"></a>工具对比</h1><ul>
@@ -196,15 +334,15 @@
 <li>学习成本也非常高</li>
 <li>专业的原型设计工具</li>
 <li>可以实现很复杂的交互</li>
-<li><a href="https://www.axure.com/" target="_blank" rel="external">官网</a></li>
+<li><a href="https://www.axure.com/" target="_blank" rel="noopener">官网</a></li>
 </ol>
 </li>
 <li>Mockplus<ol>
 <li>有免费版本，简洁高效，关注设计，而非工具</li>
-<li><a href="https://www.mockplus.cn/" target="_blank" rel="external">官网</a></li>
+<li><a href="https://www.mockplus.cn/" target="_blank" rel="noopener">官网</a></li>
 </ol>
 </li>
-<li><a href="http://www.shejidaren.com/wireframe-tools-you-must-try-in-2016.html" target="_blank" rel="external">更多请点击</a></li>
+<li><a href="http://www.shejidaren.com/wireframe-tools-you-must-try-in-2016.html" target="_blank" rel="noopener">更多请点击</a></li>
 </ul>
 <h1 id="谁来制作高保真原型"><a href="#谁来制作高保真原型" class="headerlink" title="谁来制作高保真原型"></a>谁来制作高保真原型</h1><p>产品经理与设计师是高保真原型的制作者。（技术做支持）</p>
 <ul>
@@ -214,543 +352,218 @@
 <h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
 <li>Axure RP高保真网页原型制作</li>
 </ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2017-03-20T05:27:20.000Z" itemprop="dateUpdated">2017-03-20 13:27:20</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/axure/">axure</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
   
-	</div>
-		<footer class="article-footer clearfix">
-<div class="article-catetags">
-
-<div class="article-categories">
-  <span></span>
-  <a class="article-category-link" href="/categories/设计/">设计</a>
-</div>
-
-
-  <div class="article-tags">
+    <div class="waves-block waves-effect prev">
+      <a href="/2017/07/14/Docker-Jenkins服务搭建/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Docker-Jenkins服务搭建</h4>
+      </a>
+    </div>
   
-  <span></span> <a href="/tags/axure/">axure</a>
-  </div>
 
-</div>
-
-
-
-	<div class="article-share" id="share">
-	
-	  <div data-url="http://yoursite.com/2017/03/14/Axure设计原型图/" data-title="如何设计高保真原型图 | LiuYang&#39;s blog" data-tsina="undefined" class="share clearfix">
-	  </div>
-	
-	</div>
-
-
-</footer>
-
-   	       
-	</article>
-	
-<nav class="article-nav clearfix">
- 
- <div class="prev" >
- <a href="/2017/07/14/Docker-Jenkins服务搭建/" title="Docker-Jenkins服务搭建">
-  <strong>上一篇：</strong><br/>
-  <span>
-  Docker-Jenkins服务搭建</span>
-</a>
-</div>
-
-
-<div class="next">
-<a href="/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/"  title="前端学习系列2：从移动端的角度学习与分析Redux">
- <strong>下一篇：</strong><br/> 
- <span>前端学习系列2：从移动端的角度学习与分析Redux
-</span>
-</a>
-</div>
-
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2017/01/15/前端学习系列：从移动端的角度学习与分析Redux/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">前端学习系列2：从移动端的角度学习与分析Redux</h4>
+      </a>
+    </div>
+  
 </nav>
 
-	
-<section id="comments" class="comment">
-	<div class="ds-thread" data-thread-key="2017/03/14/Axure设计原型图/" data-title="如何设计高保真原型图" data-url="http://yoursite.com/2017/03/14/Axure设计原型图/"></div>
-</section>
 
 
-</div>  
-      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+    
 
-  <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目录</strong>
- 
- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-number">1.</span> <span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#高保真原型图Axure"><span class="toc-number">2.</span> <span class="toc-text">高保真原型图Axure</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#意义"><span class="toc-number">2.1.</span> <span class="toc-text">意义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Axure版本"><span class="toc-number">2.2.</span> <span class="toc-text">Axure版本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Axure的主要功能"><span class="toc-number">2.3.</span> <span class="toc-text">Axure的主要功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#线框图-设计"><span class="toc-number">2.3.1.</span> <span class="toc-text">线框图+设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#母版"><span class="toc-number">2.3.2.</span> <span class="toc-text">母版</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#元件库"><span class="toc-number">2.3.3.</span> <span class="toc-text">元件库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#动态面板"><span class="toc-number">2.3.4.</span> <span class="toc-text">动态面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#控件连线"><span class="toc-number">2.3.5.</span> <span class="toc-text">控件连线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#交互"><span class="toc-number">2.3.6.</span> <span class="toc-text">交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浏览器展示"><span class="toc-number">2.3.7.</span> <span class="toc-text">浏览器展示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文档"><span class="toc-number">2.3.8.</span> <span class="toc-text">文档</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#合作"><span class="toc-number">2.3.9.</span> <span class="toc-text">合作</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#工具对比"><span class="toc-number">3.</span> <span class="toc-text">工具对比</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#谁来制作高保真原型"><span class="toc-number">4.</span> <span class="toc-text">谁来制作高保真原型</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考"><span class="toc-number">5.</span> <span class="toc-text">参考</span></a></li></ol>
- 
-  </div>
 
-<div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
-<aside class="clearfix">
 
-  
-<div class="categorieslist">
-	<p class="asidetitle">分类</p>
-		<ul>
-		
-		  
-			<li><a href="/categories/Android/" title="Android">Android<sup>5</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/Server/" title="Server">Server<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/hexo/" title="hexo">hexo<sup>4</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/前端/" title="前端">前端<sup>3</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/大前端/" title="大前端">大前端<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/算法/" title="算法">算法<sup>1</sup></a></li>
-		  
-		
-		  
-			<li><a href="/categories/设计/" title="设计">设计<sup>1</sup></a></li>
-		  
-		
-		</ul>
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
 </div>
 
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
 
-  
-<div class="tagslist">
-	<p class="asidetitle">标签</p>
-		<ul class="clearfix">
-		
-			
-				<li><a href="/tags/Android/" title="Android">Android<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/React/" title="React">React<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Robot/" title="Robot">Robot<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/nodejs/" title="nodejs">nodejs<sup>3</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/docker/" title="docker">docker<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/axure/" title="axure">axure<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/jenkins/" title="jenkins">jenkins<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/收藏/" title="收藏">收藏<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/开发模式/" title="开发模式">开发模式<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Android内核学习笔记/" title="Android内核学习笔记">Android内核学习笔记<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/Gradle/" title="Gradle">Gradle<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/算法/" title="算法">算法<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/自动化测试/" title="自动化测试">自动化测试<sup>1</sup></a></li>
-			
-		
-			
-				<li><a href="/tags/ReactNative/" title="ReactNative">ReactNative<sup>1</sup></a></li>
-			
-		
-		</ul>
-</div>
-
-
-  <div class="linkslist">
-  <p class="asidetitle">友情链接</p>
-    <ul>
-        
-          <li>
-            
-            	<a href="http://www.cnblogs.com/puff" target="_blank" title="赵岘&#39;s Blog">赵岘&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://123.57.236.114:3000/" target="_blank" title="曲彦桥&#39;s Blog">曲彦桥&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/guxiao1201" target="_blank" title="徐萌阳&#39;s Blog">徐萌阳&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/lihappyangel" target="_blank" title="李晓梅&#39;s Blog">李晓梅&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://xdmaolei.github.io/" target="_blank" title="毛磊&#39;s Blog">毛磊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://blog.csdn.net/u010032372" target="_blank" title="王永川&#39;s Blog">王永川&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://peive.coding.me/" target="_blank" title="张雪峰&#39;s Blog">张雪峰&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://nohere.github.io/" target="_blank" title="闫涛&#39;s Blog">闫涛&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mozzieblog.sinaapp.com/" target="_blank" title="胡昊&#39;s Blog">胡昊&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://zhangzhixin2199.github.io/" target="_blank" title="张志新&#39;s Blog">张志新&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://coofee.github.io/" target="_blank" title="赵聪颖&#39;s Blog">赵聪颖&#39;s Blog</a>
-            
-          </li>
-        
-          <li>
-            
-            	<a href="http://mjnhmd.github.io/" target="_blank" title="孟敬楠&#39;s Blog">孟敬楠&#39;s Blog</a>
-            
-          </li>
-        
-    </ul>
-</div>
-
-  <div class="rsspart">
-	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
-</div>
-
-</aside>
-</div>
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
     </div>
-    <footer><div id="footer" >
-	
-	<div class="line">
-		<span></span>
-		<div class="author"></div>
-	</div>
-	
-	
-	<section class="info">
-		<p> Hi, I&#39;m LiuYang. For now I&#39;m an Android Programmer in 58 <br/>
-			This is my blog,believe it or not.</p>
-	</section>
-	 
-	<div class="social-font" class="clearfix">
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<a href="mailto:40610243@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
-		
-	</div>
-			
-		
-
-		<p class="copyright">
-		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018 
-		
-		<a href="/about" target="_blank" title="LiuYang">LiuYang</a>
-		
-		
-		</p>
-</div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
 </footer>
-    <script src="/js/jquery-2.0.3.min.js"></script>
-<script src="/js/jquery.imagesloaded.min.js"></script>
-<script src="/js/gallery.js"></script>
-<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.navbar').click(function(){
-    $('header nav').toggleClass('shownav');
-  });
-  var myWidth = 0;
-  function getSize(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-  };
-  var m = $('#main'),
-      a = $('#asidepart'),
-      c = $('.closeaside'),
-      o = $('.openaside');
-  c.click(function(){
-    a.addClass('fadeOut').css('display', 'none');
-    o.css('display', 'block').addClass('fadeIn');
-    m.addClass('moveMain');
-  });
-  o.click(function(){
-    o.css('display', 'none').removeClass('beforeFadeIn');
-    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
-    m.removeClass('moveMain');
-  });
-  $(window).scroll(function(){
-    o.css("top",Math.max(80,260-$(this).scrollTop()));
-  });
-  
-  $(window).resize(function(){
-    getSize(); 
-    if (myWidth >= 1024) {
-      $('header nav').removeClass('shownav');
-    }else{
-      m.removeClass('moveMain');
-      a.css('display', 'block').removeClass('fadeOut');
-      o.css('display', 'none');
-      
-      $('#toc.toc-aside').css('display', 'none');
-        
-    }
-  });
-});
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aQXIjIRAEQP3/07sP8I5c1Q22NiJ1mpiQgOQAqOjXK/78+fL5+v7p+3kLeWuHP3h4eHjrod8YxFObT9+cTco/2sTDw8O7xku6ed/lbE3Op6CdGjw8PLzP5+Xd50fkpC88PDy8/4XXhhSz51/bGPDw8PACXhJGtANKoop2k7iYteDh4eF1OcCrbfp3n6/c7+Hh4eGtb9XbcoHkmJ5P4oHR4uHh4V3g5UPZXOHPYoV97IuHh4d3g5d03L45VQqQl3w9/hYPDw/vMq/9279JPmZDr6NbPDw8vAu8tiygJbW/et9XW76Ah4eHd4OXhAttiUCyeczY7Rs8PDy8e7z2wJq/advJI+NozHh4eHjXePkl1uyonce4m6KEb47UeHh4eId4bcy6LyYYXmWNRoKHh4d3m9eWRuWLeBtb7CcFDw8P7x4vjwxmhVNtccAswH0cCR4eHt5lXltWlU9KPgXtb6OaCDw8PLyjvPxPfrLQz8oO8rhhdmbGw8PDu8E7Vfa0KQvY9J5MEB4eHt7P8PJlt40wkoG2JQur3BoPDw8v5iWBQr6gz1rYbxKP7eDh4eFd4O3j1AM1C6MCglmBAh4eHt6eNwtw28i1LT7YB8F4eHh493izztqF/lSRVltMgIeHh/eTvPeRQRsobK6v8r6+KbrCw8PDu8A7dby+Ef7mG8Ywq8bDw8Mb8c5eaLVH7fa6Ky8+wMPDwzvLmy21yeBmLWzKF6KiKzw8PLw1bx/IzhbuWejQPuPh4eHd47VXTUlskQ89jyqGGwMeHh7eNV6bYeSDbssFZpvW4xs8PDy8D+DlB99TwcQmpMDDw8P7HF4e4+7D37pcAA8PD+9HePnyfeqonQQZbdixinHx8PDwYl77h3+2MZwq1Tp2p4eHh4c34f0Fw+2Sl03GCzsAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
 </script>
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var ai = $('.article-content>iframe'),
-      ae = $('.article-content>embed'),
-      t  = $('#toc'),
-      ta = $('#toc.toc-aside'),
-      o  = $('.openaside'),
-      c  = $('.closeaside');
-  if(ai.length>0){
-    ai.wrap('<div class="video-container" />');
-  };
-  if(ae.length>0){
-   ae.wrap('<div class="video-container" />');
-  };
-  c.click(function(){
-    ta.css('display', 'block').addClass('fadeIn');
-  });
-  o.click(function(){
-    ta.css('display', 'none');
-  });
-  $(window).scroll(function(){
-    ta.css("top",Math.max(140,320-$(this).scrollTop()));
-  });
-});
-</script>
+<script src="/js/main.min.js?v=1.7.2"></script>
 
 
-<script type="text/javascript">
-$(document).ready(function(){ 
-  var $this = $('.share'),
-      url = $this.attr('data-url'),
-      encodedUrl = encodeURIComponent(url),
-      title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina'),
-      description = $this.attr('description');
-  var html = [
-  '<div class="hoverqrcode clearfix"></div>',
-  '<a class="overlay" id="qrcode"></a>',
-  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
-  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
-  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
-  '<span title="Share to"></span>'
-  ].join('');
-  $this.append(html);
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
 
-  $('.hoverqrcode').hide();
-
-  var myWidth = 0;
-  function updatehoverqrcode(){
-    if( typeof( window.innerWidth ) == 'number' ) {
-      myWidth = window.innerWidth;
-    } else if( document.documentElement && document.documentElement.clientWidth) {
-      myWidth = document.documentElement.clientWidth;
-    };
-    var qrsize = myWidth > 1024 ? 200:100;
-    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
-    var p = $('.article-share-qrcode').position();
-    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
-                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
-                          .qrcode(options);
-  };
-  $(window).resize(function(){
-    $('.hoverqrcode').hide();
-  });
-  $('.article-share-qrcode').click(function(){
-    updatehoverqrcode();
-    $('.hoverqrcode').toggle();
-  });
-  $('.article-share-qrcode').hover(function(){}, function(){
-      $('.hoverqrcode').hide();
-  });
-});   
-</script>
-
-
-
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"handsomeliuyang"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = '//static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script> 
+<script src="/js/search.min.js?v=1.7.2" async></script>
 
 
 
 
 
 
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-<script type="text/javascript">
-$(document).ready(function(){ 
-  $('.article-content').each(function(i){
-    $(this).find('img').each(function(){
-      if ($(this).parent().hasClass('fancybox')) return;
-      var alt = this.alt;
-      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
-      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
-    });
-    $(this).find('.fancybox').each(function(){
-      $(this).attr('rel', 'article' + i);
-    });
-  });
-  if($.fancybox){
-    $('.fancybox').fancybox();
-  }
-}); 
-</script>
-
-
-
-<!-- Analytics Begin -->
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 <script>
-var _hmt = _hmt || [];
 (function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?1da38fa3ae1b31028395aa573a41b694";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
 })();
 </script>
 
 
 
-<!-- Analytics End -->
-
-<!-- Totop Begin -->
-
-	<div id="totop">
-	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
-	</div>
-	<script src="/js/totop.js"></script>
-
-<!-- Totop End -->
-
-<!-- MathJax Begin -->
-<!-- mathjax config similar to math.stackexchange -->
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-<!-- MathJax End -->
-
-<!-- Tiny_search Begin -->
-
-<!-- Tiny_search End -->
-
-  </body>
+</body>
 </html>
