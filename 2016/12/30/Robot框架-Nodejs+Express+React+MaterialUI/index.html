@@ -206,7 +206,7 @@
 <p>效果如下：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="robot界面.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/robot界面.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -215,9 +215,9 @@
 <li><p>前端界面框架没有真正的React化，只使用很少一部分，html页面里，还有大量的js引用配置，css引用配置</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// html引用css部分</span></div><div class="line">&lt;link href=<span class="string">"../../other_js_lib/charisma/css/charisma-app.css"</span> rel=<span class="string">"stylesheet"</span>&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/bower_components/fullcalendar/dist/fullcalendar.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/bower_components/fullcalendar/dist/fullcalendar.print.css' rel='stylesheet' media='print'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/bower_components/chosen/chosen.min.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/bower_components/colorbox/example3/colorbox.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/bower_components/responsive-tables/responsive-tables.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/bower_components/bootstrap-tour/build/css/bootstrap-tour.min.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/jquery.noty.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/noty_theme_default.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/elfinder.min.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/elfinder.theme.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/jquery.iphone.toggle.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/uploadify.css' rel='stylesheet'&gt;</div><div class="line">&lt;link href='../../other_js_lib/charisma/css/animate.min.css' rel='stylesheet'&gt;</div><div class="line"></div><div class="line">// html中大量引用js的部分</div><div class="line">&lt;!-- select or dropdown enhancer --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/bower_components/chosen/chosen.jquery.min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- plugin for gallery image view --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/bower_components/colorbox/jquery.colorbox-min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- notification plugin --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/jquery.noty.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- library for making tables responsive --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/bower_components/responsive-tables/responsive-tables.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- tour plugin --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/bower_components/bootstrap-tour/build/js/bootstrap-tour.min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- star rating plugin --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/jquery.raty.min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- for iOS style toggle switch --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/jquery.iphone.toggle.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- autogrowing textarea plugin --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/jquery.autogrow-textarea.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- multiple file upload plugin --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/jquery.uploadify-3.1.min.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- history.js for cross-browser state change on ajax --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/jquery.history.js"&gt;&lt;/script&gt;</div><div class="line">&lt;!-- application script for Charisma demo --&gt;</div><div class="line">&lt;script src="../../other_js_lib/charisma/js/charisma.js"&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
 </li>
-<li><p>html过多，每个一个界面就会有一个html页面<br> <img src="robot1html数量.png" alt=""></p>
+<li><p>html过多，每个一个界面就会有一个html页面<br> <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/robot1html数量.png" alt=""></p>
 </li>
-<li>React界面大的方向使用的是Component开发模式，但每个组件内，还是大最使用最原生的方式开发，下面是其中一个组件的render()方法内部代码：<br> <img src="robot1render方法.png" alt=""></li>
+<li>React界面大的方向使用的是Component开发模式，但每个组件内，还是大最使用最原生的方式开发，下面是其中一个组件的render()方法内部代码：<br> <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/robot1render方法.png" alt=""></li>
 <li>界面很不好，由于css与js逻辑代码分离，在没有缓存时，经常出现先看到没有样式的界面，再看到整体界面，整体视觉效果很不好</li>
 <li>使用的是browserify的express的中间件：browserify-middleware，虽然能解决开发期间每次执行手动执行转换的功能，但问题是修改界面后，每次都手动需新才行。</li>
 <li>没有适配移动端，在手机版本上的体验很差</li>
@@ -269,7 +269,7 @@
 <h2 id="框架目录结构"><a href="#框架目录结构" class="headerlink" title="框架目录结构"></a>框架目录结构</h2><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="robot目录.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/robot目录.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -282,7 +282,7 @@
 <li><p>server端的日志输出，把所有请求都通过日志输出</p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 通过使用给express里添加morgan，就可以实现</span></div><div class="line"><span class="keyword">var</span> logger = <span class="built_in">require</span>(<span class="string">'morgan'</span>);</div><div class="line"><span class="keyword">var</span> app = express();</div><div class="line">app.use(logger(<span class="string">'dev'</span>));</div></pre></td></tr></table></figure>
 </li>
-<li><p>实现Server的404异常，利用express的中间件机制原理，实现404找不到页面异常<br> <img src="express中间件.png" alt=""></p>
+<li><p>实现Server的404异常，利用express的中间件机制原理，实现404找不到页面异常<br> <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/express中间件.png" alt=""></p>
  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 工具中间件</span></div><div class="line">app.use(logger(<span class="string">'dev'</span>));</div><div class="line">app.use(bodyParser.json());</div><div class="line">app.use(bodyParser.urlencoded(&#123; <span class="attr">extended</span>: <span class="literal">false</span> &#125;));</div><div class="line">app.use(cookieParser());</div><div class="line"></div><div class="line"><span class="comment">// 业务中间件</span></div><div class="line">app.use(<span class="string">'/'</span>, index);</div><div class="line">app.use(<span class="string">'/users'</span>, users);</div><div class="line"></div><div class="line"><span class="comment">// catch 404 and forward to error handler</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> err = <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">'Not Found'</span>);</div><div class="line">  err.status = <span class="number">404</span>;</div><div class="line">  next(err);</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="comment">// error handler</span></div><div class="line">app.use(<span class="function"><span class="keyword">function</span>(<span class="params">err, req, res, next</span>) </span>&#123;</div><div class="line">  <span class="comment">// set locals, only providing error in development</span></div><div class="line">  res.locals.message = err.message;</div><div class="line">  res.locals.error = req.app.get(<span class="string">'env'</span>) === <span class="string">'development'</span> ? err : &#123;&#125;;</div><div class="line"></div><div class="line">  <span class="comment">// render the error page</span></div><div class="line">  res.status(err.status || <span class="number">500</span>);</div><div class="line">  res.render(<span class="string">'error'</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 </li>
 <li><p><a href="https://nodemon.io/" target="_blank" rel="noopener">nodemon</a>实现改动server端代码后，实现自动重新加载</p>
@@ -321,14 +321,14 @@
 <li>通过自己搭后台服务与webpack的watch来实现 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="webpack开发方式一.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/webpack开发方式一.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></li>
 <li>webpack-dev-server，HotModuleReplacementPlugin实现热更新 — 推荐方式<figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="webpack开发方式二.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/webpack开发方式二.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></li>
@@ -345,14 +345,14 @@
 <h3 id="前端框架"><a href="#前端框架" class="headerlink" title="前端框架"></a>前端框架</h3><h4 id="基于React的开发思路变化"><a href="#基于React的开发思路变化" class="headerlink" title="基于React的开发思路变化"></a>基于React的开发思路变化</h4><p><strong>传统开发模式：</strong><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="传统开发模式.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/传统开发模式.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
 <p><strong>React开发模式：</strong><br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="React开发模式.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/React开发模式.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -368,7 +368,7 @@
 <p>在React的模式下，跳转协议也是URL，但这个URL不用经过server请求，而是重新加载新模块实现，如下图所示：<br><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="路由效果.gif" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/路由效果.gif" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure></p>
@@ -380,7 +380,7 @@
 <figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="React的框架.png" alt="" title="">
+                    <img src="/2016/12/30/Robot框架-Nodejs+Express+React+MaterialUI/React的框架.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>

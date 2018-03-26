@@ -3,12 +3,9 @@
 
 
     
-    
-    
-    
   <url>
     <loc>https://handsomeliuyang.github.io/2018/03/04/%E6%8A%BD%E5%B1%89%E6%95%88%E6%9E%9C%E5%AE%9E%E7%8E%B0%E4%B8%89%E7%AB%AF%E5%8C%96%E7%9A%84%E5%8E%86%E7%A8%8B/</loc>
-    <lastmod>2018-03-07T06:42:54.000Z</lastmod>
+    <lastmod>2018-03-26T12:41:45.000Z</lastmod>
     <data>
         <display>
         <title>抽屉效果实现三端化（android，ios，web）的历程</title>
@@ -19,12 +16,33 @@
          
            
              
-              <breadCrumb title="大前端" url="https://handsomeliuyang.github.io/categories/%E5%A4%A7%E5%89%8D%E7%AB%AF/"/>
+              <breadCrumb title="前端" url="https://handsomeliuyang.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
           
         </display>
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://handsomeliuyang.github.io/2018/03/19/Gatsby%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2%E4%B9%8B%E6%97%85/</loc>
+    <lastmod>2018-03-26T12:41:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gatsby搭建博客之旅</title>
+        <pubTime>2018-03-19T09:25:39.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="前端" url="https://handsomeliuyang.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
     
   <url>
     <loc>https://handsomeliuyang.github.io/2017/12/12/%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E6%95%B0%E6%8D%AE%E5%AE%9A%E6%97%B6%E6%B8%85%E7%90%86/</loc>
@@ -241,21 +259,32 @@
 
     
   <url>
-    <loc>https://handsomeliuyang.github.io/2016/03/24/2016-03-24-58%E5%90%8C%E5%9F%8EHybrid%E6%A1%86%E6%9E%B6%E7%9A%84%E7%82%B9%E7%82%B9%E6%BB%B4%E6%BB%B4/</loc>
+    <loc>https://handsomeliuyang.github.io/2016/06/13/2016-04-14-Android%E7%AD%BE%E5%90%8D%E7%9A%84%E8%BF%87%E7%A8%8B/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
         <display>
-        <title>58同城Hybrid框架的点点滴滴</title>
-        <pubTime>2016-03-24T07:28:51.000Z</pubTime>
+        <title>Android签名的过程</title>
+        <pubTime>2016-06-13T09:59:45.000Z</pubTime>
         
-        <tag>Android</tag>
          
-        <tag>开发模式</tag>
-         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://handsomeliuyang.github.io/2016/03/16/%E6%89%98%E7%AE%A1%E5%8D%9A%E5%AE%A2%E5%88%B0Coding/</loc>
+    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>托管博客到Coding</title>
+        <pubTime>2016-03-16T14:01:41.000Z</pubTime>
+        
          
            
              
-              <breadCrumb title="Android" url="https://handsomeliuyang.github.io/categories/Android/"/>
+              <breadCrumb title="hexo" url="https://handsomeliuyang.github.io/categories/hexo/"/>
           
         </display>
     </data>
@@ -303,17 +332,21 @@
 
     
   <url>
-    <loc>https://handsomeliuyang.github.io/2016/03/16/hexo%E7%90%86%E8%A7%A3/</loc>
+    <loc>https://handsomeliuyang.github.io/2016/03/24/2016-03-24-58%E5%90%8C%E5%9F%8EHybrid%E6%A1%86%E6%9E%B6%E7%9A%84%E7%82%B9%E7%82%B9%E6%BB%B4%E6%BB%B4/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
         <display>
-        <title>hexo理解</title>
-        <pubTime>2016-03-16T03:03:16.000Z</pubTime>
+        <title>58同城Hybrid框架的点点滴滴</title>
+        <pubTime>2016-03-24T07:28:51.000Z</pubTime>
         
+        <tag>Android</tag>
+         
+        <tag>开发模式</tag>
+         
          
            
              
-              <breadCrumb title="hexo" url="https://handsomeliuyang.github.io/categories/hexo/"/>
+              <breadCrumb title="Android" url="https://handsomeliuyang.github.io/categories/Android/"/>
           
         </display>
     </data>
@@ -321,27 +354,12 @@
 
     
   <url>
-    <loc>https://handsomeliuyang.github.io/2016/06/13/2016-04-14-Android%E7%AD%BE%E5%90%8D%E7%9A%84%E8%BF%87%E7%A8%8B/</loc>
+    <loc>https://handsomeliuyang.github.io/2016/03/16/hexo%E7%90%86%E8%A7%A3/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
         <display>
-        <title>Android签名的过程</title>
-        <pubTime>2016-06-13T09:59:45.000Z</pubTime>
-        
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://handsomeliuyang.github.io/2016/03/16/%E6%89%98%E7%AE%A1%E5%8D%9A%E5%AE%A2%E5%88%B0Coding/</loc>
-    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>托管博客到Coding</title>
-        <pubTime>2016-03-16T14:01:41.000Z</pubTime>
+        <title>hexo理解</title>
+        <pubTime>2016-03-16T03:03:16.000Z</pubTime>
         
          
            

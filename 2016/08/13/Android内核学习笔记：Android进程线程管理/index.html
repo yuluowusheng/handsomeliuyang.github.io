@@ -191,7 +191,7 @@
             <h1 id="Android程序启动过程"><a href="#Android程序启动过程" class="headerlink" title="Android程序启动过程"></a>Android程序启动过程</h1><figure class="image-bubble">
                 <div class="img-lightbox">
                     <div class="overlay"></div>
-                    <img src="Android程序的启动流程.png" alt="" title="">
+                    <img src="/2016/08/13/Android内核学习笔记：Android进程线程管理/Android程序的启动流程.png" alt="" title="">
                 </div>
                 <div class="image-caption"></div>
             </figure>
@@ -222,7 +222,7 @@
 <li>Service的生命周期是运行在UIThread里，我们需要执行的后台任务，需要创建一个子线程来执行</li>
 <li>四大组件，Activity，Service，Broadcast都是需要时，系统进行创建，但ContentProvider例外，其是在应用进程启动时，就会开发创建。</li>
 </ol>
-<h1 id="Android的编程框架"><a href="#Android的编程框架" class="headerlink" title="Android的编程框架"></a>Android的编程框架</h1><p>从开始接触Android开始，我们都是面向四大组件及四大组件的生命周期方法来进行编程。<br>但学过C程序开发的都知道，应用程序都是从main()方法开始执行，再执行一个while()循环，不停接收事件，再处理事件的过程。<br>Android的事件驱动流程：<br><img src="Android程序流程.png" alt=""></p>
+<h1 id="Android的编程框架"><a href="#Android的编程框架" class="headerlink" title="Android的编程框架"></a>Android的编程框架</h1><p>从开始接触Android开始，我们都是面向四大组件及四大组件的生命周期方法来进行编程。<br>但学过C程序开发的都知道，应用程序都是从main()方法开始执行，再执行一个while()循环，不停接收事件，再处理事件的过程。<br>Android的事件驱动流程：<br><img src="/2016/08/13/Android内核学习笔记：Android进程线程管理/Android程序流程.png" alt=""></p>
 <ol>
 <li>由AMS创建应用程序进程，并创建UIThread，通过Looper.loop()，让UIThread进入事件驱动循环中</li>
 <li>四大组件的生命周期方法，用户交互等等都当作Message，进入MessageQueue里，进入UIThread的事件驱动循环中。</li>
