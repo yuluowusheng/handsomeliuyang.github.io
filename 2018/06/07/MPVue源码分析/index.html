@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>MPVue源码分析 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="Demo使用Vue实现一个消息逆转的demo：1234&amp;lt;div id=&quot;app&quot;&amp;gt;  &amp;lt;p&amp;gt;&amp;#123;&amp;#123; message &amp;#125;&amp;#125;&amp;lt;/p&amp;gt;  &amp;lt;button v-on:click=&quot;reverseMessage&quot;&amp;gt;逆转消息&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt; 1234567891011var app =">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MPVue源码分析">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="Demo使用Vue实现一个消息逆转的demo：1234&amp;lt;div id=&quot;app&quot;&amp;gt;  &amp;lt;p&amp;gt;&amp;#123;&amp;#123; message &amp;#125;&amp;#125;&amp;lt;/p&amp;gt;  &amp;lt;button v-on:click=&quot;reverseMessage&quot;&amp;gt;逆转消息&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt; 1234567891011var app =">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/小程序的代码结构.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/Vue对象.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/Vue框架.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/mpvue框架.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/mpvue初始化流程.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/mpvue更新流程.png">
+<meta property="og:updated_time" content="2018-06-12T12:51:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MPVue源码分析">
+<meta name="twitter:description" content="Demo使用Vue实现一个消息逆转的demo：1234&amp;lt;div id=&quot;app&quot;&amp;gt;  &amp;lt;p&amp;gt;&amp;#123;&amp;#123; message &amp;#125;&amp;#125;&amp;lt;/p&amp;gt;  &amp;lt;button v-on:click=&quot;reverseMessage&quot;&amp;gt;逆转消息&amp;lt;/button&amp;gt;&amp;lt;/div&amp;gt; 1234567891011var app =">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2018/06/07/MPVue源码分析/小程序的代码结构.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">MPVue源码分析</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">MPVue源码分析</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-06-07T06:34:35.000Z" itemprop="datePublished" class="page-time">
+  2018-06-07
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Demo"><span class="post-toc-number">1.</span> <span class="post-toc-text">Demo</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#小程序简介"><span class="post-toc-number">2.</span> <span class="post-toc-text">小程序简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Vue的实现原理"><span class="post-toc-number">3.</span> <span class="post-toc-text">Vue的实现原理</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#MPVue的实现"><span class="post-toc-number">4.</span> <span class="post-toc-text">MPVue的实现</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#MPVue源码介绍"><span class="post-toc-number">5.</span> <span class="post-toc-text">MPVue源码介绍</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-MPVue源码分析"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">MPVue源码分析</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-06-07 14:34:35" datetime="2018-06-07T06:34:35.000Z"  itemprop="datePublished">2018-06-07</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>使用Vue实现一个消息逆转的demo：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"reverseMessage"</span>&gt;</span>逆转消息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</div><div class="line">    <span class="attr">el</span>: <span class="string">'#app'</span>,</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">    	<span class="attr">message</span>: <span class="string">'Hello Vue.js!'</span></div><div class="line">  	&#125;,</div><div class="line">  	<span class="attr">methods</span>: &#123;</div><div class="line">    	<span class="attr">reverseMessage</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">this</span>.message = <span class="keyword">this</span>.message.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>)</div><div class="line">    	&#125;</div><div class="line">  	&#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>You can <a href="https://codepen.io/handsomeliuyang/pen/RJGejj?editors=1010" target="_blank" rel="noopener">try it on CodePen</a>.</p>
+<p>同样的效果，使用小程序实现的代码为：</p>
+<ol>
+<li>小程序的整体结构如下所示：<br> :<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/06/07/MPVue源码分析/小程序的代码结构.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li><p>App相关的代码：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// app.js文件</span></div><div class="line">App(&#123;</div><div class="line">  <span class="attr">onLaunch</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"App onLaunch..."</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">onShow</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"App onShow..."</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">onHide</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"App onHide..."</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">onError</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"App onError..."</span>);</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">// app.json</div><div class="line">&#123;</div><div class="line">  "pages":[</div><div class="line">    "pages/index/index"</div><div class="line">  ],</div><div class="line">  "window":&#123;</div><div class="line">    "backgroundTextStyle":"light",</div><div class="line">    "navigationBarBackgroundColor": "#fff",</div><div class="line">    "navigationBarTitleText": "WeChat",</div><div class="line">    "navigationBarTextStyle":"black"</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">// app.wxss</div><div class="line">.container &#123;</div><div class="line">  height: 100%;</div><div class="line">  display: flex;</div><div class="line">  flex-direction: column;</div><div class="line">  align-items: center;</div><div class="line">  justify-content: space-between;</div><div class="line">  padding: 200rpx 0;</div><div class="line">  box-sizing: border-box;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Page相关的代码：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--index.wxml--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"container"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"usermotto"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">text</span> <span class="attr">class</span>=<span class="string">"user-motto"</span>&gt;</span>&#123;&#123;message&#125;&#125;<span class="tag">&lt;/<span class="name">text</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">bindtap</span>=<span class="string">"reverseMessage"</span>&gt;</span>逆转消息<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//index.js</span></div><div class="line">Page(&#123;</div><div class="line">  <span class="attr">data</span>: &#123;</div><div class="line">    <span class="attr">message</span>: <span class="string">'Hello Wechat!'</span></div><div class="line">  &#125;,</div><div class="line">  <span class="comment">//生命周期函数</span></div><div class="line">  onLoad: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"Page onLoad..."</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">onReady</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"Page onReady..."</span>);</div><div class="line">  &#125;,</div><div class="line">  <span class="comment">//事件处理函数</span></div><div class="line">  reverseMessage: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// this.data.message = this.data.message.split('').reverse().join('')</span></div><div class="line">    <span class="keyword">this</span>.setData(&#123; <span class="attr">message</span>: <span class="keyword">this</span>.data.message.split(<span class="string">''</span>).reverse().join(<span class="string">''</span>) &#125;)</div><div class="line">  &#125;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+ <figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**index.wxss**/</span></div><div class="line"><span class="selector-class">.usermotto</span> &#123;</div><div class="line">  <span class="attribute">margin-top</span>: <span class="number">100px</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="小程序简介"><a href="#小程序简介" class="headerlink" title="小程序简介"></a>小程序简介</h1><p>Vue与小程序都可以看成javascript的高级抽象，类似于java里的各种框架，想让基于Vue开发的代码运行在小程序里，就把Vue的低层映射到小程序的Api，而不是Web端的Dom。</p>
+<p>先来分析小程序的框架体系：</p>
+<ol>
+<li>目录结构：包括App相关的三个文件，每个Page包括三个文件</li>
+<li>代码结构：<ol>
+<li>xxx.wxml布局文件，小程序特定的基础组件，如view，button, text</li>
+<li>xxx.js逻辑文件，类似于Vue对象的Page对象与App对象</li>
+<li>xxx.wxss样式文件，与css一致，但支持样式属性列表不一样</li>
+</ol>
+</li>
+<li>类MVVM的响应式框架：V(wxml)，ViewModel(Page.data，Page.func)<ol>
+<li>Page.data与wxml对应，通过setData()修改data数据，并自动更新View</li>
+</ol>
+</li>
+</ol>
+<h1 id="Vue的实现原理"><a href="#Vue的实现原理" class="headerlink" title="Vue的实现原理"></a>Vue的实现原理</h1><p>Vue运行期间，分为三个阶段：</p>
+<ol>
+<li>初始化，生成Vue对象，让其具备如下属性与方法，如下所示：<br> <img src="/2018/06/07/MPVue源码分析/Vue对象.png" alt=""></li>
+<li>vm.$mount()后，建立整个响应式框架，并首次渲染Dom</li>
+<li>事件响应，即用户交互</li>
+</ol>
+<p>整个响应式框架如下图所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/06/07/MPVue源码分析/Vue框架.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h1 id="MPVue的实现"><a href="#MPVue的实现" class="headerlink" title="MPVue的实现"></a>MPVue的实现</h1><p>通过上面的小程序框架与Vue的实现原理介绍，基于Vue写的代码，要在小程序上运行，需要做如下工作：</p>
+<ol>
+<li>编译期间生成小程序目录结构与代码结构<ol>
+<li>生成app相关的三个文件：app.js, app.json, app.wxss</li>
+<li>生成Page相关的三个文件：xxx.js, xxx.wxml, xxx.wxss<ol>
+<li>xxx.js的转换成本最低，基本不用变化，因为都是基于javascript语言写的</li>
+<li>xxx.wxml：把Vue的template转换为小程序的基础组件，同时对组件的属性进行映射处理，成本较高</li>
+<li>xxx.wxss：把Vue里的样式，直接转换过来就行，成本较低</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>对Vue运行时做修改，如下图所示：<br> <img src="/2018/06/07/MPVue源码分析/mpvue框架.png" alt=""></li>
+</ol>
+<p>部分核心代码：</p>
+<ol>
+<li>初始化流程：<br> <img src="/2018/06/07/MPVue源码分析/mpvue初始化流程.png" alt=""></li>
+<li>更新流程：<br> <img src="/2018/06/07/MPVue源码分析/mpvue更新流程.png" alt=""></li>
+</ol>
+<h1 id="MPVue源码介绍"><a href="#MPVue源码介绍" class="headerlink" title="MPVue源码介绍"></a>MPVue源码介绍</h1><p>直接对着代码来分享</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://developers.weixin.qq.com/miniprogram/dev/framework/MINA.html" target="_blank" rel="noopener">小程序框架</a></li>
+<li><a href="https://github.com/numbbbbb/read-vue-source-code" target="_blank" rel="noopener">read-vue-source-code</a></li>
+<li><a href="https://cn.vuejs.org/v2/guide/index.html" target="_blank" rel="noopener">Vue.js</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-06-12T12:51:07.000Z" itemprop="dateUpdated">2018-06-12 20:51:07</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/04/02/react-native-wechatmini/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">react-native-wechatmini</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACsUlEQVR42u3aQW7DMAwEwPz/0+0DCtu7ouTmMD4VCZJqVEBil/x84ufnz3P/+t/PXr1y9anke7Y9eHh4eOOlXzES6hrpfpuSbb3cYjw8PLxjvPuDeP7z/bGe4/M14+Hh4X0Pb2/9fn8ZtIU4Hh4e3rfxkiP7vuRto428ZMfDw8N7n9cuKI9uF5cVl+nbshY8PDy8bj1F8+kbfj7S38PDw8Mbd9WTS6I9vteO/sXV4uHh4R3gTUYH5sNY85A3KtDx8PDwXuG1jag8xr1fUP7bi5AXDw8P7wBvErYWpW08grB2CS2mKXh4eHgDXnJYT7Ygv4RyRnJF4eHh4b3Da8OF/HDPi+P5pYKHh4d3grf2j30e0ebH+lp0+/AHwMPDwzvGa4vdtbI7L6PbZtjlu3h4eHiv8JLDfW+pPS++L9eMh4eHd5g3Qc7j4LXnIV/Bw8PDO8CbNOzzFldecH82PcXQFR4eHt4SL2lB5ZHBpGXVhiDRNuHh4eFt5U0Gm+ZNsvzyWCz08fDw8A7wWkDbAFuLJ9oL5r6Ix8PDw9vLa4vpPB1dw7RR7wMeDw8P7xhvcjS3UcKkiVWPZOHh4eEd4OVDA3nckDT720A2iY/x8PDw3uS1BfSk/d+W7GvXDB4eHt5pXl7I3n/dJErY+25BxcPDw1vitZFE+2vy0YTkoqqvJTw8PLwXeWuNq/vtaEe1JsU3Hh4e3mleG5W2se+2+KAdTcDDw8Pbyvspn7Ycbxtaa1uDh4eH9yZv7fCdjBG0Y1W7Bgvw8PDw9vLy+DWJFSZDAPm1UVwMeHh4eMd4a0MD7cGdh7P5PfbwWTw8PLwv4LUDWG19235P0d/Dw8PD+ydeHhm0r6w9D9uBh4eHd4y3Fka0g1M5Mt/6h6sCDw8P7wBv8g//ZLygjWXbcBkPDw/vAO8XH4gIFNN3PaoAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
