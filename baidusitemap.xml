@@ -4,6 +4,28 @@
 
     
   <url>
+    <loc>https://handsomeliuyang.github.io/2018/10/30/Flutter%E5%AE%9E%E7%8E%B0Git%E6%9D%83%E9%99%90%E5%88%86%E9%85%8D%E5%B7%A5%E5%85%B7%E4%B9%8B%E6%97%85/</loc>
+    <lastmod>2018-11-11T09:41:13.283Z</lastmod>
+    <data>
+        <display>
+        <title>Flutter实现Git权限分配工具之旅</title>
+        <pubTime>2018-10-30T06:40:35.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Flutter</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://handsomeliuyang.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://handsomeliuyang.github.io/2016/03/24/58%E5%90%8C%E5%9F%8EHybrid%E6%A1%86%E6%9E%B6%E7%9A%84%E7%82%B9%E7%82%B9%E6%BB%B4%E6%BB%B4/</loc>
     <lastmod>2018-10-15T08:52:32.203Z</lastmod>
     <data>
@@ -209,9 +231,9 @@
         <title>前端学习系列2：从移动端的角度学习与分析Redux</title>
         <pubTime>2017-01-15T08:00:00.000Z</pubTime>
         
-        <tag>React</tag>
-         
         <tag>Robot</tag>
+         
+        <tag>React</tag>
          
         <tag>nodejs</tag>
          
@@ -233,9 +255,9 @@
         <title>React实现MergeRequest管理</title>
         <pubTime>2016-11-15T11:33:06.000Z</pubTime>
         
-        <tag>React</tag>
-         
         <tag>Robot</tag>
+         
+        <tag>React</tag>
          
         <tag>nodejs</tag>
          
@@ -257,9 +279,9 @@
         <title>前端学习系列：基于React的Robot框架的踩坑之旅</title>
         <pubTime>2016-12-30T05:00:00.000Z</pubTime>
         
-        <tag>React</tag>
-         
         <tag>Robot</tag>
+         
+        <tag>React</tag>
          
         <tag>nodejs</tag>
          
@@ -281,9 +303,9 @@
         <title>Android收藏的好文章</title>
         <pubTime>2016-03-22T02:42:49.000Z</pubTime>
         
-        <tag>收藏</tag>
-         
         <tag>Android</tag>
+         
+        <tag>收藏</tag>
          
          
            
@@ -316,70 +338,12 @@
 
     
   <url>
-    <loc>https://handsomeliuyang.github.io/2016/03/16/Gradle%E5%88%86%E4%BA%AB/</loc>
-    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>Gradle分享</title>
-        <pubTime>2016-03-16T10:15:29.000Z</pubTime>
-        
-        <tag>Android</tag>
-         
-        <tag>Gradle</tag>
-         
-         
-           
-             
-              <breadCrumb title="Android" url="https://handsomeliuyang.github.io/categories/Android/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://handsomeliuyang.github.io/2016/03/17/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</loc>
-    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>Markdown常用语法</title>
-        <pubTime>2016-03-17T05:05:47.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="hexo" url="https://handsomeliuyang.github.io/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>https://handsomeliuyang.github.io/2016/03/16/%E6%89%98%E7%AE%A1%E5%8D%9A%E5%AE%A2%E5%88%B0Coding/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
         <display>
         <title>托管博客到Coding</title>
         <pubTime>2016-03-16T14:01:41.000Z</pubTime>
-        
-         
-           
-             
-              <breadCrumb title="hexo" url="https://handsomeliuyang.github.io/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://handsomeliuyang.github.io/2016/03/16/hexo%E7%90%86%E8%A7%A3/</loc>
-    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
-    <data>
-        <display>
-        <title>hexo理解</title>
-        <pubTime>2016-03-16T03:03:16.000Z</pubTime>
         
          
            
@@ -407,12 +371,70 @@
 
     
   <url>
+    <loc>https://handsomeliuyang.github.io/2016/03/17/markdown%E5%B8%B8%E7%94%A8%E8%AF%AD%E6%B3%95/</loc>
+    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Markdown常用语法</title>
+        <pubTime>2016-03-17T05:05:47.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="hexo" url="https://handsomeliuyang.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://handsomeliuyang.github.io/2016/03/16/Gradle%E5%88%86%E4%BA%AB/</loc>
+    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gradle分享</title>
+        <pubTime>2016-03-16T10:15:29.000Z</pubTime>
+        
+        <tag>Android</tag>
+         
+        <tag>Gradle</tag>
+         
+         
+           
+             
+              <breadCrumb title="Android" url="https://handsomeliuyang.github.io/categories/Android/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://handsomeliuyang.github.io/2016/03/16/Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2016-08-13T08:21:13.000Z</lastmod>
     <data>
         <display>
         <title>Hexo搭建个人博客</title>
         <pubTime>2016-03-16T06:08:36.000Z</pubTime>
+        
+         
+           
+             
+              <breadCrumb title="hexo" url="https://handsomeliuyang.github.io/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://handsomeliuyang.github.io/2016/03/16/hexo%E7%90%86%E8%A7%A3/</loc>
+    <lastmod>2016-08-13T08:21:13.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo理解</title>
+        <pubTime>2016-03-16T03:03:16.000Z</pubTime>
         
          
            
