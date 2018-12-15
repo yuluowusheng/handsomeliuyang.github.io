@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>LeetCode Longest Common Substring | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,算法">
+    <meta name="description" content="题目Given two strings ‘X’ and ‘Y’, find the length of the longest common substring. Examples :1234567891011121314Input : X = &amp;quot;GeeksforGeeks&amp;quot;, y = &amp;quot;GeeksQuiz&amp;quot;Output : 5The longest com">
+<meta name="keywords" content="leetcode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Longest Common Substring">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2018/12/15/Leetcode-longest-common-substring/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="题目Given two strings ‘X’ and ‘Y’, find the length of the longest common substring. Examples :1234567891011121314Input : X = &amp;quot;GeeksforGeeks&amp;quot;, y = &amp;quot;GeeksQuiz&amp;quot;Output : 5The longest com">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-12-15T06:27:34.552Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Longest Common Substring">
+<meta name="twitter:description" content="题目Given two strings ‘X’ and ‘Y’, find the length of the longest common substring. Examples :1234567891011121314Input : X = &amp;quot;GeeksforGeeks&amp;quot;, y = &amp;quot;GeeksQuiz&amp;quot;Output : 5The longest com">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode Longest Common Substring</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode Longest Common Substring</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-15T03:00:06.000Z" itemprop="datePublished" class="page-time">
+  2018-12-15
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">理解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Brute-Force-暴力法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Brute Force(暴力法)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dynamic-Programming-动态规划"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Dynamic Programming(动态规划)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Leetcode-longest-common-substring"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode Longest Common Substring</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-15 11:00:06" datetime="2018-12-15T03:00:06.000Z"  itemprop="datePublished">2018-12-15</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>Given two strings ‘X’ and ‘Y’, find the length of the longest common substring.</p>
+<p><strong>Examples :</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">Input : X = &quot;GeeksforGeeks&quot;, y = &quot;GeeksQuiz&quot;</div><div class="line">Output : 5</div><div class="line">The longest common substring is &quot;Geeks&quot; and is of</div><div class="line">length 5.</div><div class="line"></div><div class="line">Input : X = &quot;abcdxyz&quot;, y = &quot;xyzabcd&quot;</div><div class="line">Output : 4</div><div class="line">The longest common substring is &quot;abcd&quot; and is of</div><div class="line">length 4.</div><div class="line"></div><div class="line">Input : X = &quot;zxabcdezy&quot;, y = &quot;yzabcdezx&quot;</div><div class="line">Output : 6</div><div class="line">The longest common substring is &quot;abcdez&quot; and is of</div><div class="line">length 6.</div></pre></td></tr></table></figure></p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>求字符串X，Y的公共最长子串，这些子串要求连续性，类似的问题是求公共最长子序列</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>设 m = X.length(), n = Y.length();</p>
+<h2 id="Brute-Force-暴力法"><a href="#Brute-Force-暴力法" class="headerlink" title="Brute Force(暴力法)"></a>Brute Force(暴力法)</h2><p>思路：</p>
+<ol>
+<li><p>遍历所有X的子串，时间复杂度为O(m^2)</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for(int i=0; i&lt;X.length(); i++)&#123;</div><div class="line">    for(int j=0; j&lt;X.length(); j++)&#123;</div><div class="line">        String sub = X.substring(i, j+1);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>求子串是否也是Y的子串，即子串在Y中的位置，可选择KMP算法，时间复杂为O(n)</p>
+</li>
+<li>满足条件的最大长度的子串就是最长公共子串。最终时间复杂度为：O(n * m^2)</li>
+</ol>
+<h2 id="Dynamic-Programming-动态规划"><a href="#Dynamic-Programming-动态规划" class="headerlink" title="Dynamic Programming(动态规划)"></a>Dynamic Programming(动态规划)</h2><p>思路：</p>
+<ol>
+<li>设 X = “abcdxyz”, Y = “xyzabcd”</li>
+<li><p>先求解如下子符串组的公共后缀：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">1. X_6=&quot;abcdxyz&quot;, Y_6=&quot;xyzabcd&quot; ===&gt; 公共后缀长度：0</div><div class="line">2. ...</div><div class="line">3. X_3=&quot;abcd&quot;, Y_6=&quot;xyzabcd&quot; ===&gt; 公共后缀长度：4</div><div class="line">4. ...</div><div class="line">5. X_0=&quot;a&quot;, Y_0=&quot;x&quot; ===&gt; 公共后缀长度：0</div></pre></td></tr></table></figure>
+</li>
+<li><p>上面所有子符串组的最长公共后缀，就是最长的公共子串：”abcd“</p>
+</li>
+</ol>
+<p>求X，Y的公共最长子串问题，转换为求所有子串的最长公共后缀的问题，公共后缀问题，有如下状态转移方程：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">The longest common suffix has following optimal substructure property</div><div class="line">   LCSuff(X, Y, m-1, n-1) = LCSuff(X, Y, m-2, n-2) + 1 if X[m-1] = Y[n-1]</div><div class="line">                        0  Otherwise (if X[m-1] != Y[n-1])</div><div class="line"></div><div class="line">The maximum length Longest Common Suffix is the longest common substring.</div><div class="line">   LCSubStr(X, Y, m-1, n-1)  = Max(LCSuff(X, Y, i, j)) where 1 &lt;= i &lt; m</div><div class="line">                                                     and 1 &lt;= j &lt; n</div></pre></td></tr></table></figure></p>
+<p>代码实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LongestCommonSubSequence</span> </span>&#123; </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">LCSubStr</span><span class="params">(String X, String Y)</span> </span>&#123; </div><div class="line">        <span class="keyword">if</span>(X == <span class="keyword">null</span> || X.length() == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(Y == <span class="keyword">null</span> || Y.length() == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> m = X.length();</div><div class="line">        <span class="keyword">int</span> n = Y.length();</div><div class="line">    </div><div class="line">        <span class="keyword">int</span> LCStuff[][] = <span class="keyword">new</span> <span class="keyword">int</span>[m][n]; </div><div class="line">        <span class="keyword">int</span> maxLCSLen = <span class="number">0</span>;  <span class="comment">// 最长公共后缀长度</span></div><div class="line">        </div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; i++) &#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; n; j++) &#123;</div><div class="line">                <span class="keyword">if</span> (X[i] == Y[j]) &#123; </div><div class="line">                    </div><div class="line">                    <span class="keyword">if</span>(i==<span class="number">0</span> || j==<span class="number">0</span>)&#123;</div><div class="line">                        LCStuff[i][j] = <span class="number">1</span>;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        LCStuff[i][j] = LCStuff[i - <span class="number">1</span>][j - <span class="number">1</span>] + <span class="number">1</span>; </div><div class="line">                    &#125;</div><div class="line">                    </div><div class="line">                    maxLCSLen = Math.max(maxLCSLen, LCStuff[i][j]); </div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    LCStuff[i][j] = <span class="number">0</span>; </div><div class="line">                &#125;</div><div class="line">            &#125; </div><div class="line">        &#125; </div><div class="line">        <span class="keyword">return</span> maxLCSLen; </div><div class="line">    &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(m * n)</li>
+<li>空间复杂度：O(m * n)</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://www.geeksforgeeks.org/longest-common-substring-dp-29/" target="_blank" rel="noopener">Longest Common Substring | DP-29</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-15T06:27:34.552Z" itemprop="dateUpdated">2018-12-15 14:27:34</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/06/leetcode-longest-palindromic-substring/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode Longest Palindromic Substring</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACqElEQVR42u3aMXIjMQwEQP3/07rUgSXPAORZruqNVLaWy2awgAA8HvH1DK6v32xXfv+U2coPPDw8vGu8fNOv/vt+zfd/ebX+7CC+uRcPDw/vGi9Zrg0S7dEkR5DvGQ8PD+9zeMldbdjIs2I8PDy8v8s7G1raYgQeHh7eJ/D2JdS8nLFPl6/UWvDw8PBi3qxN9bufr/T38PDw8A4NBOwT3zwdz4u80W7x8PDwLvD26fIsUZ6NILT7xMPDw7vBm5UAZi2xWVsrKWe8vAsPDw/vAi9v6m9e/QmpHduKMHh4eHgXePt0Ngfkd7VNuGEZAg8PD+8or30F5438A7WTPKHHw8PDu8BLHpyXABLw7LDadDyaLMPDw8Mb8WZt+03Zd7/+sLOHh4eHd5SXp7+zYawoLgXI9gcAHh4e3m/x8gfPXuX7skg0KICHh4d3iNemwm1xtmVfHLrCw8PDO8Sbbatt8LfDWLPZsVVlGg8PDy/m5RvalyfacatTwwp4eHh4t3n557ZEe3voqujy4eHh4a15s5d+niK3owazssgPz8LDw8M7xNs0tE6VMPKDODBThoeHh3eIt3lwXoxoE+hZmr6KdXh4eHgB73aDKgkV+ZRUWzTBw8PDu8drC6OnmvqbMHOgy4eHh4e34CXJ641i6yzk1Gk3Hh4e3mXee3BbtJ0lxG2I+uEQ8fDw8C7zZk2vtgDRFnZnzTA8PDy8G7xnebVts7bY2ibT77+Jh4eHd4O3GWlKgkQeEtpDqRtgeHh4eEd5m9d6wp4FgGOBAQ8PD+8aLynF7kemDserZG94eHh4H8NrG135QbSHu5omw8PDw/svvHygKh8OeB66ih4aHh4e3prXNr2SYJAUDtpxgXxveHh4ePd47Q/+fNOzRlcywnWqkIGHh4dX8v4Bm7LaT/5C8fMAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>

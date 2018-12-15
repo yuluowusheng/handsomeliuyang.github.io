@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>LeetCode Longest Palindromic Substring | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,算法">
+    <meta name="description" content="题目Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000. Example 1:123Input: &amp;quot;babad&amp;quot;Output: &amp;quot;bab&amp;quot;Note: &amp;quot;aba&amp;quot;">
+<meta name="keywords" content="leetcode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Longest Palindromic Substring">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2018/12/06/leetcode-longest-palindromic-substring/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="题目Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000. Example 1:123Input: &amp;quot;babad&amp;quot;Output: &amp;quot;bab&amp;quot;Note: &amp;quot;aba&amp;quot;">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/12/06/leetcode-longest-palindromic-substring/20181211095308958.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/12/06/leetcode-longest-palindromic-substring/20181211100718788.png">
+<meta property="og:updated_time" content="2018-12-15T06:30:18.317Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Longest Palindromic Substring">
+<meta name="twitter:description" content="题目Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000. Example 1:123Input: &amp;quot;babad&amp;quot;Output: &amp;quot;bab&amp;quot;Note: &amp;quot;aba&amp;quot;">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2018/12/06/leetcode-longest-palindromic-substring/20181211095308958.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode Longest Palindromic Substring</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode Longest Palindromic Substring</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-06T02:12:25.000Z" itemprop="datePublished" class="page-time">
+  2018-12-06
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">理解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Brute-Force-暴力破解"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Brute Force(暴力破解)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Dynamic-Programming-动态规划"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Dynamic Programming(动态规划)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Expand-Around-Center-优化后的动态规划"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Expand Around Center(优化后的动态规划)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Manacher’s-Algorithm-最优算法"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">Manacher’s Algorithm(最优算法)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Longest-Common-Substring-最长公共子串"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">Longest Common Substring(最长公共子串)</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">4.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-leetcode-longest-palindromic-substring"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode Longest Palindromic Substring</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-06 10:12:25" datetime="2018-12-06T02:12:25.000Z"  itemprop="datePublished">2018-12-06</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Input: &quot;babad&quot;</div><div class="line">Output: &quot;bab&quot;</div><div class="line">Note: &quot;aba&quot; is also a valid answer.</div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Input: &quot;cbbd&quot;</div><div class="line">Output: &quot;bb&quot;</div></pre></td></tr></table></figure></p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>求字符串s中，最大的回文子串，具有对称性的字符串称为回文串。</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="Brute-Force-暴力破解"><a href="#Brute-Force-暴力破解" class="headerlink" title="Brute Force(暴力破解)"></a>Brute Force(暴力破解)</h2><p>这个思路非常简单，找到字符串s中，所有可能的子串，一一判断其是否是回文串，同时记录最大的回文子串，如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isPalindromicString</span><span class="params">(String s, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span></span>&#123;</div><div class="line">        <span class="keyword">while</span>(i&lt;j) &#123;</div><div class="line">            <span class="keyword">if</span>(s.charAt(i) != s.charAt(j)) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">            i++;</div><div class="line">            j--;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> longestStart = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> longestEnd = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> longestLen = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> len = s.length();</div><div class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;len; i++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i+longestLen; j&lt;len; j++)&#123;</div><div class="line">                <span class="keyword">if</span>(isPalindromicString(s, i, j))&#123;</div><div class="line">                    <span class="keyword">if</span>((j-i+<span class="number">1</span>) &gt; longestLen) &#123;</div><div class="line">                        longestLen = j-i+<span class="number">1</span>;</div><div class="line">                        longestStart = i;</div><div class="line">                        longestEnd = j;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> s.substring(longestStart, longestEnd+<span class="number">1</span>);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度</p>
+<ol>
+<li>时间复杂度：O(n^3)</li>
+<li>空间复杂度：O(1)</li>
+</ol>
+<h2 id="Dynamic-Programming-动态规划"><a href="#Dynamic-Programming-动态规划" class="headerlink" title="Dynamic Programming(动态规划)"></a>Dynamic Programming(动态规划)</h2><p>利用回文串的对称性的特点，可以得出如下结论：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">字符串S，P(i,j)表示子串Si...Sj是否是回文串，其可能值为：</div><div class="line">1. P(i,j) = true; // 表示子串Si...Sj是回文串</div><div class="line">2. P(i,j) = false; // 表示子串Si...Sj不是回文串</div><div class="line"></div><div class="line">结论：P(i,j) = P(i+1, j-1) &amp;&amp; Si == Sj</div></pre></td></tr></table></figure></p>
+<p>上面的结论就是一个动态规则里的状态转移方程，可以使用动态规划的思路来减少重复比较，步骤：</p>
+<ol>
+<li>先计算长度为1和2的回文串，并把结果保存下来</li>
+<li>利用上面的结果，计算长度为3的回文串，保存结果，依次类推</li>
+</ol>
+<p>转换为代码的关键是：</p>
+<ol>
+<li>保存每个子串的回文串结果，长度为n的字符串S，其子串有n^2，使用二维数组来存储</li>
+<li>遍历子串时，要按长度从小到大来遍历</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> || s.length() &lt;= <span class="number">1</span>) &#123;</div><div class="line">            <span class="keyword">return</span> s;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">int</span> n = s.length();</div><div class="line">        <span class="keyword">boolean</span> p[][] = <span class="keyword">new</span> <span class="keyword">boolean</span>[n][n];</div><div class="line">        </div><div class="line">        <span class="comment">// 初始化结果，设置长度值小于0，1的子串其回文结果为true</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j++) &#123;</div><div class="line">                <span class="keyword">if</span>(j &gt; i) &#123;</div><div class="line">                    p[i][j] = <span class="keyword">false</span>;</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    p[i][j] = <span class="keyword">true</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> maxLen = <span class="number">1</span>; <span class="comment">// 不会遍历长度为1</span></div><div class="line">        <span class="keyword">int</span> maxLeft = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxRight = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> subLen = <span class="number">2</span>; subLen&lt;=n; subLen++)&#123;<span class="comment">// 子串的长度，长度为1都已经计算过了，从2开始</span></div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; (i+subLen-<span class="number">1</span>)&lt;n; i++)&#123; <span class="comment">// 子串的起点index</span></div><div class="line">                <span class="keyword">int</span> j = i+subLen-<span class="number">1</span>;</div><div class="line">                <span class="comment">// 依据状态转移方程，更新二维数据p</span></div><div class="line">                p[i][j] = p[i+<span class="number">1</span>][j-<span class="number">1</span>] &amp;&amp; s.charAt(i) == s.charAt(j);</div><div class="line">                </div><div class="line">                <span class="keyword">if</span>(p[i][j]) &#123;</div><div class="line">                    <span class="keyword">if</span>(subLen &gt;= maxLen) &#123;</div><div class="line">                        maxLen = subLen;</div><div class="line">                        maxLeft = i;</div><div class="line">                        maxRight = j;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> s.substring(maxLeft, maxRight+<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(n^2);</li>
+<li>空间复杂度：O(n^2);</li>
+</ol>
+<h2 id="Expand-Around-Center-优化后的动态规划"><a href="#Expand-Around-Center-优化后的动态规划" class="headerlink" title="Expand Around Center(优化后的动态规划)"></a>Expand Around Center(优化后的动态规划)</h2><p>理论上，我们可以实现时间复杂度为O(n^2)，空间复杂度为O(1)的动态规划算法。</p>
+<p>利用回文串的特点，对字符串S的子串进行归类：—- 回文串有可能是偶数，也有可能是奇数</p>
+<ol>
+<li>[Si], [S(i-1),Si,Si+1], … , [S(i-n), … , Si, S(i+n)]</li>
+<li>[Si, S(i+1)], [S(i-1), Si, Si+1, S(i+2)], …, [S(i-n),…, Si, Si+1, …, S(i+n)]</li>
+</ol>
+<p>这样进行归类后，如果先把一类的子串放在一起计算，就只需要两个变量来记录上一个子串的结果，不用记录所有的子串结果，代码实现如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">expandAroundCenter</span><span class="params">(String s, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> expandL = l;</div><div class="line">        <span class="keyword">int</span> expandR = r;</div><div class="line">        <span class="keyword">while</span>(expandL&gt;=<span class="number">0</span> &amp;&amp; expandR&lt;s.length() &amp;&amp; s.charAt(expandL) == s.charAt(expandR))&#123;</div><div class="line">            expandL--;</div><div class="line">            expandR++;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 注意，此时expandR, expandL是不满足回文串的index，所以是-1</span></div><div class="line">        <span class="keyword">return</span> expandR - expandL - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span> || s.length()&lt;=<span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">return</span> s;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> n = s.length();</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxStart = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> maxEnd = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</div><div class="line">            <span class="keyword">int</span> len = expandAroundCenter(s, i, i);</div><div class="line">            <span class="keyword">int</span> len2 = expandAroundCenter(s, i, i+<span class="number">1</span>);</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(len &gt;= maxLen) &#123;</div><div class="line">                maxLen = len;</div><div class="line">                maxStart = i - len/<span class="number">2</span>;</div><div class="line">                maxEnd = i + len/<span class="number">2</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(len2 &gt;= maxLen) &#123;</div><div class="line">                maxLen = len2;</div><div class="line">                maxStart = i - len2/<span class="number">2</span> + <span class="number">1</span>;</div><div class="line">                maxEnd = i + len2/<span class="number">2</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> s.substring(maxStart, maxEnd+<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(1)</li>
+</ol>
+<h2 id="Manacher’s-Algorithm-最优算法"><a href="#Manacher’s-Algorithm-最优算法" class="headerlink" title="Manacher’s Algorithm(最优算法)"></a>Manacher’s Algorithm(最优算法)</h2><p>时间复杂度为O(n)的算法，其步骤如下：</p>
+<ol>
+<li>字符串转换，S to T，如S = “abaaba”, T = “#a#b#a#a#b#a#”  <ol>
+<li>S的回文子串有可能为偶数，也有可能为奇数；T的回文子串一定是奇数<ol>
+<li>abccba —&gt;  #a#b#c#c#b#a#</li>
+<li>abcdcba —&gt; #a#b#c#d#c#b#a#</li>
+</ol>
+</li>
+<li>T的最长回文串去掉字符串‘#’后，就是S的最长回文子串</li>
+</ol>
+</li>
+<li><p>int[] P = new int[T.length]; P[i]表示以Ti为中心回文串的长度（不包含Ti的长度）</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">T = # a # b # a # a # b # a #</div><div class="line">P = 0 1 0 3 0 1 6 1 0 3 0 1 0</div></pre></td></tr></table></figure>
+<p> 如上所示，只要计算出P的值，最长回文子串，就是数组里的最大值</p>
+</li>
+<li><p>利用回文串的对称性，推导快速计算P的数学公式：</p>
+<ol>
+<li>假设字符串S=“babcbabcbaccba”，转换后的T，及已经计算了部分结果的数组P，如下所示：<br><img src="/2018/12/06/leetcode-longest-palindromic-substring/20181211095308958.png" alt=""><ol>
+<li>L，C，R分别表示回文串“#a#b#c#b#a#b#c#b#a#”的最左边临界点，中间值，最右边临界点</li>
+<li>i’是以C为中心i的对称点（mirror）</li>
+</ol>
+</li>
+<li>计算P[i]的值，由于回文串的对称性，可快速得出：P[i]=P[i’]=1</li>
+<li>上面的公式，无法适合计算P[C+1]…P[R]之间的所有值，如下图所示：<br><img src="/2018/12/06/leetcode-longest-palindromic-substring/20181211100718788.png" alt=""><ol>
+<li>P[15] != P[7]，因为P[7] &gt; R - i，即7 &gt; 20-15</li>
+<li>虽然P[15] != P[7], 由于P[7]&gt;R-i，所以P[15]&gt;=R-i</li>
+</ol>
+</li>
+<li><p>最终的计算公式：</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if P[i&apos;] &lt;= R - i</div><div class="line">then P[i] = P[i&apos;]</div><div class="line">else P[i] &gt;= R - i (通过以Ti为中心，两边扩大比较获取P[i]的值)</div></pre></td></tr></table></figure>
+</li>
+<li><p>为了最大程度使用上面的公式，有更大的右边界时，要更新右边界</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>具体的代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">preProcess</span><span class="params">(String s)</span></span>&#123;</div><div class="line">        StringBuffer sb = <span class="keyword">new</span> StringBuffer(<span class="string">"^"</span>);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;s.length(); i++)&#123;</div><div class="line">            sb.append(<span class="string">"#"</span>).append(s.charAt(i));</div><div class="line">        &#125;</div><div class="line">        sb.append(<span class="string">"#$"</span>);</div><div class="line">        <span class="keyword">return</span> sb.toString();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s==<span class="keyword">null</span> || s.length()&lt;=<span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">return</span> s;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// 预处理</span></div><div class="line">        String T = preProcess(s);</div><div class="line">        <span class="keyword">int</span> n = T.length();</div><div class="line">        </div><div class="line">        <span class="keyword">int</span>[] P = <span class="keyword">new</span> <span class="keyword">int</span>[n];</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> R = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> C = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n-<span class="number">1</span>; i++)&#123; <span class="comment">// 逐一求P的值</span></div><div class="line">            </div><div class="line">            <span class="keyword">int</span> mirror_i = <span class="number">2</span>*C-i; <span class="comment">// mirror_i = c-(i-c) = 2c-i</span></div><div class="line">            </div><div class="line">            <span class="comment">// 注意：R&gt;i一定要判断</span></div><div class="line">            P[i] = R &gt; i ? Math.min(P[mirror_i], R-i) : <span class="number">0</span>;</div><div class="line">            </div><div class="line">            <span class="keyword">while</span>(T.charAt(i+P[i]+<span class="number">1</span>) == T.charAt(i-P[i]-<span class="number">1</span>))&#123;</div><div class="line">                P[i]++;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            <span class="comment">// 更新R值</span></div><div class="line">            <span class="keyword">if</span>((i+P[i]) &gt; R)&#123;</div><div class="line">                C = i;</div><div class="line">                R = i+P[i];</div><div class="line">            &#125;    </div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> maxLen = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> centerIndex = <span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;n-<span class="number">1</span>; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(P[i] &gt;= maxLen) &#123;</div><div class="line">                maxLen = P[i];</div><div class="line">                centerIndex = i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// StringBuffer result = new StringBuffer();</span></div><div class="line">        <span class="comment">// if(T.charAt(max_index) != '#') &#123;</span></div><div class="line">        <span class="comment">//     result.append(T.charAt(max_index));</span></div><div class="line">        <span class="comment">// &#125;</span></div><div class="line">        <span class="comment">// int i=1;</span></div><div class="line">        <span class="comment">// do&#123;</span></div><div class="line">        <span class="comment">//     if(T.charAt(max_index+i) != '#') &#123;</span></div><div class="line">        <span class="comment">//         result.insert(0, T.charAt(max_index-i));</span></div><div class="line">        <span class="comment">//         result.append(T.charAt(max_index+i));</span></div><div class="line">        <span class="comment">//     &#125;</span></div><div class="line">        <span class="comment">//     i++;</span></div><div class="line">        <span class="comment">// &#125;while(i&lt;=max);</span></div><div class="line">        <span class="comment">// return result.toString();</span></div><div class="line">        <span class="keyword">return</span> s.substring((centerIndex-maxLen)/<span class="number">2</span>, (centerIndex-maxLen)/<span class="number">2</span> + maxLen);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：看上去有两个循环，for和while，但注意while循环的遍历次数之和为n，所以时间复杂度为O(2n)=O(n)</li>
+<li>空间复杂度：O(n)</li>
+</ol>
+<h2 id="Longest-Common-Substring-最长公共子串"><a href="#Longest-Common-Substring-最长公共子串" class="headerlink" title="Longest Common Substring(最长公共子串)"></a>Longest Common Substring(最长公共子串)</h2><p>利用回文串的特点，求字符串S与逆反字符串S‘的最长公共子串，就是其最长回文子串，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. S=&quot;caba&quot;, S&apos;=&quot;abac&quot;</div><div class="line">2. 最长公共子串 C = “aba”，其最长回文子串 P = “aba”</div></pre></td></tr></table></figure></p>
+<p>有一个特例除外，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. S = &quot;abacdfgdcaba&quot;, S&apos; = &quot;abacdgfdcaba&quot;.</div><div class="line">2. 最长公共子串 C = “abacd”，但其最长回文子串 P = “aba”</div></pre></td></tr></table></figure></p>
+<p>要排除上面的特殊，排除方法：把逆反S’中C再逆反后的下标与S中的C的下标进行比较，不相等则排除掉</p>
+<p>求S与S‘中的最长公共子串C，可以采用动态规划，具体请查看：<a href="https://handsomeliuyang.github.io/2018/12/15/Leetcode-longest-common-substring/">Leetcode-Long-Common-String</a></p>
+<p>代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestPalindrome</span><span class="params">(String S)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(S==<span class="keyword">null</span> || S.length()&lt;=<span class="number">1</span>)&#123;</div><div class="line">            <span class="keyword">return</span> S;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> n = S.length();</div><div class="line">        </div><div class="line">        StringBuffer SReverseBuffer = <span class="keyword">new</span> StringBuffer();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=n-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</div><div class="line">            SReverseBuffer.append(S.charAt(i));</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        String SReverse = SReverseBuffer.toString();</div><div class="line">        </div><div class="line">        <span class="keyword">int</span>[][] LCStuff = <span class="keyword">new</span> <span class="keyword">int</span>[n][n];</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> LCSLen = <span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> endIndex = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;n; i++)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;n; j++)&#123;</div><div class="line">                <span class="keyword">if</span>(S.charAt(i) == SReverse.charAt(j)) &#123;</div><div class="line">                    </div><div class="line">                    <span class="keyword">if</span>(i==<span class="number">0</span> || j==<span class="number">0</span>) &#123;</div><div class="line">                        LCStuff[i][j] = <span class="number">1</span>;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        LCStuff[i][j] = LCStuff[i-<span class="number">1</span>][j-<span class="number">1</span>] + <span class="number">1</span>;</div><div class="line">                    &#125;</div><div class="line">                    </div><div class="line">                    <span class="keyword">if</span>(LCSLen &lt; LCStuff[i][j])&#123;</div><div class="line">                        <span class="comment">// 判断是否是真正的回文</span></div><div class="line">                        <span class="keyword">if</span>((i-LCStuff[i][j]+<span class="number">1</span>) == (n-(j+<span class="number">1</span>))) &#123;</div><div class="line">                            LCSLen = LCStuff[i][j];</div><div class="line">                            endIndex = i;</div><div class="line">                        &#125;</div><div class="line">                    &#125;</div><div class="line">                    </div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    LCStuff[i][j] = <span class="number">0</span>;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> S.substring(endIndex-LCSLen+<span class="number">1</span>, endIndex+<span class="number">1</span>);</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(n^2)</li>
+<li>空间复杂度：O(n^2)</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://leetcode.com/problems/longest-palindromic-substring/solution/" target="_blank" rel="noopener">solution</a></li>
+<li><a href="https://articles.leetcode.com/longest-palindromic-substring-part-ii/" target="_blank" rel="noopener">Longest Palindromic Substring Part II</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2018-12-15T06:30:18.317Z" itemprop="dateUpdated">2018-12-15 14:30:18</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between">
+  
+    <div class="waves-block waves-effect prev">
+      <a href="/2018/12/15/Leetcode-longest-common-substring/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">LeetCode Longest Common Substring</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/03/LeetCode之Median of Two Sorted Arrays/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode之Median of Two Sorted Arrays</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2018</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACo0lEQVR42u3aQW7DMAwEwP7/0+kDkthLUjRyGJ8KJLU0KiCpS/79xc+r9eRvvh7l/ZuHHzw8PLyjU3//TvXN396Q/FxdiA+/i4eHh7fGS1737dXXS5AfGGeXAA8PD+/XePkUe9ScjYeHh/f7vPzY6G33SRiBh4eH9wu86qt70W1vKR/KWvDw8PCmlany9frJn1fqe3h4eHgLDQHV4fPothdk3MwWDw8Pb4GXb7j5wHnwWh23OU88PDy8Bd5kgLwYlvxuEhbnzQp4eHh4e7y8MD8p6ifX7l7b1s1s8fDw8I7yqs2m1YBgfgDkhbGb/xXw8PDwjvKqr66W9jfChejowsPDw1vjVQ+GagBRjVavl7jQeoWHh4e3xtvY9HtX50mLVeFKjYeHh7fGq158k826OmIvjIgOBjw8PLwW79Smnx8n+ad5GBHV9/Dw8PAO8XqF/MnxMF+CQtMVHh4e3oO8ecGsdwBMil4fPsXDw8Nb4OVTr0ar+eW7F+aWy2x4eHh4C7xqqSmJDArFquI3q+EFHh4e3gYvL1blIe/1ll09iqqFNDw8PLxneL2QIt/cm5ObHzZ4eHh4C7zJhr5x1c4jhkIYgYeHhzfmTYpMvTbWnN1rY8XDw8Pb5l1vrHmraB4i5CPmUcXNQYKHh4e3zJvAes0H+SV+sScCDw8Pr8WblKDyCVU/nZfZ8PDw8J7h9eKGJGhIruCnCm94eHh4G7xX8ekVyXpX9jz4+PqHwcPDw1vgTVqaqsWzBNYrdI1geHh4eIdq65P4oLcQ+dTLBwMeHh7eGm/SMjW/iE9Ch5vlw8PDw/sBXnmAVojcCymiyeHh4eE9zotanQaA1+DBw8PDe5JXLVnN26Qmh1BhufHw8PAWeJOLb7U5II96Ty0HHh4e3lHeP/ZiFttDDUmmAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
