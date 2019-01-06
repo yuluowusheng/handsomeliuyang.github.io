@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>LeetCode Regular Expression Matching | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,算法">
+    <meta name="description" content="题目Given an input string (s) and a pattern (p), implement regular expression matching with support for ‘.’ and ‘*’.12&amp;apos;.&amp;apos; Matches any single character.&amp;apos;*&amp;apos; Matches zero or more of the">
+<meta name="keywords" content="leetcode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Regular Expression Matching">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2018/12/29/LeetCode-Regular-Expression-Matching/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="题目Given an input string (s) and a pattern (p), implement regular expression matching with support for ‘.’ and ‘*’.12&amp;apos;.&amp;apos; Matches any single character.&amp;apos;*&amp;apos; Matches zero or more of the">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2018/12/29/LeetCode-Regular-Expression-Matching/官方复杂度.png">
+<meta property="og:updated_time" content="2019-01-06T04:14:50.814Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Regular Expression Matching">
+<meta name="twitter:description" content="题目Given an input string (s) and a pattern (p), implement regular expression matching with support for ‘.’ and ‘*’.12&amp;apos;.&amp;apos; Matches any single character.&amp;apos;*&amp;apos; Matches zero or more of the">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2018/12/29/LeetCode-Regular-Expression-Matching/官方复杂度.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode Regular Expression Matching</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode Regular Expression Matching</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2018-12-29T01:50:48.000Z" itemprop="datePublished" class="page-time">
+  2018-12-29
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">理解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#递归算法"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">递归算法</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#动态规划"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">动态规划</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-LeetCode-Regular-Expression-Matching"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode Regular Expression Matching</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2018-12-29 09:50:48" datetime="2018-12-29T01:50:48.000Z"  itemprop="datePublished">2018-12-29</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>Given an input string (s) and a pattern (p), implement regular expression matching with support for ‘.’ and ‘*’.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&apos;.&apos; Matches any single character.</div><div class="line">&apos;*&apos; Matches zero or more of the preceding element.</div></pre></td></tr></table></figure></p>
+<p>The matching should cover the entire input string (not partial).</p>
+<p><strong>Note:</strong></p>
+<ul>
+<li>s could be empty and contains only lowercase letters a-z.</li>
+<li>p could be empty and contains only lowercase letters a-z, and characters like . or *.</li>
+</ul>
+<p><strong>Example 1:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">s = &quot;aa&quot;</div><div class="line">p = &quot;a&quot;</div><div class="line">Output: false</div><div class="line">Explanation: &quot;a&quot; does not match the entire string &quot;aa&quot;.</div></pre></td></tr></table></figure></p>
+<p><strong>Example 2:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">s = &quot;aa&quot;</div><div class="line">p = &quot;a*&quot;</div><div class="line">Output: true</div><div class="line">Explanation: &apos;*&apos; means zero or more of the precedeng element, &apos;a&apos;. Therefore, by repeating &apos;a&apos; once, it becomes &quot;aa&quot;.</div></pre></td></tr></table></figure></p>
+<p><strong>Example 3:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">s = &quot;ab&quot;</div><div class="line">p = &quot;.*&quot;</div><div class="line">Output: true</div><div class="line">Explanation: &quot;.*&quot; means &quot;zero or more (*) of any character (.)&quot;.</div></pre></td></tr></table></figure></p>
+<p><strong>Example 4:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">s = &quot;aab&quot;</div><div class="line">p = &quot;c*a*b&quot;</div><div class="line">Output: true</div><div class="line">Explanation: c can be repeated 0 times, a can be repeated 1 time. Therefore it matches &quot;aab&quot;.</div></pre></td></tr></table></figure></p>
+<p><strong>Example 5:</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Input:</div><div class="line">s = &quot;mississippi&quot;</div><div class="line">p = &quot;mis*is*p*.&quot;</div><div class="line">Output: false</div></pre></td></tr></table></figure></p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>正则表达式大家都使用过，’.’和’*’都是最长使用的，主要是注意如下几种特殊情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// 特殊情况1：</div><div class="line">Input:</div><div class="line">s = &quot;aaa&quot;</div><div class="line">p = &quot;a*a&quot;</div><div class="line">Output: true</div><div class="line"></div><div class="line">// 特殊情况2：</div><div class="line">Input:</div><div class="line">s = &quot;aa&quot;</div><div class="line">p = &quot;a*&quot;</div><div class="line">Output: true</div><div class="line"></div><div class="line">// 特殊情况3：</div><div class="line">Input:</div><div class="line">s = &quot;&quot;</div><div class="line">p = &quot;c*c*&quot;</div><div class="line">Output: true</div><div class="line"></div><div class="line">// 特殊情况4：</div><div class="line">Input:</div><div class="line">s = &quot;&quot;</div><div class="line">p = &quot;.*&quot;</div><div class="line">Output: true</div></pre></td></tr></table></figure></p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="递归算法"><a href="#递归算法" class="headerlink" title="递归算法"></a>递归算法</h2><p>可能性太多，最简单的方案是通过递归来解决，匹配都是从左到右逐一匹配，递归函数的关键是两点：</p>
+<ol>
+<li>临界条件</li>
+<li>递归函数</li>
+</ol>
+<p>代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String s, String p)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(s == <span class="keyword">null</span> || p == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 递归的临界条件，此临界条件把s为空串也考虑进去了</span></div><div class="line">        <span class="keyword">if</span>(p.length() == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> s.length() == <span class="number">0</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">/**</span></div><div class="line">        // 最早写的临界条件，此临界判断，没有考虑两种临界条件：</div><div class="line">        // 1. s = "" p = "c*c*" 2. s = "aaa" p = "a*a"</div><div class="line">        if(s.length() == 0) &#123;</div><div class="line">            return p.length() == 0 || (p.length() == 2 &amp;&amp; p.charAt(1) == '*');</div><div class="line">        &#125;</div><div class="line">        else if(p.length() == 0)&#123;</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">        **/</div><div class="line">        </div><div class="line">        <span class="comment">// 递归函数</span></div><div class="line">        </div><div class="line">        <span class="comment">// 第一字符判断，考虑到了s为空串的情况</span></div><div class="line">        <span class="keyword">boolean</span> firstMatch = !(s.length() == <span class="number">0</span>) &amp;&amp; (p.charAt(<span class="number">0</span>) == <span class="string">'.'</span> || s.charAt(<span class="number">0</span>) == p.charAt(<span class="number">0</span>));</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(p.length() &gt;= <span class="number">2</span> &amp;&amp; p.charAt(<span class="number">1</span>) == <span class="string">'*'</span>) &#123;</div><div class="line">            <span class="comment">/**</span></div><div class="line">            之前我的一种写法：</div><div class="line">            return firstMatch ? isMatch(s.substring(1),p) : isMatch(s, p.substring(2))</div><div class="line">            这种写法没有考虑到特殊情况：s = "aaa" p = "a*a"，按我们的临界条件判断，两种情况都应该去尝试，所以都进行尝试</div><div class="line">            **/</div><div class="line">            <span class="keyword">return</span> (firstMatch &amp;&amp; isMatch(s.substring(<span class="number">1</span>), p)) || isMatch(s, p.substring(<span class="number">2</span>));</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> firstMatch &amp;&amp; isMatch(s.substring(<span class="number">1</span>), p.substring(<span class="number">1</span>));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<p>使用代入法，我自己理解的时间复杂度为O(2^s.length())或O(2^p.length())，官方的时间复杂度与空间复杂度没有理解：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2018/12/29/LeetCode-Regular-Expression-Matching/官方复杂度.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<h2 id="动态规划"><a href="#动态规划" class="headerlink" title="动态规划"></a>动态规划</h2><p>动态规划是一种“大转小”解决问题的思想，上面的函数函数，可以理解为状态转移方程，求解一般是把其中小的问题的答案保存起来，减少重复计算。</p>
+<p>条件：</p>
+<ol>
+<li>字符串S, 模式串P</li>
+<li>S[i] 表示字符串：S0,S1,…,Si</li>
+<li>P[j] 表示字符串：P0,P1,…,Pj</li>
+<li>boolean[][] dp; dp[i][j]表示match(S[i], P[j])的匹配结果</li>
+</ol>
+<p>由上面的递归函数得知dp[i][j]的结果可能如下：</p>
+<ol>
+<li>dp[i][j] = (firstMath &amp;&amp; dp[i+1][j]) || dp[i][j+2]; // 当P.charAt(j+1) == ‘*’</li>
+<li>dp[i][j] = firstMatch &amp;&amp; dp[i+1][j+1];</li>
+</ol>
+<p>从上可知，问题是由小问题转大问题，那就逆序遍历S与P，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isMatch</span><span class="params">(String S, String P)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span>[][] dp = <span class="keyword">new</span> <span class="keyword">boolean</span>[S.length()+<span class="number">1</span>][P.length()+<span class="number">1</span>];</div><div class="line">        dp[S.length()][P.length()] = <span class="keyword">true</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=S.length()-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=P.length()-<span class="number">1</span>; j&gt;=<span class="number">0</span>; j--)&#123;</div><div class="line">                </div><div class="line">                <span class="keyword">boolean</span> firstMatch = i&lt;S.length() &amp;&amp; (P.charAt(j) == <span class="string">'.'</span> || S.charAt(i) == P.charAt(j));</div><div class="line">                <span class="keyword">if</span>(j &lt; P.length()-<span class="number">1</span> &amp;&amp; P.charAt(j+<span class="number">1</span>) == <span class="string">'*'</span>)&#123;</div><div class="line">                    dp[i][j] = (firstMatch &amp;&amp; dp[i+<span class="number">1</span>][j]) || dp[i][j+<span class="number">2</span>];</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    dp[i][j] = firstMatch &amp;&amp; dp[i+<span class="number">1</span>][j+<span class="number">1</span>];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> dp[<span class="number">0</span>][<span class="number">0</span>];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(S.length() * P.length())</li>
+<li>空间复杂度：O(S.length() * P.length())</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-01-06T04:14:50.814Z" itemprop="dateUpdated">2019-01-06 12:14:50</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/15/Leetcode-longest-common-substring/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode Longest Common Substring</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtElEQVR42u3awW7rMAwEwPz/T6fXB7wm2CWlwofJqWhtWeMAIkvy9Yo/738+m9/nT/l/hXa1Fx4eHt413vvr59N287vyrX9/Ke3T8fDw8G7zkuU+XZ/8Ndl6y/t+DR4eHt5zeEnSnKTaebqcX4+Hh4f3TF6ScOeY9il4eHh4z+G1ZYXk3iT5nh36V2oteHh4eDEv7yI95+cr/T08PDy8dVc9P3DblDrfz2q3eHh4eBd4+YHbJspJmSB/7myfeHh4eDd4s/JBS5qB28GvX9bBw8PDu8CbJb6nihqzsYA6wODh4eEd5bWFhvYV5Ed5O3AQfT14eHh4l3n7kmtyZLdbzwsZw5kIPDw8vFHVdL90HhJmHf8kzAwbYHh4eHglb3Y0J639BLkZVqg7e3h4eHiHeLNGV5IW54d7Hk5mbTY8PDy8s7w2MOSk/DW1waZYGQ8PD+8Cr23ttwOms2Q9T+WHwwR4eHh463HVvGe0KbAmKw+/k+/9PTw8PLyjvM3mThUUZq2yoviLh4eHd5TXtp2SwNCuc3Z84ZdaCx4eHt4FXt7InzXJ2pBwqv2Gh4eHd483azvNiggHKs3tTBkeHh7eUd6+/T8r+x6ooAR34eHh4d3m5WGgTZo3IeRAgw0PDw/vAq8ttrZFgc2mZ9dHSDw8PLwFbzMQkLy5/ejA6hvDw8PDu8bLW1+zdlReMp6FiqgYgYeHh/cnvHboKh+ialtceYVhWBvGw8PDC3jv8tOWXDdl3FmA+Th0hYeHh3eINxtpattgs+R4NrgwDDZ4eHh4JW/W1mrbZm0AOBYY8PDw8K7x2sbY7Ihv75rVV/Dw8PCexku2kvx1kygnpQ08PDy8Z/LaY7odRNgUmvHw8PBu8zbjTbPC7mYooQhUeHh4eBd47T/8+aGcJ9xtan6gp4eHh4c34f0AH7QiFgmupWEAAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
