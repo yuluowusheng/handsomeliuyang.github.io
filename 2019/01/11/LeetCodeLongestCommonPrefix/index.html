@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>LeetCode Longest Common Prefix | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,算法">
+    <meta name="description" content="题目Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string “”. Example 1:12Input: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot">
+<meta name="keywords" content="leetcode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Longest Common Prefix">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2019/01/11/LeetCodeLongestCommonPrefix/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="题目Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string “”. Example 1:12Input: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/01/11/LeetCodeLongestCommonPrefix/trie.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/01/11/LeetCodeLongestCommonPrefix/google搜索.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/01/11/LeetCodeLongestCommonPrefix/trie-demo.png">
+<meta property="og:updated_time" content="2019-01-14T09:08:13.908Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Longest Common Prefix">
+<meta name="twitter:description" content="题目Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string “”. Example 1:12Input: [&amp;quot;flower&amp;quot;,&amp;quot;flow&amp;quot">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2019/01/11/LeetCodeLongestCommonPrefix/trie.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode Longest Common Prefix</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode Longest Common Prefix</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-11T01:56:38.000Z" itemprop="datePublished" class="page-time">
+  2019-01-11
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">理解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Vertical-scanning（垂直扫描）"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Vertical scanning（垂直扫描）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Binary-search-二分搜索"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">Binary search(二分搜索)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Trie-Prefix-tree，-前缀树，字典树"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Trie(Prefix tree， 前缀树，字典树)</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-LeetCodeLongestCommonPrefix"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode Longest Common Prefix</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-11 09:56:38" datetime="2019-01-11T01:56:38.000Z"  itemprop="datePublished">2019-01-11</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
+<p>If there is no common prefix, return an empty string “”.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Input: [&quot;flower&quot;,&quot;flow&quot;,&quot;flight&quot;]</div><div class="line">Output: &quot;fl&quot;</div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Input: [&quot;dog&quot;,&quot;racecar&quot;,&quot;car&quot;]</div><div class="line">Output: &quot;&quot;</div><div class="line">Explanation: There is no common prefix among the input strings.</div></pre></td></tr></table></figure></p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>此题目非常好理解，就是求最长前缀</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="Vertical-scanning（垂直扫描）"><a href="#Vertical-scanning（垂直扫描）" class="headerlink" title="Vertical scanning（垂直扫描）"></a>Vertical scanning（垂直扫描）</h2><p>最容易想到的解决方案，就是垂直扫描，注意代码的写法：</p>
+<ol>
+<li>不需要额外的空间来保存Prefix字符串</li>
+<li>注意全匹配情况</li>
+</ol>
+<p>代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span> </span>&#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> len = strs[<span class="number">0</span>].length();</div><div class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(index &lt; len)&#123;</div><div class="line">            </div><div class="line">            <span class="keyword">char</span> curChar = strs[<span class="number">0</span>].charAt(index);</div><div class="line">            </div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;strs.length; i++)&#123;</div><div class="line">                </div><div class="line">                <span class="keyword">if</span>(index &gt;= strs[i].length() || curChar != strs[i].charAt(index))&#123;</div><div class="line">                    <span class="keyword">return</span> strs[<span class="number">0</span>].substring(<span class="number">0</span>, index); <span class="comment">// 不用单独出空间保持prefix字符串</span></div><div class="line">                &#125;</div><div class="line">                </div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            index++;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>]; <span class="comment">// 全匹配情况</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(m*n), 其中m表示字符串的长度，n表示字符串的数量</li>
+<li>空间复杂度：O(1)</li>
+</ol>
+<h2 id="Binary-search-二分搜索"><a href="#Binary-search-二分搜索" class="headerlink" title="Binary search(二分搜索)"></a>Binary search(二分搜索)</h2><p>可以通过二分搜索法来查看index下标，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String[] strs)</span> </span>&#123;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> len = strs[<span class="number">0</span>].length();</div><div class="line">        </div><div class="line">        <span class="keyword">int</span> iMin = <span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> iMax = len;</div><div class="line">        <span class="keyword">int</span> index = -<span class="number">1</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(iMin &lt;= iMax)&#123;</div><div class="line">            </div><div class="line">            index = (iMin+iMax) / <span class="number">2</span>;</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(isCommonPrefix(strs, index))&#123;</div><div class="line">                iMin = index + <span class="number">1</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                iMax = index - <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> strs[<span class="number">0</span>].substring(<span class="number">0</span>, (iMin+iMax)/<span class="number">2</span>);</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCommonPrefix</span><span class="params">(String[] strs, <span class="keyword">int</span> len)</span></span>&#123;</div><div class="line">        String str1 = strs[<span class="number">0</span>].substring(<span class="number">0</span>, len);</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;strs.length; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(!strs[i].startsWith(str1)) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>注意二分搜索法的写法：</p>
+<ol>
+<li>iMin, iMax, index都从1开始，不要从0开始</li>
+<li>最后确定的位置为(iMin + iMax)/2，而不是直接使用index值</li>
+</ol>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：由于isCommonPrefix()函数的时间复杂度为O(m<em>n)，二分搜索法的时间复杂度为O(logm), 时间复杂度为O(m</em>n*logm)</li>
+<li>空间复杂度：O(1)</li>
+</ol>
+<h2 id="Trie-Prefix-tree，-前缀树，字典树"><a href="#Trie-Prefix-tree，-前缀树，字典树" class="headerlink" title="Trie(Prefix tree， 前缀树，字典树)"></a>Trie(Prefix tree， 前缀树，字典树)</h2><blockquote>
+<p>Trie这个术语来自于retrieval。根据词源学，trie的发明者Edward Fredkin把它读作英语发音：/ˈtriː/ “tree”。但是，其他作者把它读作英语发音：/ˈtraɪ/ “try”。</p>
+</blockquote>
+<p>由字符串组：{“a”, “to”, “tea”, “ted”, “ten”, “i”, “in”, “inn”}，构建的Trie的结构为：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/11/LeetCodeLongestCommonPrefix/trie.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>从上图可知，trie树的特点：</p>
+<ol>
+<li>根节点不包含字符，除根节点外的每一个子节点都包含一个字符</li>
+<li>从根节点到某一个节点，路径上经过的字符连接起来，为该节点对应的字符串</li>
+<li>每个节点的所有子节点包含的字符互不相同</li>
+</ol>
+<p>Trie利用空间换时间，适合解决下述问题：</p>
+<ol>
+<li>频繁求解字符串组的前缀</li>
+<li>有相似前缀的字符串组，如搜索：<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/11/LeetCodeLongestCommonPrefix/google搜索.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+</li>
+</ol>
+<p>对于此问题，如果提前利用字符串组构建Trie，可以提升频繁求前缀的性能，如下case：</p>
+<ol>
+<li>[“flower”,”flow”,”flight”]构建的Trie，其时间复杂度为O(m*n)<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/11/LeetCodeLongestCommonPrefix/trie-demo.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></li>
+<li>再通过Trie查找公共前缀，时间复杂度为O(m)</li>
+</ol>
+<p>代码如下所示：— 注意：此代码是从leetcode直接拷贝的<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> String <span class="title">longestCommonPrefix</span><span class="params">(String q, String[] strs)</span> </span>&#123;</div><div class="line">    <span class="keyword">if</span> (strs == <span class="keyword">null</span> || strs.length == <span class="number">0</span>)</div><div class="line">         <span class="keyword">return</span> <span class="string">""</span>;  </div><div class="line">    <span class="keyword">if</span> (strs.length == <span class="number">1</span>)</div><div class="line">         <span class="keyword">return</span> strs[<span class="number">0</span>];</div><div class="line">    Trie trie = <span class="keyword">new</span> Trie();      </div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; strs.length ; i++) &#123;</div><div class="line">        trie.insert(strs[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> trie.searchLongestPrefix(q);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TrieNode</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// R links to node children</span></div><div class="line">    <span class="keyword">private</span> TrieNode[] links;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> R = <span class="number">26</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isEnd;</div><div class="line"></div><div class="line">    <span class="comment">// number of children non null links</span></div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> size;    </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">char</span> ch, TrieNode node)</span> </span>&#123;</div><div class="line">        links[ch -<span class="string">'a'</span>] = node;</div><div class="line">        size++;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLinks</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> size;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//assume methods containsKey, isEnd, get, put are implemented as it is described</span></div><div class="line">   <span class="comment">//in  https://leetcode.com/articles/implement-trie-prefix-tree/)</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Trie</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> TrieNode root;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Trie</span><span class="params">()</span> </span>&#123;</div><div class="line">        root = <span class="keyword">new</span> TrieNode();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"><span class="comment">//assume methods insert, search, searchPrefix are implemented as it is described</span></div><div class="line"><span class="comment">//in  https://leetcode.com/articles/implement-trie-prefix-tree/)</span></div><div class="line">    <span class="function"><span class="keyword">private</span> String <span class="title">searchLongestPrefix</span><span class="params">(String word)</span> </span>&#123;</div><div class="line">        TrieNode node = root;</div><div class="line">        StringBuilder prefix = <span class="keyword">new</span> StringBuilder();</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; word.length(); i++) &#123;</div><div class="line">            <span class="keyword">char</span> curLetter = word.charAt(i);</div><div class="line">            <span class="keyword">if</span> (node.containsKey(curLetter) &amp;&amp; (node.getLinks() == <span class="number">1</span>) &amp;&amp; (!node.isEnd())) &#123;</div><div class="line">                prefix.append(curLetter);</div><div class="line">                node = node.get(curLetter);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span></div><div class="line">                <span class="keyword">return</span> prefix.toString();</div><div class="line"></div><div class="line">         &#125;</div><div class="line">         <span class="keyword">return</span> prefix.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-01-14T09:08:13.908Z" itemprop="dateUpdated">2019-01-14 17:08:13</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2018/12/29/LeetCode-Regular-Expression-Matching/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode Regular Expression Matching</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACt0lEQVR42u3aQW7kMAwEwPz/01lgT7tIxugmpUwO5VPgcWSVDiZB8uMjvj7/Xv/+/fXO8/PJas/3v65z7MLDw8Mbbf15uVdbzF///Mzz+smhvFwfDw8P7xovCQbPG/2Mr5ydh6KX9/Hw8PDeyisWHWW8bWDAw8PD+/28FpavkKTyeHh4eL+Nl7zmLHhWfb1Ya8HDw8OLebMG2Hv/vt7fw8PDwxt11dvGWJs05y2u2W7x8PDwbvDyFlQ7CjBrpLUjC1HAwMPDw7vASxpRedY6Kxa0I1Z1yRgPDw/vKC//+CapcM7O354PNET9PTw8PLw1bzPq1A5j7UseB6rReHh4eAteXiZI0tx2c3nweD6sl3fw8PDwLvCS5drNtcexmQSIfsXDw8O7wMsz0llxdhYe6gDQJt94eHh4I97mI5uUemdF2DxEDWci8PDw8A7x2o9vG3lm6+ejCXh4eHjv4s3a/JvGf9t4Kwaz8PDw8K7x2s96XpJo7+SVkuiNeHh4eJd5baF29ms+ZLBpj+Hh4eG9l5dsN//Qt+FkFiq+Sanx8PDwjvLaYsRmPGvWeMvDyX938PDw8K7xNk2vWZF3kzQXq+Hh4eH9CG/2Wd+0ymYDW9ER4OHh4V3gJS38TSmhbaQVza04ocfDw8O7x2s/03l5dzaG1T75cs94eHh4F3ht2vr8siS9bj/us4PDw8PDu8fbNPLbFDwPRbNAhYeHh/eTvFONsTwwbA5uVavGw8PDW/A+y2vT8k/S4sOFDzw8PLyfqKkOixSnUuH8WA+Q8PDw8Ba8WTA4NTrQpvV1Eo+Hh4d3jXe2xdWWZe+l7Hh4eHi/h7cfQciPKR81+OZ5PDw8vLfykhJAnlJv2mlFyQMPDw/vGi9Pgtti7uYtyX8VGTceHh7eIV7bAEsCSVvUODVMMGTj4eHhpbw/DFjPFOAMGJ8AAAAASUVORK5CYII=" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
