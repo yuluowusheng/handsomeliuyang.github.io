@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>LeetCode Merge K Sorted Lists | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,算法">
+    <meta name="description" content="题目Given K sorted linked lists of size N each, merge them and print the sorted output. Example:1234567Input: k = 3, n =  4list1 = 1-&amp;gt;3-&amp;gt;5-&amp;gt;7list2 = 2-&amp;gt;4-&amp;gt;6-&amp;gt;8list3 = 0-&amp;gt;9-&amp;gt;10-&amp;g">
+<meta name="keywords" content="leetcode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Merge K Sorted Lists">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2019/01/23/LeetCodeMergeKSortedLists/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="题目Given K sorted linked lists of size N each, merge them and print the sorted output. Example:1234567Input: k = 3, n =  4list1 = 1-&amp;gt;3-&amp;gt;5-&amp;gt;7list2 = 2-&amp;gt;4-&amp;gt;6-&amp;gt;8list3 = 0-&amp;gt;9-&amp;gt;10-&amp;g">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/01/23/LeetCodeMergeKSortedLists/分治法.png">
+<meta property="og:updated_time" content="2019-01-25T03:19:07.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Merge K Sorted Lists">
+<meta name="twitter:description" content="题目Given K sorted linked lists of size N each, merge them and print the sorted output. Example:1234567Input: k = 3, n =  4list1 = 1-&amp;gt;3-&amp;gt;5-&amp;gt;7list2 = 2-&amp;gt;4-&amp;gt;6-&amp;gt;8list3 = 0-&amp;gt;9-&amp;gt;10-&amp;g">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2019/01/23/LeetCodeMergeKSortedLists/分治法.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode Merge K Sorted Lists</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode Merge K Sorted Lists</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-01-23T01:34:38.000Z" itemprop="datePublished" class="page-time">
+  2019-01-23
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#理解"><span class="post-toc-number">2.</span> <span class="post-toc-text">理解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决"><span class="post-toc-number">3.</span> <span class="post-toc-text">解决</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Compare-one-by-one"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">Compare one by one</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#最小堆"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">最小堆</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Divide-And-Conquer-分治法"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">Divide And Conquer(分治法)</span></a></li></ol></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-LeetCodeMergeKSortedLists"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode Merge K Sorted Lists</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-01-23 09:34:38" datetime="2019-01-23T01:34:38.000Z"  itemprop="datePublished">2019-01-23</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>Given K sorted linked lists of size N each, merge them and print the sorted output.</p>
+<p>Example:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Input: k = 3, n =  4</div><div class="line">list1 = 1-&gt;3-&gt;5-&gt;7</div><div class="line">list2 = 2-&gt;4-&gt;6-&gt;8</div><div class="line">list3 = 0-&gt;9-&gt;10-&gt;11</div><div class="line"></div><div class="line">Output: </div><div class="line">0-&gt;1-&gt;2-&gt;3-&gt;4-&gt;5-&gt;6-&gt;7-&gt;8-&gt;9-&gt;10-&gt;11</div></pre></td></tr></table></figure></p>
+<h1 id="理解"><a href="#理解" class="headerlink" title="理解"></a>理解</h1><p>此题目还有很多种变种，如不固定每个list的长度。不管如何变化，其算法都是一样，选择固定长度的题目，主要是方便时间复杂度的计算</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><h2 id="Compare-one-by-one"><a href="#Compare-one-by-one" class="headerlink" title="Compare one by one"></a>Compare one by one</h2><p>步骤：</p>
+<ol>
+<li>创建空链表</li>
+<li>比较每个list的head元素，取出最小元素，并移动此list的head元素</li>
+<li>把取出的最小元素链接到空链表里</li>
+</ol>
+<p>代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * public class ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode next;</div><div class="line"> *     ListNode(int x) &#123; val = x; &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(ListNode[] lists)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> minIndex = -<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;lists.length; i++)&#123;</div><div class="line">            <span class="keyword">if</span>(lists[i] == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(minIndex == -<span class="number">1</span> || lists[i].val &lt; lists[minIndex].val)&#123;</div><div class="line">                minIndex = i;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> minIndex;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeKLists</span><span class="params">(ListNode[] lists)</span> </span>&#123;</div><div class="line">        ListNode output = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">        ListNode outputEnd = output;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">            <span class="comment">// 比较head大小</span></div><div class="line">            <span class="keyword">int</span> index = compare(lists);</div><div class="line">            <span class="keyword">if</span>(index == -<span class="number">1</span>) &#123;</div><div class="line">                <span class="keyword">return</span> output.next;</div><div class="line">            &#125;</div><div class="line">            outputEnd.next = lists[index];</div><div class="line">            outputEnd = lists[index];</div><div class="line">            lists[index] = lists[index].next;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：<ol>
+<li>第一层while循环的次数为： K*N 次</li>
+<li>compare()里的for循环次数 K 次</li>
+<li>时间复杂度为：O(K*N*K)</li>
+</ol>
+</li>
+<li>空间复杂度：O(1)</li>
+</ol>
+<h2 id="最小堆"><a href="#最小堆" class="headerlink" title="最小堆"></a>最小堆</h2><p>通过最小堆优化上面的compare()函数，在写代码之前，我们需要了解最小堆的一些特性：</p>
+<ol>
+<li>堆可以用数组来表示</li>
+<li>下标从0开始编号，位置i的元素有如下特性：<ol>
+<li>其parent(i) = (i-1)/2;</li>
+<li>left_child(i) = 2*i + 1;</li>
+<li>right_child(i) = 2*i + 2;</li>
+</ol>
+</li>
+<li>修改顶点元素后，恢复其堆的特性的时间复杂度为：O(logK)</li>
+</ol>
+<p>代码如下所示：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for singly-linked list.</div><div class="line"> * public class ListNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     ListNode next;</div><div class="line"> *     ListNode(int x) &#123; val = x; &#125;</div><div class="line"> * &#125;</div><div class="line"> */</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLeft</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">2</span> * i + <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getRight</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="number">2</span> * i + <span class="number">2</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">minHeapify</span><span class="params">(ListNode[] minHeap, <span class="keyword">int</span> i)</span></span>&#123;</div><div class="line">        <span class="keyword">int</span> size = minHeap.length;</div><div class="line">        </div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">            <span class="keyword">int</span> min = i;</div><div class="line">            <span class="keyword">int</span> left = getLeft(i);</div><div class="line">            <span class="keyword">int</span> right = getRight(i);</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(left &lt; size &amp;&amp; minHeap[left] != <span class="keyword">null</span> &amp;&amp; </div><div class="line">               (minHeap[min] == <span class="keyword">null</span> || minHeap[min].val &gt; minHeap[left].val)) &#123;</div><div class="line">                min = left;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span>(right &lt; size &amp;&amp; minHeap[right] != <span class="keyword">null</span> &amp;&amp; </div><div class="line">               (minHeap[min] == <span class="keyword">null</span> || minHeap[min].val &gt; minHeap[right].val))&#123;</div><div class="line">                min = right;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">if</span>(min == i) &#123;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">            ListNode temp = minHeap[i];</div><div class="line">            minHeap[i] = minHeap[min];</div><div class="line">            minHeap[min] = temp;</div><div class="line">            i = min;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> ListNode[] initMinHeap(ListNode[] lists)&#123;</div><div class="line">        </div><div class="line">        ListNode[] minHeap = lists;</div><div class="line">    </div><div class="line">        <span class="comment">// 遍历所有非叶子结点，构建最小堆</span></div><div class="line">        <span class="keyword">int</span> size = minHeap.length;</div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=(size-<span class="number">1</span>)/<span class="number">2</span>; i&gt;=<span class="number">0</span>; i--)&#123;</div><div class="line">            minHeapify(lists, i);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> minHeap;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">getMin</span><span class="params">(ListNode[] minHeap)</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> minHeap[<span class="number">0</span>];</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">replaceMin</span><span class="params">(ListNode[] minHeap, ListNode node)</span></span>&#123;</div><div class="line">        </div><div class="line">        minHeap[<span class="number">0</span>] = node;</div><div class="line">        </div><div class="line">        minHeapify(minHeap, <span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">mergeKLists</span><span class="params">(ListNode[] lists)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(lists.length == <span class="number">0</span>)&#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ListNode output = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</div><div class="line">        ListNode outputEnd = output;</div><div class="line">        </div><div class="line">        <span class="comment">// 初始化最小堆</span></div><div class="line">        ListNode[] minHeap = initMinHeap(lists);</div><div class="line"></div><div class="line">        <span class="keyword">while</span>(<span class="keyword">true</span>)&#123;</div><div class="line">            <span class="comment">// 比较head大小</span></div><div class="line">            ListNode minNode = getMin(minHeap);</div><div class="line">            <span class="keyword">if</span>(minNode == <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">return</span> output.next;</div><div class="line">            &#125;</div><div class="line">            outputEnd.next = minNode;</div><div class="line">            outputEnd = minNode;</div><div class="line">            </div><div class="line">            replaceMin(minHeap, minNode.next);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>复杂度：</p>
+<ol>
+<li>时间复杂度：O(K*N*logK)</li>
+<li>空间复杂度：O(K)</li>
+</ol>
+<h2 id="Divide-And-Conquer-分治法"><a href="#Divide-And-Conquer-分治法" class="headerlink" title="Divide And Conquer(分治法)"></a>Divide And Conquer(分治法)</h2><p>此算法的思路：</p>
+<ol>
+<li>两两分组合并，形成一个新的数组</li>
+<li>再重复步骤1，直到只剩一个元素</li>
+</ol>
+<p>如下所示：<br><figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/01/23/LeetCodeMergeKSortedLists/分治法.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure></p>
+<p>代码省略…</p>
+<p>关键来思考其时间复杂度的计算方法：</p>
+<ol>
+<li>Merging的次数为：logK</li>
+<li>listi, listj合并的时间复杂度为0(n)</li>
+<li>总时间复杂度为=(K/2)*O(N)+(K/2^2)*O(N)+…+(K/2^logK)*O(N)</li>
+<li>假定(K/2^i)*O(N) 约等于 O(K*N)</li>
+<li>总时间复杂度约等于O(K*N*logK)</li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-01-25T03:19:07.806Z" itemprop="dateUpdated">2019-01-25 11:19:07</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/11/LeetCodeLongestCommonPrefix/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode Longest Common Prefix</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACp0lEQVR42u3aQW7DMAwEwPz/0+m1QBNnSYqBC4xPRePYGh0kZqnHI76eb67fn/69891z8rfk3x1deHh4eIeG/m7QPcD1FFSfnIwZDw8Pb5uXPK63lF8Puvqu/B48PDy8+/BObRJ5iXxdxOPh4eH9F16+SSThRV524+Hh4d2Hlwe114t7FZOHtutZCx4eHl7My4va+/y90t/Dw8PDG3fVe5vEZMlOoo3Cu/Dw8PAWePmCmwep1eFWjwiU34iHh4d3lJc8aF7s5ltFHkAkgQgeHh7eHi9H5qFtFVBtsCUbDB4eHt42LwdUGdVpykOQDyPBw8PDW+CVDzAVAdVJSd6V/wcPDw/vO7zqj//e0atqxz8v3z+k1Hh4eHiHeJOFeB4lzKcjeT4eHh7eWd7ZgCA/npVvRdWJe5u44OHh4R3iVcvZ6iKeF8e9pldhO8HDw8Mb85JBbxyTmkxB89AVHh4e3lHeSvE6aF/ljA8NMDw8PLw1Xu+IQG9xT4r4U4e08PDw8DZ4k3ZX4djTeIPJ3/XhZAQeHh7eId51UZu3u8pLdtwwq0bJeHh4eHu86iB6IW/yreoRq8KOh4eHh7fA60UD1dg3D3yPxRl4eHh4W0lpoSWWlL/54CZbQu/4Fx4eHt4pXrWtVW2PPYMrmcRRlw8PDw9vgTdv2OeAZkHcizPw8PDw1ni94jWPKnqfVkPhFyI8PDy8L/LmmGMZybwzhoeHh3cUVi2L5wFr9ahB0k578S08PDy8Bd4319hegJtEugc2GDw8PLwibxK/Jp8mRXwv1IjGg4eHh7fG2zgW0NsS5mEKHh4e3j15STFd/U8ykmpIgYeHh3cH3tkCOhnuKGjGw8PDW+NNCt9efJA84frOwsaAh4eHd5RX/cGfIPfuPNbTw8PDw+vwfgAVGivwAja+1QAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
