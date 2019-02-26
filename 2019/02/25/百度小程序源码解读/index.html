@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>百度小程序源码解读 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="前端,小程序">
+    <meta name="description" content="整体框架百度小程序的开发Api，加构设计与微信小程序基本一致。 为了提升整体性能，充分利用手机的多CPU性能：  把逻辑层与渲染层分离，分别位于不同的运行容器 异步请求都由native来执行">
+<meta name="keywords" content="前端,小程序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="百度小程序源码解读">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2019/02/25/百度小程序源码解读/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="整体框架百度小程序的开发Api，加构设计与微信小程序基本一致。 为了提升整体性能，充分利用手机的多CPU性能：  把逻辑层与渲染层分离，分别位于不同的运行容器 异步请求都由native来执行">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/02/25/百度小程序源码解读/整体框架2.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/02/25/百度小程序源码解读/目录结构-src.png">
+<meta property="og:image" content="https://handsomeliuyang.github.io/2019/02/25/百度小程序源码解读/目录结构-dist.png">
+<meta property="og:updated_time" content="2019-02-26T02:34:32.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="百度小程序源码解读">
+<meta name="twitter:description" content="整体框架百度小程序的开发Api，加构设计与微信小程序基本一致。 为了提升整体性能，充分利用手机的多CPU性能：  把逻辑层与渲染层分离，分别位于不同的运行容器 异步请求都由native来执行">
+<meta name="twitter:image" content="https://handsomeliuyang.github.io/2019/02/25/百度小程序源码解读/整体框架2.png">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">百度小程序源码解读</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">百度小程序源码解读</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-02-24T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2019-02-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#整体框架"><span class="post-toc-number">1.</span> <span class="post-toc-text">整体框架</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开发流程"><span class="post-toc-number">2.</span> <span class="post-toc-text">开发流程</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#编译"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">编译</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#加载，启动，渲染"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">加载，启动，渲染</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#交互"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">交互</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考"><span class="post-toc-number">3.</span> <span class="post-toc-text">参考</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-百度小程序源码解读"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">百度小程序源码解读</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-02-25 00:00:00" datetime="2019-02-24T16:00:00.000Z"  itemprop="datePublished">2019-02-25</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/前端/">前端</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="整体框架"><a href="#整体框架" class="headerlink" title="整体框架"></a>整体框架</h1><p>百度小程序的开发Api，加构设计与微信小程序基本一致。</p>
+<p>为了提升整体性能，充分利用手机的多CPU性能：</p>
+<ol>
+<li>把逻辑层与渲染层分离，分别位于不同的运行容器</li>
+<li>异步请求都由native来执行</li>
+</ol>
+<figure class="image-bubble">
+                <div class="img-lightbox">
+                    <div class="overlay"></div>
+                    <img src="/2019/02/25/百度小程序源码解读/整体框架2.png" alt="" title="">
+                </div>
+                <div class="image-caption"></div>
+            </figure>
+<ol>
+<li>逻辑层<ol>
+<li>逻辑层就是对开发者所暴露的Api，有App，Page，布局文件，其中的App，Page都是两个函数</li>
+<li>App()函数的处理：直接创建App对象，全局唯一对象</li>
+<li>Page()函数的处理：保存到Map中，不会马上构建Page对象，当导航到页面时，才会真正创建Page对象</li>
+</ol>
+</li>
+<li>渲染层<ol>
+<li>使用MVVM框架san来渲染界面</li>
+<li>在编译期间把小程序标签转化为san框架所支持的标签</li>
+<li>为每个小程序页面，创建对应的san框架下Page组件，PageComponent的template就是swan.xml转译后的内容</li>
+</ol>
+</li>
+<li>渲染层与逻辑层交互<ol>
+<li>渲染层接收用户的交互事件，由统一的函数处理后，通过消息总线传递到逻辑层的Page对象，再调用对应的函数</li>
+<li>逻辑层依据用户操作，执行业务操作，修改data数据，通过消息总线传递到渲染层的组件里，San.Page组件会自动更新界面</li>
+</ol>
+</li>
+</ol>
+<h1 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h1><h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>一个简单的百度小程序项目：</p>
+<ol>
+<li>目录结构：<br> <img src="/2019/02/25/百度小程序源码解读/目录结构-src.png" alt=""></li>
+<li><p>App.js的源码：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">App(&#123;</div><div class="line">    onLaunch(event) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'onLaunch'</span>);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    onShow(event) &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'onShow'</span>);</div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">globalData</span>: &#123;</div><div class="line">        <span class="attr">userInfo</span>: <span class="string">'user'</span></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>index.js的源码：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> p = [];</div><div class="line">Page(&#123;</div><div class="line">    <span class="attr">data</span>: &#123;</div><div class="line">        <span class="attr">text</span>: <span class="string">"这是一段文字."</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">add</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        p.push(<span class="string">"其他文字"</span>);</div><div class="line">        <span class="keyword">this</span>.setData(&#123;</div><div class="line">            <span class="attr">text</span>: <span class="string">"这是一段文字."</span> + p.join(<span class="string">","</span>)</div><div class="line">        &#125;)</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">remove</span>: <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(p.length &gt; <span class="number">0</span>)&#123;</div><div class="line">            p.pop();</div><div class="line">            <span class="keyword">this</span>.setData(&#123;</div><div class="line">                <span class="attr">text</span>: <span class="string">"这是一段文字."</span> + p.join(<span class="string">","</span>)</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+<li><p>index.swan的源码：</p>
+ <figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">"text-px text-&#123;&#123;text&#125;&#125;"</span>&gt;</span>&#123;&#123;text&#125;&#125;<span class="tag">&lt;/<span class="name">view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">bind:tap</span>=<span class="string">"add"</span>&gt;</span>add text<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">"btn"</span> <span class="attr">type</span>=<span class="string">"primary"</span> <span class="attr">bind:tap</span>=<span class="string">"remove"</span>&gt;</span>remove text<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">view</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>以上的小程序代码，经过编译后的情况：</p>
+<ol>
+<li>目录结构：<br> <img src="/2019/02/25/百度小程序源码解读/目录结构-dist.png" alt=""></li>
+<li><p>App.js的源码：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.define(<span class="string">"138"</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">t, e, n, o, a, i, s, c, r, u, d, l, g, w, f, h</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> p = [];</div><div class="line">        Page(&#123;</div><div class="line">            <span class="attr">data</span>: &#123;</div><div class="line">                <span class="attr">text</span>: <span class="string">"这是一段文字."</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">add</span>: <span class="function"><span class="keyword">function</span>(<span class="params">t</span>) </span>&#123;</div><div class="line">                p.push(<span class="string">"其他文字"</span>);</div><div class="line">                <span class="keyword">this</span>.setData(&#123;</div><div class="line">                    <span class="attr">text</span>: <span class="string">"这是一段文字."</span> + p.join(<span class="string">","</span>)</div><div class="line">                &#125;)</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">remove</span>: <span class="function"><span class="keyword">function</span>(<span class="params">t</span>) </span>&#123;</div><div class="line">                p.length &gt; <span class="number">0</span> &amp;&amp; (p.pop(), <span class="keyword">this</span>.setData(&#123;</div><div class="line">                    <span class="attr">text</span>: <span class="string">"这是一段文字."</span> + p.join(<span class="string">","</span>)</div><div class="line">                &#125;))</div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">window</span>.define(<span class="string">"193"</span>,</div><div class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">t, e, n, o, a, i, s, c, r, u, d, l, g, w, f, h</span>) </span>&#123;</div><div class="line">        App(&#123;</div><div class="line">            <span class="attr">onLaunch</span>: <span class="function"><span class="keyword">function</span>(<span class="params">t</span>) </span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Lifecycle App onLaunch"</span>)</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">onShow</span>: <span class="function"><span class="keyword">function</span>(<span class="params">t</span>) </span>&#123;</div><div class="line">                <span class="built_in">console</span>.log(<span class="string">"Lifecycle App onShow"</span>)</div><div class="line">            &#125;,</div><div class="line">            <span class="attr">globalData</span>: &#123;</div><div class="line">                <span class="attr">userInfo</span>: <span class="string">'user'</span></div><div class="line">            &#125;</div><div class="line">        &#125;)</div><div class="line">&#125;);</div><div class="line"></div><div class="line"><span class="built_in">window</span>.__swanRoute = <span class="string">"app"</span>;</div><div class="line"><span class="built_in">window</span>.usingComponents = [];</div><div class="line"><span class="built_in">require</span>(<span class="string">"193"</span>);</div><div class="line"></div><div class="line"><span class="built_in">window</span>.__swanRoute = <span class="string">"pages/text/text"</span>;</div><div class="line"><span class="built_in">window</span>.usingComponents = [];</div><div class="line"><span class="built_in">require</span>(<span class="string">"138"</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>index.swan.js的源码：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 注意，做了一些简化</span></div><div class="line">(<span class="function">(<span class="params">global</span>)=&gt;</span>&#123;</div><div class="line">    global.errorMsg = [];</div><div class="line">    <span class="keyword">var</span> templateComponents = <span class="built_in">Object</span>.assign(&#123;&#125;, &#123;&#125;);</div><div class="line">    <span class="keyword">var</span> param = &#123;&#125;;</div><div class="line">    <span class="keyword">var</span> filterArr = <span class="built_in">JSON</span>.parse(<span class="string">"[]"</span>);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        filterArr &amp;&amp; filterArr.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</div><div class="line">            param[item.module] = <span class="built_in">eval</span>(item.module)</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="keyword">var</span> pageContent = <span class="string">`</span></div><div class="line">            &lt;view&gt;</div><div class="line">                &lt;view&gt;&#123;&#123;text&#125;&#125;&lt;/view&gt;</div><div class="line">                &lt;button class=\"btn\" type=\"primary\" on-bindtap=\"eventHappen('tap', $event, 'add', '', 'bind')\"&gt;</div><div class="line">                    add text</div><div class="line">                &lt;/button&gt;</div><div class="line">                &lt;button class=\"btn\" type=\"primary\" on-bindtap=\"eventHappen('tap', $event, 'remove', '', 'bind')\"&gt;</div><div class="line">                    remove text</div><div class="line">                &lt;/button&gt;</div><div class="line">            &lt;/view&gt;`;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> renderPage = <span class="function"><span class="keyword">function</span> (<span class="params">filters, modules</span>) </span>&#123;</div><div class="line">            <span class="comment">// 路径与该组件映射</span></div><div class="line">            <span class="comment">// var customAbsolutePathMap = (global.componentFactory.getAllComponents(), &#123;&#125;);</span></div><div class="line"></div><div class="line">            <span class="comment">// 当前页面使用的自定义组件</span></div><div class="line">            <span class="comment">// const pageUsingComponentMap = JSON.parse("&#123;&#125;");</span></div><div class="line"></div><div class="line">            <span class="comment">// 生成该页面引用的自定义组件</span></div><div class="line">            <span class="comment">// const customComponents = Object.keys(pageUsingComponentMap).reduce((customComponents, customName) =&gt; &#123;</span></div><div class="line">            <span class="comment">// 	customComponents[customName] = customAbsolutePathMap[pageUsingComponentMap[customName]];</span></div><div class="line">            <span class="comment">// 	return customComponents;</span></div><div class="line">            <span class="comment">// &#125;, &#123;&#125;);</span></div><div class="line">            global.pageRender(pageContent, templateComponents)</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        renderPage(filterArr, param);</div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">        global.errorMsg[<span class="string">'execError'</span>] = e;</div><div class="line">        <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">&#125;)(<span class="built_in">window</span>);</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>编译总结：</p>
+<ol>
+<li>对template进行转换：<ol>
+<li>标签转换：bind:tap ===&gt; on-bindtap</li>
+<li>事件包装：eventHappen(‘tap’, $event, ‘add’, ‘’, ‘bind’)</li>
+</ol>
+</li>
+<li>对App.js进行包装，提升效率，减少逐一加载流程</li>
+<li>通过渲染模板，生成index.swan.js文件，提升渲染效率</li>
+</ol>
+<h2 id="加载，启动，渲染"><a href="#加载，启动，渲染" class="headerlink" title="加载，启动，渲染"></a>加载，启动，渲染</h2><p>用户点击跳转到小程序后：</p>
+<ol>
+<li>Native的任务：<ol>
+<li>下载小程序.zip文件</li>
+<li>启动两个web运行容器：<ol>
+<li>渲染层webview加载slaves.html</li>
+<li>逻辑层jscore加载master.html</li>
+</ol>
+</li>
+<li>解析小程序app.json，发送’AppReady’事件</li>
+</ol>
+</li>
+<li><p>逻辑层master.js：</p>
+<ol>
+<li><p>监听’AppReady’事件，执行小程序的调起逻辑</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 监听客户端的调起逻辑</div><div class="line"> */</div><div class="line">listenAppReady() &#123;</div><div class="line">    <span class="keyword">this</span>.swaninterface.bind(<span class="string">'AppReady'</span>, event =&gt; &#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'master listener AppReady '</span>, event);</div><div class="line">        swanEvents(<span class="string">'masterActiveStart'</span>);</div><div class="line">        <span class="comment">// 给三方用的，并非给框架用，请保留</span></div><div class="line">        <span class="keyword">this</span>.context.appConfig = event.appConfig;</div><div class="line">        <span class="comment">// 初始化master的入口逻辑</span></div><div class="line">        <span class="keyword">this</span>.initRender(event);</div><div class="line">        <span class="comment">// this.preLoadSubPackage();</span></div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>初始化master的入口逻辑，小程序的每个界面，对应一个Slave对象（与渲染层的slave.js不一样），依据用户打开多个页面，构建一个导航栈，保存在navigator对象里</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 初始化渲染</div><div class="line"> *</div><div class="line"> * @param &#123;Object&#125; initEvent - 客户端传递的初始化事件对象</div><div class="line"> * @param &#123;string&#125; initEvent.appConfig - 客户端将app.json的内容（json字符串）给前端用于处理</div><div class="line"> * @param &#123;string&#125; initEvent.appPath - app在手机上的磁盘位置</div><div class="line"> * @param &#123;string&#125; initEvent.wvID - 第一个slave的id</div><div class="line"> * @param &#123;string&#125; initEvent.pageUrl - 第一个slave的url</div><div class="line"> */</div><div class="line">initRender(initEvent) &#123;</div><div class="line">    <span class="comment">// 设置appConfig</span></div><div class="line">    <span class="keyword">this</span>.navigator.setAppConfig(&#123;</div><div class="line">        ...JSON.parse(initEvent.appConfig),</div><div class="line">        ...&#123;</div><div class="line">            <span class="attr">appRootPath</span>: initEvent.appPath</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">    swanEvents(<span class="string">'masterActiveInitRender'</span>);</div><div class="line"></div><div class="line">    <span class="comment">// 压入initSlave</span></div><div class="line">    <span class="keyword">this</span>.navigator.pushInitSlave(&#123;</div><div class="line">        <span class="attr">pageUrl</span>: initEvent.pageUrl,</div><div class="line">        <span class="attr">slaveId</span>: +initEvent.wvID,</div><div class="line">        <span class="attr">root</span>: initEvent.root,</div><div class="line">        <span class="attr">preventAppLoad</span>: initEvent.preventAppLoad</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">this</span>.appPath = initEvent.appPath;</div><div class="line">    swanEvents(<span class="string">'masterActivePushInitslave'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>创建初始化页面的slave后，如果没有预加载，就加载小程序里的app.js文件（注意：是编译后的app.js文件），并发送’slaveLoaded’事件，通知渲染层开始渲染</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 初始化第一个slave</div><div class="line"> * @param &#123;Object&#125; [initParams] - 初始化的参数</div><div class="line"> */</div><div class="line">pushInitSlave(initParams) &#123;</div><div class="line">    ....</div><div class="line">    <span class="comment">// 创建初始化slave</span></div><div class="line">    <span class="keyword">this</span>.initSlave = <span class="keyword">this</span>.createInitSlave(initParams.pageUrl, <span class="keyword">this</span>.appConfig);</div><div class="line"></div><div class="line">    <span class="comment">// slave的init调用</span></div><div class="line">    <span class="keyword">this</span>.initSlave</div><div class="line">        .init(initParams)</div><div class="line">        .then(<span class="function"><span class="params">initRes</span> =&gt;</span> &#123;</div><div class="line">            swanEvents(<span class="string">'masterActiveCreateInitslaveEnd'</span>);</div><div class="line">            <span class="comment">// 入栈</span></div><div class="line">            <span class="keyword">this</span>.history.pushHistory(<span class="keyword">this</span>.initSlave);</div><div class="line">            swanEvents(<span class="string">'masterActivePushInitslaveEnd'</span>);</div><div class="line">            <span class="comment">// 调用slave的onEnqueue生命周期函数</span></div><div class="line">            <span class="keyword">this</span>.initSlave.onEnqueue();</div><div class="line">            swanEvents(<span class="string">'masterActiveOnqueueInitslave'</span>);</div><div class="line">        &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 初始化为第一个页面</div><div class="line"> *</div><div class="line"> * @param &#123;Object&#125; initParams 初始化的配置参数</div><div class="line"> * @return &#123;Promise&#125; 返回初始化之后的Promise流</div><div class="line"> */</div><div class="line">Slave.init(initParams) &#123;</div><div class="line">    <span class="keyword">this</span>.isFirstPage = <span class="literal">true</span>;</div><div class="line">    <span class="keyword">return</span> <span class="built_in">Promise</span></div><div class="line">        .resolve(initParams)</div><div class="line">        .then(<span class="function"><span class="params">initParams</span> =&gt;</span> &#123;</div><div class="line">            swanEvents(<span class="string">'masterActiveInitAction'</span>);</div><div class="line">            <span class="keyword">if</span> (!!initParams.preventAppLoad) &#123;</div><div class="line">                <span class="keyword">return</span> initParams;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// const loadCommonJs = this.appConfig.splitAppJs</span></div><div class="line">            <span class="comment">// &amp;&amp; !this.appConfig.subPackages</span></div><div class="line">            <span class="comment">// 	? 'common.js' : 'app.js';</span></div><div class="line">            <span class="keyword">const</span> loadCommonJs = <span class="string">'app.js'</span>;</div><div class="line">            <span class="keyword">return</span> loader</div><div class="line">                .loadjs(<span class="string">`<span class="subst">$&#123;<span class="keyword">this</span>.appRootPath&#125;</span>/<span class="subst">$&#123;loadCommonJs&#125;</span>`</span>, <span class="string">'masterActiveAppJsLoaded'</span>)</div><div class="line">                .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                    <span class="keyword">return</span> <span class="keyword">this</span>.loadJs.call(<span class="keyword">this</span>, initParams);</div><div class="line">                &#125;);</div><div class="line">        &#125;)</div><div class="line">        .then(<span class="function"><span class="params">initParams</span> =&gt;</span> &#123;</div><div class="line">            <span class="keyword">this</span>.uri = initParams.pageUrl.split(<span class="string">'?'</span>)[<span class="number">0</span>];</div><div class="line">            <span class="keyword">this</span>.accessUri = initParams.pageUrl;</div><div class="line">            <span class="keyword">this</span>.slaveId = initParams.slaveId;</div><div class="line">            <span class="comment">// init的事件为客户端处理，确保是在slave加载完成之后，所以可以直接派发</span></div><div class="line">            <span class="keyword">this</span>.swaninterface.communicator.fireMessage(&#123;</div><div class="line">                <span class="attr">type</span>: <span class="string">`slaveLoaded<span class="subst">$&#123;<span class="keyword">this</span>.slaveId&#125;</span>`</span>,</div><div class="line">                <span class="attr">message</span>: &#123;<span class="attr">slaveId</span>: <span class="keyword">this</span>.slaveId&#125;</div><div class="line">            &#125;);</div><div class="line">            <span class="keyword">return</span> initParams;</div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>执行slave入栈后的生命周期函数this.initSlave.onEnqueue(); 在此函数里，会真正Page Instance，同时监听到渲染层准备好后，发送’initData’事件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 入栈之后的生命周期方法</div><div class="line"> *</div><div class="line"> * @return &#123;Object&#125; 入栈之后，创建的本slave的页面实例对象</div><div class="line"> */</div><div class="line">onEnqueue() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.createPageInstance();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 创建页面实例，并且，当slave加载完成之后，向slave传递初始化data</div><div class="line"> *</div><div class="line"> * @return &#123;Promise&#125; 创建完成的事件流</div><div class="line"> */</div><div class="line">createPageInstance() &#123;</div><div class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.isCreated()) &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Promise</span>.resolve();</div><div class="line">    &#125;</div><div class="line">    swanEvents(<span class="string">'masterActiveCreatePageFlowStart'</span>, &#123;</div><div class="line">        <span class="attr">uri</span>: <span class="keyword">this</span>.uri</div><div class="line">    &#125;);</div><div class="line">    <span class="keyword">const</span> userPageInstance = createPageInstance(<span class="keyword">this</span>.accessUri, <span class="keyword">this</span>.slaveId, <span class="keyword">this</span>.appConfig);</div><div class="line">    <span class="keyword">const</span> query = userPageInstance.privateProperties.accessUri.split(<span class="string">'?'</span>)[<span class="number">1</span>];</div><div class="line">    <span class="keyword">this</span>.setUserPageInstance(userPageInstance);</div><div class="line"></div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        swanEvents(<span class="string">'masterPageOnLoadHookStart'</span>);</div><div class="line">        userPageInstance._onLoad(getParams(query));</div><div class="line">        swanEvents(<span class="string">'masterPageOnLoadHookEnd'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">catch</span> (e) &#123;</div><div class="line">        <span class="comment">// avoid empty state</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">this</span>.status = STATUS_MAP.CREATED;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">`Master 监听 slaveLoaded 事件，slaveId=<span class="subst">$&#123;<span class="keyword">this</span>.slaveId&#125;</span>`</span>);</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.swaninterface.invoke(<span class="string">'loadJs'</span>, &#123;</div><div class="line">        <span class="attr">uri</span>: <span class="keyword">this</span>.uri,</div><div class="line">        <span class="attr">eventObj</span>: &#123;</div><div class="line">            <span class="attr">wvID</span>: <span class="keyword">this</span>.slaveId</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">success</span>: <span class="function"><span class="params">params</span> =&gt;</span> &#123;</div><div class="line">            swanEvents(<span class="string">'masterActiveCreatePageFlowEnd'</span>);</div><div class="line">            swanEvents(<span class="string">'masterActiveSendInitdataStart'</span>);</div><div class="line">            userPageInstance.privateMethod</div><div class="line">                .sendInitData.call(userPageInstance, <span class="keyword">this</span>.appConfig);</div><div class="line">            swanEvents(<span class="string">'masterActiveSendInitdataEnd'</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+<li><p>渲染层slave.js</p>
+<ol>
+<li><p>监听’PageReady’事件，加载对应页面的文件：app.css，index.css，index.swan.js文件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 监听pageReady，触发整个入口的调起</div><div class="line"> * @param &#123;Object&#125; [global] 全局对象</div><div class="line"> */</div><div class="line">listenPageReady(global) &#123;</div><div class="line">    swanEvents(<span class="string">'slavePreloadListened'</span>);</div><div class="line">    <span class="comment">// 控制是否开启预取initData的开关</span></div><div class="line">    <span class="keyword">let</span> advancedInitDataSwitch = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">this</span>.swaninterface.bind(<span class="string">'PageReady'</span>, event =&gt; &#123;</div><div class="line">        swanEvents(<span class="string">'slaveActiveStart'</span>, &#123;</div><div class="line">            <span class="attr">pageInitRenderStart</span>: <span class="built_in">Date</span>.now() + <span class="string">''</span></div><div class="line">        &#125;);</div><div class="line">        ...</div><div class="line">        const appPath = event.appPath;</div><div class="line">        <span class="keyword">const</span> pagePath = event.pagePath.split(<span class="string">'?'</span>)[<span class="number">0</span>];</div><div class="line">        <span class="keyword">const</span> onReachBottomDistance = event.onReachBottomDistance;</div><div class="line">        ...</div><div class="line">        let loadUserRes = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            <span class="comment">// 设置页面的基础路径为当前页面本应所在的路径</span></div><div class="line">            <span class="comment">// 行内样式等使用相对路径变成此值</span></div><div class="line">            <span class="comment">// setPageBasePath(`$&#123;appPath&#125;/$&#123;pagePath&#125;`);</span></div><div class="line">            swanEvents(<span class="string">'slaveActivePageLoadStart'</span>);</div><div class="line">            <span class="comment">// 加载用户的资源</span></div><div class="line">            <span class="built_in">Promise</span>.all([</div><div class="line">                loader.loadcss(<span class="string">`<span class="subst">$&#123;appPath&#125;</span>/app.css`</span>, <span class="string">'slaveActiveAppCssLoaded'</span>),</div><div class="line">                loader.loadcss(<span class="string">`<span class="subst">$&#123;appPath&#125;</span>/<span class="subst">$&#123;pagePath&#125;</span>.css`</span>, <span class="string">'slaveActivePageCssLoaded'</span>)</div><div class="line">            ])</div><div class="line">                .catch(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                    <span class="built_in">console</span>.warn(<span class="string">'加载css资源出现问题，请检查css文件'</span>);</div><div class="line">                &#125;)</div><div class="line">                .then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                    <span class="comment">// todo: 兼容天幕，第一个等天幕同步后，干掉</span></div><div class="line">                    swanEvents(<span class="string">'slaveActiveCssLoaded'</span>);</div><div class="line">                    swanEvents(<span class="string">'slaveActiveSwanJsStart'</span>);</div><div class="line">                    loader.loadjs(<span class="string">`<span class="subst">$&#123;appPath&#125;</span>/<span class="subst">$&#123;pagePath&#125;</span>.swan.js`</span>, <span class="string">'slaveActiveSwanJsLoaded'</span>);</div><div class="line">                &#125;);</div><div class="line">        &#125;;</div><div class="line">        <span class="comment">// (event.devhook === 'true' ? loadHook().then(loadUserRes).catch(loadUserRes) : loadUserRes());</span></div><div class="line">        loadUserRes();</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>在每个页面编译后的xxx.swan.js文件里，会执行pageRender()函数，进行界面渲染，如此demo里的index.swan.js文件：</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">(<span class="function">(<span class="params">global</span>)=&gt;</span>&#123;</div><div class="line">    global.errorMsg = [];</div><div class="line">    <span class="keyword">var</span> templateComponents = <span class="built_in">Object</span>.assign(&#123;&#125;, &#123;&#125;);</div><div class="line">    <span class="keyword">var</span> param = &#123;&#125;;</div><div class="line">    <span class="keyword">var</span> filterArr = <span class="built_in">JSON</span>.parse(<span class="string">"[]"</span>);</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">        filterArr &amp;&amp; filterArr.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">item</span>) </span>&#123;</div><div class="line">            param[item.module] = <span class="built_in">eval</span>(item.module)</div><div class="line">        &#125;);</div><div class="line"></div><div class="line">        <span class="keyword">var</span> pageContent = <span class="string">`</span></div><div class="line">            &lt;div class=\"wrap\"&gt;</div><div class="line">                &lt;div&gt;&#123;&#123;text&#125;&#125;&lt;/div&gt;</div><div class="line">                &lt;button class=\"btn\" type=\"primary\" v-on:click=\"eventHappen('tap', $event, 'add', '', 'bind')\"&gt;</div><div class="line">                    add text</div><div class="line">                &lt;/button&gt;</div><div class="line">                &lt;button class=\"btn\" type=\"primary\" v-on:click=\"eventHappen('tap', $event, 'remove', '', 'bind')\"&gt;</div><div class="line">                    remove text</div><div class="line">                &lt;/button&gt;</div><div class="line">            &lt;/div&gt;`;</div><div class="line"></div><div class="line">        <span class="keyword">var</span> renderPage = <span class="function"><span class="keyword">function</span> (<span class="params">filters, modules</span>) </span>&#123;</div><div class="line">            ...</div><div class="line">            global.pageRender(pageContent, templateComponents)</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        renderPage(filterArr, param);</div><div class="line">    &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">        global.errorMsg[<span class="string">'execError'</span>] = e;</div><div class="line">        <span class="keyword">throw</span> e;</div><div class="line">    &#125;</div><div class="line">&#125;)(<span class="built_in">window</span>);</div></pre></td></tr></table></figure>
+</li>
+<li><p>global.pageRender()函数是在slave.js文件里定义的方法，其内部的逻辑就是创建对应的san框架里的Page组件，等待初始化数据过来后，再绑定到界面上</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 注册所有components(也包括顶层components -- page)</div><div class="line"> */</div><div class="line">registerComponents() &#123;</div><div class="line">    ...</div><div class="line">    global.pageRender = <span class="function">(<span class="params">pageTemplate, templateComponents, customComponents, filters, modules</span>) =&gt;</span> &#123;</div><div class="line">        ...</div><div class="line">        <span class="comment">// 定义当前页面的组件</span></div><div class="line">        componentFactory.componentDefine(</div><div class="line">            <span class="string">'page'</span>,</div><div class="line">            &#123;</div><div class="line">                <span class="attr">template</span>: <span class="string">`&lt;swan-page tabindex="-1"&gt;<span class="subst">$&#123;pageTemplate&#125;</span>&lt;/swan-page&gt;`</span>,</div><div class="line">                <span class="attr">superComponent</span>: <span class="string">'super-page'</span></div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                <span class="attr">classProperties</span>: &#123;</div><div class="line">                    <span class="attr">components</span>: &#123;...componentFactory.getComponents(), ...templateComponents, ...customComponents&#125;,</div><div class="line">                    <span class="attr">filters</span>: &#123;</div><div class="line">                        ...filtersObj</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        );</div><div class="line">        swanEvents(<span class="string">'slaveActiveDefineComponentPage'</span>);</div><div class="line">        <span class="comment">// 获取page的组件类</span></div><div class="line">        <span class="keyword">const</span> Page = global.componentFactory.getComponents(<span class="string">'page'</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 初始化页面对象</span></div><div class="line">        <span class="keyword">const</span> page = <span class="keyword">new</span> Page();</div><div class="line">        swanEvents(<span class="string">'slaveActiveConstructUserPage'</span>);</div><div class="line"></div><div class="line">        <span class="comment">// 调用页面对象的加载完成通知</span></div><div class="line">        page.slaveLoaded();</div><div class="line">        swanEvents(<span class="string">'slaveActiveUserPageSlaveloaded'</span>);</div><div class="line">        <span class="comment">// 用于记录用户模板代码在开始执行到监听initData事件之前的耗时</span></div><div class="line">        global.FeSlaveSwanJsInitEnd = <span class="built_in">Date</span>.now();</div><div class="line"></div><div class="line">        <span class="comment">// 监听等待initData，进行渲染</span></div><div class="line">        page.communicator.onMessage(<span class="string">'initData'</span>, params =&gt; &#123;</div><div class="line">            swanEvents(<span class="string">'slaveActiveReceiveInitData'</span>);</div><div class="line">            <span class="keyword">try</span> &#123;</div><div class="line">                <span class="comment">// 根据master传递的data，设定初始数据，并进行渲染</span></div><div class="line">                page.setInitData(params);</div><div class="line">                swanEvents(<span class="string">'slaveActiveRenderStart'</span>);</div><div class="line"></div><div class="line">                <span class="comment">// 真正的页面渲染，发生在initData之后</span></div><div class="line">                <span class="comment">// 此处让页面真正挂载处于自定义组件成功引用其他自定义组件之后,</span></div><div class="line">                <span class="comment">// 引用其它自定义组件是在同一时序promise.resolve().then里执行, 故此处attach时, 自定义组件已引用完成</span></div><div class="line">                setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                    page.attach(<span class="built_in">document</span>.body);</div><div class="line">                    <span class="comment">// 通知master加载首屏之后的逻辑</span></div><div class="line">                    page.communicator.sendMessage(</div><div class="line">                        <span class="string">'master'</span>, &#123;</div><div class="line">                            <span class="attr">type</span>: <span class="string">'slaveAttached'</span>,</div><div class="line">                            <span class="attr">slaveId</span>: page.slaveId</div><div class="line">                        &#125;</div><div class="line">                    );</div><div class="line">                    swanEvents(<span class="string">'slaveActivePageAttached'</span>);</div><div class="line">                &#125;, <span class="number">0</span>);</div><div class="line"></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">catch</span> (e) &#123;</div><div class="line">                <span class="built_in">console</span>.log(e);</div><div class="line">                global.errorMsg[<span class="string">'renderError'</span>] = e;</div><div class="line">            &#125;</div><div class="line">        &#125;, &#123;<span class="attr">listenPreviousEvent</span>: <span class="literal">true</span>&#125;);</div><div class="line"></div><div class="line">        ...</div><div class="line">    &#125;;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>当界面渲染后，发送’slaveAttached’事件，逻辑层执行onShow()生命周期函数</p>
+</li>
+</ol>
+</li>
+</ol>
+<h2 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h2><ol>
+<li><p>当用户点击界面上的button按钮时，会触发san.Page组件里的eventHappen()函数，发送’event’事件</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 执行用户绑定的事件</div><div class="line"> *</div><div class="line"> * @param &#123;string&#125; eventName 事件名称</div><div class="line"> * @param &#123;Object&#125; $event 事件对象</div><div class="line"> * @param &#123;Function&#125; reflectMethod 用户回调方法</div><div class="line"> * @param &#123;boolean&#125; capture 是否事件捕获</div><div class="line"> * @param &#123;boolean&#125; catchType 是否终止事件执行</div><div class="line"> * @param &#123;Object&#125; customEventParams 用户绑定的事件集合</div><div class="line"> */</div><div class="line">eventHappen: <span class="function"><span class="keyword">function</span>(<span class="params">eventName, $event, reflectMethod, capture, catchType, customEventParams</span>) </span>&#123;</div><div class="line">    swanEvents(<span class="string">'slaveEventHappen'</span>, &#123;</div><div class="line">        <span class="attr">eventName</span>: eventName,</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="keyword">if</span> ($event &amp;&amp; catchType === <span class="string">'catch'</span>) &#123;</div><div class="line">        $event.stopPropagation &amp;&amp; $event.stopPropagation();</div><div class="line">        (eventName === <span class="string">'touchstart'</span> || eventName === <span class="string">'touchmove'</span>)</div><div class="line">        &amp;&amp; $event.preventDefault &amp;&amp; $event.preventDefault();</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">this</span>.$communicator.sendMessage(</div><div class="line">        <span class="string">'master'</span>,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">type</span>: <span class="string">'event'</span>,</div><div class="line">            <span class="attr">value</span>: &#123;</div><div class="line">                <span class="attr">eventType</span>: eventName,</div><div class="line">                reflectMethod,</div><div class="line">                <span class="attr">e</span>: $event, <span class="comment">//eventProccesser(eventName, $event)</span></div><div class="line">            &#125;,</div><div class="line">            <span class="attr">slaveId</span>: <span class="keyword">this</span>.slaveId,</div><div class="line">            customEventParams</div><div class="line">        &#125;</div><div class="line">    );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>逻辑层master.js监听’event’事件后，执行对应Page里的对应函数</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * 绑定开发者绑定的events</div><div class="line"> */</div><div class="line">bindDeveloperEvents() &#123;</div><div class="line">    <span class="keyword">this</span>.slaveCommunicator.onMessage(<span class="string">'event'</span>, event =&gt; &#123;</div><div class="line">        swanEvents(<span class="string">'masterListenEvent'</span>, event);</div><div class="line"></div><div class="line">        <span class="keyword">const</span> eventOccurredPageObject = <span class="keyword">this</span>.history.seek(event.slaveId).getUserPageInstance();</div><div class="line">        <span class="comment">// if (event.customEventParams) &#123;</span></div><div class="line">        <span class="comment">//     const nodeId = event.customEventParams.nodeId;</span></div><div class="line">        <span class="comment">//     const reflectComponent = eventOccurredPageObject</span></div><div class="line">        <span class="comment">//         .privateProperties.customComponents[nodeId];</span></div><div class="line">        <span class="comment">//     if (reflectComponent[event.value.reflectMethod]) &#123;</span></div><div class="line">        <span class="comment">//         reflectComponent[event.value.reflectMethod]</span></div><div class="line">        <span class="comment">//             .call(reflectComponent, event.value.e);</span></div><div class="line">        <span class="comment">//     &#125;</span></div><div class="line">        <span class="comment">// &#125;</span></div><div class="line">        <span class="comment">// else</span></div><div class="line">        <span class="keyword">if</span> (eventOccurredPageObject[event.value.reflectMethod]) &#123;</div><div class="line">            eventOccurredPageObject[event.value.reflectMethod]</div><div class="line">                .call(eventOccurredPageObject, event.value.e);</div><div class="line">        &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>当逻辑层master，执行this.setData()函数更新界面时，会发送’setData’事件，渲染层slave.js会监听此事件，进行界面更新</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 逻辑层Page对象</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 页面中挂载的setData操作方法，操作后，会传到slave，对视图进行更改</div><div class="line"> *</div><div class="line"> * @param &#123;string|Object&#125; [path] - setData的数据操作路径，或setData的对象&#123;path: value&#125;</div><div class="line"> * @param &#123;*&#125; [value] - setData的操作值</div><div class="line"> * @param &#123;Function&#125; [cb] - setData的回调函数</div><div class="line"> */</div><div class="line">setData(path, value, cb) &#123;</div><div class="line">    <span class="keyword">this</span>.sendDataOperation(&#123;</div><div class="line">        <span class="attr">type</span>: <span class="string">'set'</span>,</div><div class="line">        path,</div><div class="line">        value,</div><div class="line">        cb</div><div class="line">    &#125;);</div><div class="line">&#125;,</div><div class="line"></div><div class="line"><span class="comment">// 渲染层</span></div><div class="line"><span class="comment">/**</span></div><div class="line"> * 初始化事件绑定</div><div class="line"> * @private</div><div class="line"> */</div><div class="line">initMessagebinding: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">this</span>.$communicator.onMessage(</div><div class="line">        [<span class="string">'setData'</span>, <span class="string">'pushData'</span>, <span class="string">'popData'</span>, <span class="string">'unshiftData'</span>, <span class="string">'shiftData'</span>, <span class="string">'removeAtData'</span>, <span class="string">'spliceData'</span>],</div><div class="line">        params =&gt; &#123;</div><div class="line">            swanEvents(<span class="string">'slaveDataEvent'</span>, params);</div><div class="line">            <span class="keyword">const</span> setObject = params.setObject || &#123;&#125;;</div><div class="line">            <span class="keyword">const</span> operationType = params.type.replace(<span class="string">'Data'</span>, <span class="string">''</span>);</div><div class="line">            <span class="keyword">if</span> (operationType === <span class="string">'set'</span>) &#123;</div><div class="line">                <span class="comment">// TODO-ly 此处可以优化，使用Vue效率最高的方案</span></div><div class="line">                <span class="keyword">for</span>(<span class="keyword">var</span> key <span class="keyword">in</span> setObject)&#123;</div><div class="line">                    <span class="keyword">this</span>[key] = setObject[key];</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    );</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><ol>
+<li><a href="https://github.com/swan-team" target="_blank" rel="noopener">智能小程序</a></li>
+<li><a href="https://github.com/handsomeliuyang/swanvue-core" target="_blank" rel="noopener">swanvue-core</a></li>
+</ol>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-02-26T02:34:32.700Z" itemprop="dateUpdated">2019-02-26 10:34:32</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/前端/">前端</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/小程序/">小程序</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/01/23/LeetCodeMergeKSortedLists/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">LeetCode Merge K Sorted Lists</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACuElEQVR42u3cQW4jMQwEwPz/01lgTwtsbHeTUuxDzWngjEcqBZAIkvDXV3x9/73+v3/+1+9/rkfPP//k+bjHLjw8PLzR1B9dOSl5Qz7F/Yh4eHh4t3n5YZC/un0m2dvzOePh4eF9Ai85NtrA9/no7Sh4eHh4n8ZLtvLZhJK0BR4eHt6n8faphNnwOft6rgUPDw8v5m0KYO+6/6X6Hh4eHl5ZVd+UxNpkbp6AKOaJh4eHd4F3qqi/P1QSalsMw8PDw/sdXpuuzdsF2nRGPsMXC4eHh4d3jZds3Am+TQe3y9EG+nh4eHg3eLNtfVPuygGzYB0PDw/vvbzZ69p2qzaAzg8qPDw8vLO8GwMkwydpjtnSP6zv4eHh4R3i7VMMm0k/x+ffffE5Hh4e3lFesq2fbSnIj5ZZsuOrPbXw8PDwJiOuflKkbTXIJ5eU0Ir6Hh4eHt4hXl7oaoPdBLlZ0Cg1jIeHh3eNV4SnZVXt7HLkjQ7TzgI8PDy8Ca9NmLaJ3U1ban544OHh4d3mtYnUZODkGEgSCm1q+EVnBB4eHt4h3myjb5sG8oLWPjONh4eHd4+XB9ObAPpYd9gsKYyHh4d3gZdvym3QPEvItmnlaGnw8PDwDvH2G/qMkd+36ePiP4aHh4c34uWh82zgTXNAXpx78SQeHh7eBd6suSov9ufBcQsoMHh4eHhHeW35atMokG/0ebNCFFLj4eHhXeC1xac2IG5LXPvjBA8PD+8Gb9NQNWulStIfs2THD2Ph4eHhXeCdTUzsQ+Fk6sdIeHh4eAvepvG0XbN9CN4uCh4eHt49Xj5k0m6VLFbb5pVXuPDw8PA+kzdLTMySFPl3f3geDw8P76289njIGxFyZN38ioeHh3eN1wbBm26FJL2bz+3FsuLh4eFd4O0LYO13k0OiTS6vqnx4eHh46dv+AHQDFtunL0cVAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
