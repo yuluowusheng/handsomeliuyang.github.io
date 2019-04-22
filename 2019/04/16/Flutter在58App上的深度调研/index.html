@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>Flutter在58App上的深度调研 | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="">
+    <meta name="description" content="背景现在跨平台的框架主要有如下几种：  ReactNative，Weex kotlin-native Flutter 小程序 Hybrid  长期来看，跨平台开发一定会是一个趋势，因为其能带来如下好处：  减少开发成本，提升开发效率 动态部署，不依赖发版  但现阶段，框架很多，各有各的优缺点，对于应用开发的RD来说，面临一个框架如何选择的难题。在行业趋势没有真正出现之前，RD应该要勇于去学习，去尝">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter在58App上的深度调研">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2019/04/16/Flutter在58App上的深度调研/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="背景现在跨平台的框架主要有如下几种：  ReactNative，Weex kotlin-native Flutter 小程序 Hybrid  长期来看，跨平台开发一定会是一个趋势，因为其能带来如下好处：  减少开发成本，提升开发效率 动态部署，不依赖发版  但现阶段，框架很多，各有各的优缺点，对于应用开发的RD来说，面临一个框架如何选择的难题。在行业趋势没有真正出现之前，RD应该要勇于去学习，去尝">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-04-22T03:25:05.446Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Flutter在58App上的深度调研">
+<meta name="twitter:description" content="背景现在跨平台的框架主要有如下几种：  ReactNative，Weex kotlin-native Flutter 小程序 Hybrid  长期来看，跨平台开发一定会是一个趋势，因为其能带来如下好处：  减少开发成本，提升开发效率 动态部署，不依赖发版  但现阶段，框架很多，各有各的优缺点，对于应用开发的RD来说，面临一个框架如何选择的难题。在行业趋势没有真正出现之前，RD应该要勇于去学习，去尝">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Flutter在58App上的深度调研</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">Flutter在58App上的深度调研</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-16T03:23:34.000Z" itemprop="datePublished" class="page-time">
+  2019-04-16
+</time>
+
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#背景"><span class="post-toc-number">1.</span> <span class="post-toc-text">背景</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#具体实现"><span class="post-toc-number">2.</span> <span class="post-toc-text">具体实现</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#首页tab框架"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">首页tab框架</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义ImageButton-Widget"><span class="post-toc-number">2.1.1.</span> <span class="post-toc-text">自定义ImageButton Widget</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#自定义HomeBottomNavigationBar-Widget"><span class="post-toc-number">2.1.2.</span> <span class="post-toc-text">自定义HomeBottomNavigationBar Widget</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#首页tab"><span class="post-toc-number">2.1.3.</span> <span class="post-toc-text">首页tab</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#内嵌ReactNative"><span class="post-toc-number">2.1.4.</span> <span class="post-toc-text">内嵌ReactNative</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#发布入口页"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">发布入口页</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#切换效果"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">切换效果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#渐变按钮"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">渐变按钮</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#部落图片选择控件"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">部落图片选择控件</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#底部抽屉效果"><span class="post-toc-number">2.3.1.</span> <span class="post-toc-text">底部抽屉效果</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加载并显示相册图片"><span class="post-toc-number">2.3.2.</span> <span class="post-toc-text">加载并显示相册图片</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#结论"><span class="post-toc-number">3.</span> <span class="post-toc-text">结论</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-Flutter在58App上的深度调研"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">Flutter在58App上的深度调研</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-16 11:23:34" datetime="2019-04-16T03:23:34.000Z"  itemprop="datePublished">2019-04-16</time>
+
+            
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>现在跨平台的框架主要有如下几种：</p>
+<ol>
+<li>ReactNative，Weex</li>
+<li>kotlin-native</li>
+<li>Flutter</li>
+<li>小程序</li>
+<li>Hybrid</li>
+</ol>
+<p>长期来看，跨平台开发一定会是一个趋势，因为其能带来如下好处：</p>
+<ol>
+<li>减少开发成本，提升开发效率</li>
+<li>动态部署，不依赖发版</li>
+</ol>
+<p>但现阶段，框架很多，各有各的优缺点，对于应用开发的RD来说，面临一个框架如何选择的难题。在行业趋势没有真正出现之前，RD应该要勇于去学习，去尝试新框架，学习其设计思想，体验其优势与劣势，找到最适合自己的框架。</p>
+<p>之前对Flutter做过简单应用的尝试（<a href="https://handsomeliuyang.github.io/2018/10/30/Flutter%E5%AE%9E%E7%8E%B0Git%E6%9D%83%E9%99%90%E5%88%86%E9%85%8D%E5%B7%A5%E5%85%B7%E4%B9%8B%E6%97%85/">Flutter实现Git权限分配工具之旅</a>），但不够深入，任何一个框架在没有真正进行深入实践时，根本无法判断其优缺点，为了不浮于表面，人云亦云的去判定Flutter框架，才有了这次的调研：基于Flutter实现58App的首页功能（首页模块是58App相对比较复杂的模块）</p>
+<h1 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h1><h2 id="首页tab框架"><a href="#首页tab框架" class="headerlink" title="首页tab框架"></a>首页tab框架</h2><p><strong>实现效果</strong></p>
+<iframe height="520" width="100%" src="/2019/04/16/Flutter在58App上的深度调研/首页tab框架.gif" frameborder="0" allowfullscreen></iframe>
+
+<p>在Flutter的Material Widget里，有BottomNavigationBar和TabBar两个类似的效果，但都无法直接使用，改造成本非常的大，最终选择自定义实现底部栏。</p>
+<h3 id="自定义ImageButton-Widget"><a href="#自定义ImageButton-Widget" class="headerlink" title="自定义ImageButton Widget"></a>自定义ImageButton Widget</h3><p>ImageButton的要求：</p>
+<ol>
+<li>支持图片与文本</li>
+<li>支持两种状态：default，active</li>
+<li>不同状态有不同的图片，不同的文本颜色</li>
+</ol>
+<p>实现思路：</p>
+<ol>
+<li>InkResponse Widget实现处理点击事件</li>
+<li>Column布局</li>
+<li>StatelessWidget，通过props来修改状态</li>
+</ol>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ImageButton</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="built_in">double</span> width;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">double</span> height;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">String</span> imageAssetName;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">String</span> activeImageAssetName;</div><div class="line">    <span class="keyword">final</span> GestureTapCallback onTap;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">String</span> text;</div><div class="line">    <span class="keyword">final</span> Color textColor;</div><div class="line">    <span class="keyword">final</span> Color activeTextColor;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="built_in">bool</span> isActive;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> ImageButton(&#123;Key key,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.width,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.height,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.imageAssetName,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.activeImageAssetName,</div><div class="line">        <span class="keyword">this</span>.text,</div><div class="line">        <span class="keyword">this</span>.textColor,</div><div class="line">        <span class="keyword">this</span>.activeTextColor,</div><div class="line">        <span class="keyword">this</span>.onTap,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.isActive</div><div class="line">    &#125;) : <span class="keyword">super</span>(key: key);</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">return</span> InkResponse(</div><div class="line">            child: Column(</div><div class="line">                mainAxisAlignment: MainAxisAlignment.center,</div><div class="line">                children: &lt;Widget&gt;[</div><div class="line">                    Image.asset(</div><div class="line">                        <span class="keyword">this</span>.isActive ? <span class="keyword">this</span>.activeImageAssetName : <span class="keyword">this</span>.imageAssetName,</div><div class="line">                        width: width,</div><div class="line">                        height: height,</div><div class="line">                        fit: BoxFit.contain</div><div class="line">                    ),</div><div class="line">                    Text(</div><div class="line">                        <span class="keyword">this</span>.text,</div><div class="line">                        style: TextStyle(color: <span class="keyword">this</span>.isActive ? <span class="keyword">this</span>.activeTextColor : <span class="keyword">this</span>.textColor),</div><div class="line">                    )</div><div class="line">                ],</div><div class="line">            ),</div><div class="line">            onTap: onTap,</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="自定义HomeBottomNavigationBar-Widget"><a href="#自定义HomeBottomNavigationBar-Widget" class="headerlink" title="自定义HomeBottomNavigationBar Widget"></a>自定义HomeBottomNavigationBar Widget</h3><p>要求：</p>
+<ol>
+<li>tabItem数量为奇数，中间的发布大小凸出来</li>
+<li>能与TabBarView联动</li>
+</ol>
+<p>实现思路：</p>
+<ol>
+<li>Container Widget设置高度，背景</li>
+<li>Row，Expanded做等分</li>
+<li>Padding设置每个tabItem的paddingTop</li>
+<li>通过TabController实现与TabBarView联动<ol>
+<li>tabController 继承 ChangeNotifier，ChangeNotifier是用于通知观察机制</li>
+<li>_controller.addListener()来监听TabBarView的切换</li>
+<li>_controller.animateTo(i)来通知tab的切换</li>
+</ol>
+</li>
+</ol>
+<p>代码如下：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'package:flutter_gallery/wuba_demo/home/publish/publish_home.dart'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'../wuba_ui/button/image_button.dart'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">NavigationItem</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">String</span> title;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="built_in">String</span> icon;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">String</span> activeIcon;</div><div class="line"></div><div class="line">    NavigationItem(&#123;</div><div class="line">        <span class="keyword">this</span>.title,</div><div class="line">        <span class="keyword">this</span>.icon,</div><div class="line">        <span class="keyword">this</span>.activeIcon</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomeBottomNavigationBar</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="built_in">List</span>&lt;NavigationItem&gt; items;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">Function</span> onTap;</div><div class="line">    <span class="keyword">final</span> TabController controller;</div><div class="line">    <span class="keyword">final</span> Color defaultColor;</div><div class="line">    <span class="keyword">final</span> Color selectColor;</div><div class="line"></div><div class="line">    HomeBottomNavigationBar(&#123;</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.items,</div><div class="line">        <span class="keyword">this</span>.onTap,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.controller,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.defaultColor,</div><div class="line">        <span class="meta">@required</span> <span class="keyword">this</span>.selectColor</div><div class="line">    &#125;);</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    _HomeBottomNavigationBarState createState() =&gt; _HomeBottomNavigationBarState();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_HomeBottomNavigationBarState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">HomeBottomNavigationBar</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="built_in">int</span> _currentIndex;</div><div class="line">    TabController _controller;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> initState() &#123;</div><div class="line">        <span class="keyword">super</span>.initState();</div><div class="line">        _updateTabController();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> didUpdateWidget(HomeBottomNavigationBar oldWidget) &#123;</div><div class="line">        <span class="keyword">super</span>.didUpdateWidget(oldWidget);</div><div class="line">        _updateTabController();</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> dispose() &#123;</div><div class="line">        <span class="keyword">if</span> (_controller != <span class="keyword">null</span>) &#123;</div><div class="line">            _controller.removeListener(_handleTabControllerTick);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">super</span>.dispose();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">void</span> _handleTabControllerTick() &#123;</div><div class="line">        debugPrint(<span class="string">'_handleTabControllerTick <span class="subst">$&#123;_controller.index&#125;</span>'</span>);</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>._currentIndex != _controller.index) &#123;</div><div class="line">            setState(() &#123;</div><div class="line">                <span class="keyword">this</span>._currentIndex = _controller.index;</div><div class="line">            &#125;);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">void</span> _updateTabController() &#123;</div><div class="line">        <span class="keyword">if</span> (widget.controller == _controller) &#123;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 移除老的controller的listener</span></div><div class="line">        <span class="keyword">if</span> (_controller != <span class="keyword">null</span>) &#123;</div><div class="line">            _controller.removeListener(_handleTabControllerTick);</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        _controller = widget.controller;</div><div class="line">        <span class="keyword">if</span> (_controller != <span class="keyword">null</span>) &#123;</div><div class="line">            _controller.addListener(_handleTabControllerTick);</div><div class="line">            _currentIndex = _controller.index;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">var</span> children = &lt;Widget&gt;[];</div><div class="line">        <span class="comment">// 添加正常的tab选项</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; widget.items.length; i++) &#123;</div><div class="line">            <span class="keyword">var</span> navigationItem = widget.items[i];</div><div class="line">            children.add(Expanded(</div><div class="line">                flex: <span class="number">1</span>,</div><div class="line">                child: Padding(</div><div class="line">                    padding: EdgeInsets.only(top: <span class="number">15</span>),</div><div class="line">                    child: ImageButton(</div><div class="line">                        width: <span class="number">23</span>,</div><div class="line">                        height: <span class="number">23</span>,</div><div class="line">                        imageAssetName: navigationItem.icon,</div><div class="line">                        activeImageAssetName: navigationItem.activeIcon,</div><div class="line">                        text: navigationItem.title,</div><div class="line">                        textColor: widget.defaultColor,</div><div class="line">                        activeTextColor: widget.selectColor,</div><div class="line">                        isActive: <span class="keyword">this</span>._currentIndex == i,</div><div class="line">                        onTap:  () &#123;</div><div class="line">                            <span class="keyword">if</span> (<span class="keyword">this</span>._controller != <span class="keyword">null</span>) &#123;</div><div class="line">                                <span class="keyword">this</span>._controller.animateTo(i);</div><div class="line">                            &#125;</div><div class="line">                            <span class="keyword">if</span> (widget.onTap != <span class="keyword">null</span>) &#123;</div><div class="line">                                widget.onTap(i);</div><div class="line">                            &#125;</div><div class="line">                        &#125;,</div><div class="line">                    ),</div><div class="line">                )</div><div class="line">            ));</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 添加发布item</span></div><div class="line">        children.insert(<span class="number">2</span>, Expanded(</div><div class="line">            flex: <span class="number">1</span>,</div><div class="line">            child: ImageButton(</div><div class="line">                width: <span class="number">40</span>,</div><div class="line">                height: <span class="number">40</span>,</div><div class="line">                imageAssetName: <span class="string">'assets/images/home/wb_home_tab_publish_img.png'</span>,</div><div class="line">                activeImageAssetName: <span class="string">''</span>,</div><div class="line">                text: <span class="string">'发布'</span>,</div><div class="line">                textColor: widget.defaultColor,</div><div class="line">                isActive: <span class="keyword">false</span>,</div><div class="line">                onTap: ()&#123;</div><div class="line">                    Navigator.push(context, PageRouteBuilder(</div><div class="line">                        transitionDuration: <span class="built_in">Duration</span>(),</div><div class="line">                        pageBuilder: (BuildContext context, Animation&lt;<span class="built_in">double</span>&gt; animation, Animation&lt;<span class="built_in">double</span>&gt; secondaryAnimation)&#123;</div><div class="line">                            <span class="keyword">return</span> PublishHome();</div><div class="line">                        &#125;</div><div class="line">                    ));</div><div class="line">                &#125;,</div><div class="line">            ),</div><div class="line">        ));</div><div class="line"></div><div class="line">        <span class="keyword">return</span> Container(</div><div class="line">            height: <span class="number">63</span>,</div><div class="line">            decoration: BoxDecoration(</div><div class="line">                image: DecorationImage(</div><div class="line">                    image: AssetImage(<span class="string">'assets/images/home/wb_tab_bg.png'</span>),</div><div class="line">                    fit: BoxFit.fill</div><div class="line">                )</div><div class="line">            ),</div><div class="line">            child: Row(</div><div class="line">                crossAxisAlignment: CrossAxisAlignment.stretch,</div><div class="line">                children: children,</div><div class="line">            )</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="首页tab"><a href="#首页tab" class="headerlink" title="首页tab"></a>首页tab</h3><p>实现思路：</p>
+<ol>
+<li>Stack Positioned实现叠层布局，解决tabbar凸起部份覆盖在TabBarView上</li>
+<li>TabBarView Widget实现类似ViewPager效果</li>
+</ol>
+<p>代码如下：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'home_bottom_navigation_bar.dart'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'package:wubarn_plugin/wuba_rn_view.dart'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HomeDemo</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> <span class="built_in">String</span> routeName = <span class="string">'/wuba/home'</span>;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> HomeDemo(&#123; Key key &#125;) : <span class="keyword">super</span>(key: key);</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    _HomeDemoState createState() =&gt; _HomeDemoState();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_HomeDemoState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">HomeDemo</span>&gt;</span></div><div class="line">    <span class="title">with</span> <span class="title">SingleTickerProviderStateMixin</span> &#123;</div><div class="line"></div><div class="line">    <span class="built_in">List</span>&lt;NavigationItem&gt; _navigationViews;</div><div class="line">    TabController controller;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> initState() &#123;</div><div class="line">        <span class="keyword">super</span>.initState();</div><div class="line"></div><div class="line">        _navigationViews = &lt;NavigationItem&gt;[</div><div class="line">            NavigationItem(</div><div class="line">                icon: <span class="string">'assets/images/home/wb_home_tap_index_normal.png'</span>,</div><div class="line">                activeIcon: <span class="string">'assets/images/home/wb_home_tap_index_pressed.png'</span>,</div><div class="line">                title: <span class="string">'首页'</span>,</div><div class="line">            ),</div><div class="line">            NavigationItem(</div><div class="line">                icon: <span class="string">'assets/images/home/wb_home_tap_history_normal.png'</span>,</div><div class="line">                activeIcon: <span class="string">'assets/images/home/wb_home_tap_history_pressed.png'</span>,</div><div class="line">                title: <span class="string">'部落'</span>,</div><div class="line">            ),</div><div class="line">            NavigationItem(</div><div class="line">                icon: <span class="string">'assets/images/home/wb_home_tap_message_normal.png'</span>,</div><div class="line">                activeIcon: <span class="string">'assets/images/home/wb_home_tap_message_pressed.png'</span>,</div><div class="line">                title: <span class="string">'消息'</span>,</div><div class="line">            ),</div><div class="line">            NavigationItem(</div><div class="line">                icon: <span class="string">'assets/images/home/wb_home_tap_center_normal.png'</span>,</div><div class="line">                activeIcon: <span class="string">'assets/images/home/wb_home_tap_center_pressed.png'</span>,</div><div class="line">                title: <span class="string">'我的'</span>,</div><div class="line">            )</div><div class="line">        ];</div><div class="line"></div><div class="line">        controller = TabController(</div><div class="line">            initialIndex: <span class="number">2</span>, length: <span class="keyword">this</span>._navigationViews.length, vsync: <span class="keyword">this</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">return</span> Scaffold(</div><div class="line">            body: Stack(</div><div class="line">                children: &lt;Widget&gt;[</div><div class="line">                    Positioned(</div><div class="line">                        top: <span class="number">0</span>,</div><div class="line">                        left: <span class="number">0</span>,</div><div class="line">                        right: <span class="number">0</span>,</div><div class="line">                        bottom: <span class="number">50</span>,</div><div class="line">                        child: TabBarView(</div><div class="line">                            controller: controller,</div><div class="line">                            children: &lt;Widget&gt;[</div><div class="line">                                Container(</div><div class="line">                                    color: Colors.red,</div><div class="line">                                    child: Text(<span class="string">'Fragment'</span>),</div><div class="line">                                ),</div><div class="line">                                Container(</div><div class="line">                                    child: WubaRNView(),</div><div class="line">                                ),</div><div class="line">                                Container(</div><div class="line">                                    color: Colors.white,</div><div class="line">                                    child: Text(<span class="string">'Fragment'</span>),</div><div class="line">                                ),</div><div class="line">                                Container(</div><div class="line">                                    color: Colors.yellow,</div><div class="line">                                    child: Text(<span class="string">'Fragment'</span>),</div><div class="line">                                )</div><div class="line">                            ]</div><div class="line">                        ),</div><div class="line">                    ),</div><div class="line">                    Positioned(</div><div class="line">                        left: <span class="number">0</span>,</div><div class="line">                        right: <span class="number">0</span>,</div><div class="line">                        bottom: <span class="number">0</span>,</div><div class="line">                        height: <span class="number">63</span>,</div><div class="line">                        child: HomeBottomNavigationBar(</div><div class="line">                            items: <span class="keyword">this</span>._navigationViews,</div><div class="line">                            controller: <span class="keyword">this</span>.controller,</div><div class="line">                            defaultColor: Colors.black,</div><div class="line">                            selectColor: Colors.red,</div><div class="line">                        ),</div><div class="line">                    )</div><div class="line">                ],</div><div class="line">            ),</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="内嵌ReactNative"><a href="#内嵌ReactNative" class="headerlink" title="内嵌ReactNative"></a>内嵌ReactNative</h3><p>实现思路：</p>
+<ol>
+<li>通过独立的Flutter Plugin实现</li>
+<li>ReactNative的ReactRootView可以被嵌入Native中，那同样可以被嵌入Flutter中</li>
+<li>Flutter的AndroidView只有两个状态：create，dispose。在这两个状态里，执行ReactNative相关的生命周期函数</li>
+</ol>
+<p>dart部分：创建对应的Widget<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WubaRNView</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    _WubaRNViewState createState() =&gt; _WubaRNViewState();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_WubaRNViewState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">WubaRNView</span>&gt; </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="comment">// 不同的端，其通信方式不一样</span></div><div class="line">        <span class="keyword">if</span> (defaultTargetPlatform == TargetPlatform.android) &#123;</div><div class="line">            <span class="keyword">return</span> AndroidView(</div><div class="line">                viewType: <span class="string">'plugins.wuba.com/wubarnview'</span>,</div><div class="line">                onPlatformViewCreated: _onPlatformViewCreated,</div><div class="line">            );</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> Text(</div><div class="line">            <span class="string">'$defaultTargetPlatform is not yet supported by the WubaRNView plugin'</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">void</span> _onPlatformViewCreated(<span class="built_in">int</span> id) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Android的实现：</p>
+<ol>
+<li><p>注册ViewFactory</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WubarnPlugin</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String VIEW_TYPE = <span class="string">"plugins.wuba.com/wubarnview"</span>;</div><div class="line"></div><div class="line">    <span class="comment">/** Plugin registration. */</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerWith</span><span class="params">(Registrar registrar)</span> </span>&#123;</div><div class="line">        registrar.platformViewRegistry().registerViewFactory(VIEW_TYPE, <span class="keyword">new</span> WubarnViewFactory(registrar.messenger()));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>通过ViewFactory创建WubarnView</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WubarnViewFactory</span> <span class="keyword">extends</span> <span class="title">PlatformViewFactory</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> BinaryMessenger messenger;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WubarnViewFactory</span><span class="params">(BinaryMessenger messenger)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(StandardMessageCodec.INSTANCE);</div><div class="line">        <span class="keyword">this</span>.messenger = messenger;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> PlatformView <span class="title">create</span><span class="params">(Context context, <span class="keyword">int</span> id, Object o)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> WubarnView(context, messenger, id);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>WubarnView的具体实现</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WubarnView</span> <span class="keyword">implements</span> <span class="title">PlatformView</span>, <span class="title">MethodChannel</span>.<span class="title">MethodCallHandler</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReactRootView mReactRootView;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReactInstanceManager mReactInstanceManager;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">WubarnView</span><span class="params">(Context context, BinaryMessenger messenger, <span class="keyword">int</span> id)</span> </span>&#123;</div><div class="line">        MethodChannel methodChannel = <span class="keyword">new</span> MethodChannel(messenger, WubarnPlugin.VIEW_TYPE + <span class="string">"_"</span> + id);</div><div class="line">        methodChannel.setMethodCallHandler(<span class="keyword">this</span>);</div><div class="line">        <span class="comment">// ReactNative的创建及初始化，设置其默认加载的bundle名称</span></div><div class="line">        mReactRootView = <span class="keyword">new</span> ReactRootView(context);</div><div class="line">        mReactInstanceManager = ReactInstanceManager.builder()</div><div class="line">                .setApplication((Application) context.getApplicationContext())</div><div class="line">                .setBundleAssetName(<span class="string">"index.android.bundle"</span>)</div><div class="line">                .setJSMainModulePath(<span class="string">"index"</span>)</div><div class="line">                .addPackage(<span class="keyword">new</span> MainReactPackage())</div><div class="line">                .setUseDeveloperSupport(<span class="keyword">false</span>)</div><div class="line">                .setInitialLifecycleState(LifecycleState.RESUMED)</div><div class="line">                .build();</div><div class="line">        <span class="comment">// 这个"App1"名字一定要和我们在index.js中注册的名字保持一致AppRegistry.registerComponent()</span></div><div class="line">        mReactRootView.startReactApplication(mReactInstanceManager, <span class="string">"App1"</span>, <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> View <span class="title">getView</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> mReactRootView;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">dispose</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// mReactInstanceManager.onHostPause(mActivity);</span></div><div class="line">        <span class="comment">// mReactInstanceManager.onHostResume(mActivity, null);</span></div><div class="line">        <span class="comment">// mReactInstanceManager.onHostDestroy(mActivity);</span></div><div class="line">        mReactRootView.unmountReactApplication();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall methodCall, MethodChannel.Result result)</span> </span>&#123;</div><div class="line">        <span class="keyword">switch</span> (methodCall.method)&#123;</div><div class="line">            <span class="keyword">case</span> <span class="string">""</span>:</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                result.notImplemented();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="发布入口页"><a href="#发布入口页" class="headerlink" title="发布入口页"></a>发布入口页</h2><p> <strong>实现效果</strong></p>
+ <iframe height="520" width="100%" src="/2019/04/16/Flutter在58App上的深度调研/发布入口页.gif" frameborder="0" allowfullscreen></iframe>
+
+<h3 id="切换效果"><a href="#切换效果" class="headerlink" title="切换效果"></a>切换效果</h3><p> 实现思路：</p>
+<ol>
+<li>通过PageRoute，去掉切换的动画</li>
+<li>通过AnimatedBuilder，实现旋转动画</li>
+<li><p>通过WillPopScope Widget拦截返回事件</p>
+<p>Flutter的页面切换是由Navigator管理，其中有一个栈，栈帧是路由，通过PageRoute可以自定义切换的动画，如下去掉切换动画的代码：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Navigator.push(context, PageRouteBuilder(</div><div class="line">    transitionDuration: <span class="built_in">Duration</span>(), <span class="comment">// 去掉了执行动画的时间</span></div><div class="line">    pageBuilder: (BuildContext context, Animation&lt;<span class="built_in">double</span>&gt; animation, Animation&lt;<span class="built_in">double</span>&gt; secondaryAnimation)&#123;</div><div class="line">        <span class="keyword">return</span> PublishHome();</div><div class="line">    &#125;</div><div class="line">));</div></pre></td></tr></table></figure>
+</li>
+</ol>
+</li>
+</ol>
+<p>由于Flutter是MVVM框架，Flutter里的Animation只负责计算，不负责界面布局与渲染，需要手动调用setState()来让界面重绘，不过可以通过AnimatedBuilder简化流程，但Flutter在实现组合动画比较麻烦。<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">PublishHome</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line">    <span class="meta">@override</span></div><div class="line">    _PublishHomeState createState() =&gt; _PublishHomeState();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_PublishHomeState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">PublishHome</span>&gt; <span class="title">with</span> <span class="title">SingleTickerProviderStateMixin</span> </span>&#123;</div><div class="line"></div><div class="line">    Animation&lt;<span class="built_in">double</span>&gt; animation;</div><div class="line">    AnimationController controller;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> initState() &#123;</div><div class="line">        <span class="keyword">super</span>.initState();</div><div class="line"></div><div class="line">        controller = AnimationController(duration: <span class="built_in">Duration</span>(milliseconds: <span class="number">200</span>), vsync: <span class="keyword">this</span>);</div><div class="line">        animation = Tween(begin: <span class="number">0.0</span>, end: <span class="number">45.0</span>).animate(controller);</div><div class="line">        animation.addStatusListener((AnimationStatus status)&#123;</div><div class="line">            <span class="keyword">if</span>(status == AnimationStatus.dismissed) &#123;</div><div class="line">                Navigator.pop(context);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        controller.forward();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">return</span> WillPopScope(</div><div class="line">            onWillPop: () <span class="keyword">async</span> &#123;</div><div class="line">                controller.reverse();</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;,</div><div class="line">            child: Scaffold(</div><div class="line">                backgroundColor: Colors.white,</div><div class="line">                body: SafeArea(</div><div class="line">                    top: <span class="keyword">true</span>,</div><div class="line">                    child: Stack(</div><div class="line">                        children: &lt;Widget&gt;[</div><div class="line">                            ...</div><div class="line">                            Positioned(</div><div class="line">                                left: <span class="number">0</span>,</div><div class="line">                                right: <span class="number">0</span>,</div><div class="line">                                bottom: <span class="number">0</span>,</div><div class="line">                                height: <span class="number">63</span>,</div><div class="line">                                child: GestureDetector(</div><div class="line">                                    child: Column(</div><div class="line">                                        mainAxisAlignment: MainAxisAlignment.center,</div><div class="line">                                        children: &lt;Widget&gt;[</div><div class="line">                                            AnimatedBuilder(</div><div class="line">                                                animation: <span class="keyword">this</span>.animation,</div><div class="line">                                                builder: (BuildContext context, Widget child)&#123;</div><div class="line">                                                    <span class="keyword">return</span> Transform.rotate(</div><div class="line">                                                        angle: animation.value * math.pi / <span class="number">180.0</span>,</div><div class="line">                                                        child: child,</div><div class="line">                                                    );</div><div class="line">                                                &#125;,</div><div class="line">                                                child: Image.asset(</div><div class="line">                                                    <span class="string">'assets/images/home/wb_home_tab_publish_img.png'</span>,</div><div class="line">                                                    width: <span class="number">40</span>,</div><div class="line">                                                    height: <span class="number">40</span>,</div><div class="line">                                                    fit: BoxFit.contain</div><div class="line">                                                ),</div><div class="line">                                            ),</div><div class="line">                                            Text(</div><div class="line">                                                <span class="string">'发布'</span>,</div><div class="line">                                                style: TextStyle(color: Colors.white),</div><div class="line">                                            )</div><div class="line">                                        ],</div><div class="line">                                    ),</div><div class="line">                                    onTap: ()&#123;</div><div class="line">                                        controller.reverse();</div><div class="line">                                    &#125;,</div><div class="line">                                ),</div><div class="line">                            )</div><div class="line">                        ],</div><div class="line"></div><div class="line">                    ),</div><div class="line">                ),</div><div class="line">            )</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="渐变按钮"><a href="#渐变按钮" class="headerlink" title="渐变按钮"></a>渐变按钮</h3><p>要求：</p>
+<ol>
+<li>不使用图片实现</li>
+<li>背景支持渐变</li>
+<li>不要点击效果</li>
+</ol>
+<p>Material Widget里的四种Button无法满足按钮要求，第三方渐变按钮也无法完全满足要求，通过Container Widget的decoration自定义此Widget：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> <span class="string">'package:flutter/material.dart'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">GradientButton</span> <span class="keyword">extends</span> <span class="title">StatelessWidget</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">double</span> width;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">double</span> height;</div><div class="line">    <span class="keyword">final</span> Gradient gradient;</div><div class="line">    <span class="keyword">final</span> Widget child;</div><div class="line">    <span class="keyword">final</span> <span class="built_in">Function</span> onTap;</div><div class="line">    <span class="keyword">final</span> BorderRadius shapeRadius;</div><div class="line"></div><div class="line">    <span class="keyword">const</span> GradientButton(</div><div class="line">        &#123;Key key, <span class="keyword">this</span>.width, <span class="keyword">this</span>.height, <span class="keyword">this</span>.gradient, <span class="keyword">this</span>.onTap, <span class="keyword">this</span>.shapeRadius, <span class="keyword">this</span>.child&#125;)</div><div class="line">        : <span class="keyword">super</span>(key: key);</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">return</span> GestureDetector(</div><div class="line">            onTap: <span class="keyword">this</span>.onTap,</div><div class="line">            child: Container(</div><div class="line">                width: <span class="keyword">this</span>.width,</div><div class="line">                height: <span class="keyword">this</span>.height,</div><div class="line">                decoration: BoxDecoration(</div><div class="line">                    gradient: <span class="keyword">this</span>.gradient, <span class="comment">// 设置渐变</span></div><div class="line">                    borderRadius: <span class="keyword">this</span>.shapeRadius <span class="comment">// 设置圆角</span></div><div class="line">                ),</div><div class="line">                child: Center(</div><div class="line">                    child: child,</div><div class="line">                )</div><div class="line">            ),</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="部落图片选择控件"><a href="#部落图片选择控件" class="headerlink" title="部落图片选择控件"></a>部落图片选择控件</h2><p><strong>实现效果</strong></p>
+<iframe height="520" width="100%" src="/2019/04/16/Flutter在58App上的深度调研/部落图片选择控件.gif" frameborder="0" allowfullscreen></iframe>
+
+<h3 id="底部抽屉效果"><a href="#底部抽屉效果" class="headerlink" title="底部抽屉效果"></a>底部抽屉效果</h3><p>要求：</p>
+<ol>
+<li>BottomSheet增加中间态</li>
+<li>有回弹效果</li>
+</ol>
+<p>第三方库RubberBottomSheet实现了此效果，其原理如下：</p>
+<ol>
+<li>通过Stack实现叠加布局</li>
+<li>修改AnimationController的原码，依据lowerBound，upperBound的实现思路，实现halfBound，即中间态</li>
+</ol>
+<p>直接使用RubberBottomSheet的代码非常简单：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TribePublish</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    _TribePublishState createState() =&gt; _TribePublishState();</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_TribePublishState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">TribePublish</span>&gt; <span class="title">with</span> <span class="title">SingleTickerProviderStateMixin</span> </span>&#123;</div><div class="line"></div><div class="line">    RubberAnimationController _controller;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> initState() &#123;</div><div class="line">        <span class="keyword">super</span>.initState();</div><div class="line">        _controller = RubberAnimationController(</div><div class="line">            vsync: <span class="keyword">this</span>,</div><div class="line">            lowerBoundValue: AnimationControllerValue(pixel: <span class="number">54</span>),</div><div class="line">            halfBoundValue: AnimationControllerValue(pixel: <span class="number">300</span>),</div><div class="line">            upperBoundValue: AnimationControllerValue(percentage: <span class="number">1.0</span>),</div><div class="line">            duration: <span class="built_in">Duration</span>(milliseconds: <span class="number">200</span>)</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">return</span> Scaffold(</div><div class="line">            backgroundColor: Colors.white,</div><div class="line">            appBar: AppBar(</div><div class="line">                title: Text(<span class="string">'部落发布'</span>),</div><div class="line">            ),</div><div class="line">            body: RubberBottomSheet(</div><div class="line">                header: _getHeader(),</div><div class="line">                lowerLayer: _getLowerLayer(),</div><div class="line">                upperLayer: _getUpperLayer(),</div><div class="line">                animationController: _controller,</div><div class="line">            )</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="加载并显示相册图片"><a href="#加载并显示相册图片" class="headerlink" title="加载并显示相册图片"></a>加载并显示相册图片</h3><p><strong>加载相册图片</strong></p>
+<ol>
+<li>通过MethodChannel，实现与Native通信，加载相册图片</li>
+<li>在Android里，加载相册图片，需要先授权</li>
+<li>防止相册图片过多，需进行分页加载</li>
+</ol>
+<p>Android端的代码实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AlbumManagerPlugin</span> <span class="keyword">implements</span> <span class="title">MethodChannel</span>.<span class="title">MethodCallHandler</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerWith</span><span class="params">(PluginRegistry registry)</span> </span>&#123;</div><div class="line">        registerWith(registry.registrarFor(<span class="string">"com.wuba.plugins.AlbumManagerPlugin"</span>));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">registerWith</span><span class="params">(PluginRegistry.Registrar registrar)</span></span>&#123;</div><div class="line">        <span class="keyword">final</span> MethodChannel channel = <span class="keyword">new</span> MethodChannel(registrar.messenger(), <span class="string">"plugins.wuba.com/album_manager"</span>);</div><div class="line">        channel.setMethodCallHandler(<span class="keyword">new</span> AlbumManagerPlugin(registrar.context(), registrar));</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">/**</span></div><div class="line">     * the page size of query albums</div><div class="line">     */</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> PAGE_SIZE = <span class="number">200</span>;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Context mContext;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">final</span> PluginRegistry.Registrar mRegistrar;</div><div class="line">    <span class="keyword">private</span> PermissionsUtils mPermissionsUtils;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">AlbumManagerPlugin</span><span class="params">(Context context, PluginRegistry.Registrar registrar)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.mContext = context;</div><div class="line">        mRegistrar = registrar;</div><div class="line">        mPermissionsUtils = <span class="keyword">new</span> PermissionsUtils();</div><div class="line"></div><div class="line">        registrar.addRequestPermissionsResultListener(<span class="keyword">new</span> PluginRegistry.RequestPermissionsResultListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">onRequestPermissionsResult</span><span class="params">(<span class="keyword">int</span> i, String[] strings, <span class="keyword">int</span>[] ints)</span> </span>&#123;</div><div class="line">                mPermissionsUtils.dealResult(i, strings, ints);</div><div class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall methodCall, MethodChannel.Result result)</span> </span>&#123;</div><div class="line">        <span class="comment">// 先申请权限</span></div><div class="line">        mPermissionsUtils.setPermissionsListener(<span class="keyword">new</span> PermissionsListener() &#123;</div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDenied</span><span class="params">(String[] deniedPermissions)</span> </span>&#123;</div><div class="line">                Log.i(<span class="string">"permission"</span>, <span class="string">"onDenied call.method = $&#123;call.method&#125;"</span>);</div><div class="line"></div><div class="line">                result.error(<span class="string">"失败"</span>, <span class="string">"权限被拒绝"</span>, <span class="string">""</span>);</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="meta">@Override</span></div><div class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGranted</span><span class="params">()</span> </span>&#123;</div><div class="line">                <span class="keyword">switch</span> (methodCall.method)&#123;</div><div class="line">                    <span class="keyword">case</span> <span class="string">"getAllImage"</span>:</div><div class="line">                        getAllImage(methodCall, result);</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    <span class="keyword">default</span>:</div><div class="line">                        result.notImplemented();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">        mPermissionsUtils.withActivity(mRegistrar.activity());</div><div class="line">        mPermissionsUtils.getPermissions(mRegistrar.activity(), <span class="number">3001</span>, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getAllImage</span><span class="params">(MethodCall methodCall, MethodChannel.Result result)</span> </span>&#123;</div><div class="line">        List&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line"></div><div class="line"><span class="comment">//        int pageIndex = methodCall.argument("pageIndex");</span></div><div class="line">        <span class="keyword">int</span> pageIndex = <span class="number">0</span>;</div><div class="line"></div><div class="line">        Log.d(<span class="string">"liuyang"</span>, <span class="string">""</span> + methodCall.argument(<span class="string">"pageIndex"</span>));</div><div class="line"></div><div class="line">        String[] projection = &#123;MediaStore.Images.ImageColumns.DATA, MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME&#125;;</div><div class="line">        String sortOrder = MediaStore.Images.Media.DATE_TAKEN + <span class="string">" DESC limit "</span> + PAGE_SIZE + <span class="string">" offset "</span> + pageIndex * PAGE_SIZE;</div><div class="line">        <span class="comment">//执行分页</span></div><div class="line">        String selection = <span class="keyword">null</span>;</div><div class="line"><span class="comment">//        if (!ALL_PHOTO.equals(s)) &#123;</span></div><div class="line"><span class="comment">//            selection = MediaStore.Images.ImageColumns.BUCKET_DISPLAY_NAME + " = '" + s + "' ";</span></div><div class="line"><span class="comment">//        &#125;</span></div><div class="line"></div><div class="line">        Cursor cursor = mContext.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,</div><div class="line">                projection, selection, <span class="keyword">null</span>, sortOrder);</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            <span class="keyword">if</span> (cursor != <span class="keyword">null</span>) &#123;</div><div class="line">                <span class="keyword">while</span> (cursor.moveToNext()) &#123;</div><div class="line">                    <span class="comment">// 获取图片的路径</span></div><div class="line">                    String path = cursor.getString(cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA));</div><div class="line">                    list.add(path);</div><div class="line">                &#125;</div><div class="line"></div><div class="line">                result.success(list);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line"><span class="comment">//            LOGGER.e(TAG, e.toString());</span></div><div class="line">            result.error(<span class="string">"AlbumManagerPlugin"</span>, e.getMessage(), <span class="string">""</span>);</div><div class="line">        &#125; <span class="keyword">finally</span> &#123;</div><div class="line">            <span class="keyword">if</span> (cursor != <span class="keyword">null</span>) &#123;</div><div class="line">                cursor.close();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>Flutter端的代码实现：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AlbumManagerPlugin</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> <span class="keyword">const</span> MethodChannel _channel = MethodChannel(<span class="string">'plugins.wuba.com/album_manager'</span>);</div><div class="line"></div><div class="line">    <span class="keyword">static</span> Future&lt;<span class="built_in">List</span>&lt;AssetEntity&gt;&gt; getAllAssetList(<span class="built_in">int</span> pageIndex) <span class="keyword">async</span> &#123;</div><div class="line">        <span class="built_in">Map</span>&lt;<span class="keyword">dynamic</span>, <span class="keyword">dynamic</span>&gt; map = <span class="built_in">Map</span>&lt;<span class="keyword">dynamic</span>, <span class="keyword">dynamic</span>&gt;();</div><div class="line">        map[<span class="string">'pageIndex'</span>] = pageIndex;</div><div class="line">        <span class="built_in">List</span>&lt;<span class="keyword">dynamic</span>&gt; paths = <span class="keyword">await</span> _channel.invokeMethod(<span class="string">'getAllImage'</span>, map);</div><div class="line">        <span class="keyword">return</span> _castAsset(paths);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">static</span> Future&lt;<span class="built_in">List</span>&lt;AssetEntity&gt;&gt; _castAsset(<span class="built_in">List</span>&lt;<span class="keyword">dynamic</span>&gt; paths) <span class="keyword">async</span> &#123;</div><div class="line">        <span class="built_in">List</span>&lt;AssetEntity&gt; result = &lt;AssetEntity&gt;[];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; paths.length; i++) &#123;</div><div class="line">            result.add(AssetEntity(path: paths[i]));</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>细节点：</p>
+<ol>
+<li>Native的扩展能力定义为Plugin，Plugin可以独立发布为一个库，里面即有native代码也有dart代码，不用像ReactNative，需要单独合并native的代码，但带的问题是：dependencies库都是直接原码</li>
+<li>通过MethodChannel进行Flutter与Native通信，可以传递参数，如何传递一组参数了，通过源码分析：Map对象</li>
+</ol>
+<p><strong>分页显示图片</strong></p>
+<ol>
+<li>通过GridView显示图片，实现分页加载</li>
+<li>默认的图片加载策略是LRU，体验与内存表现都很不好</li>
+</ol>
+<p>下面的代码没有实现分页与图片加载策略的优化：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">AlbumGrid</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</div><div class="line">    <span class="meta">@override</span></div><div class="line">    _AlbumGridState createState() =&gt; _AlbumGridState();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">_AlbumGridState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">AlbumGrid</span>&gt; </span>&#123;</div><div class="line">    <span class="built_in">List</span>&lt;AssetEntity&gt; list = <span class="keyword">new</span> <span class="built_in">List</span>&lt;AssetEntity&gt;();</div><div class="line">    <span class="built_in">int</span> currentPage = <span class="number">-1</span>;</div><div class="line">    <span class="meta">@override</span></div><div class="line">    <span class="keyword">void</span> initState() &#123;</div><div class="line">        <span class="keyword">super</span>.initState();</div><div class="line"></div><div class="line">        <span class="comment">// 加载第一页数据</span></div><div class="line">        _initData(<span class="number">0</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">void</span> _initData(<span class="built_in">int</span> nextPage) <span class="keyword">async</span> &#123;</div><div class="line">        <span class="built_in">List</span>&lt;AssetEntity&gt; newPage = <span class="keyword">await</span> AlbumManagerPlugin.getAllAssetList(nextPage);</div><div class="line">        <span class="keyword">this</span>.setState(()&#123;</div><div class="line">            list.addAll(newPage);</div><div class="line">            currentPage = nextPage;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@override</span></div><div class="line">    Widget build(BuildContext context) &#123;</div><div class="line">        <span class="keyword">return</span> GridView.builder(</div><div class="line">            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(</div><div class="line">                crossAxisCount: <span class="number">4</span>,</div><div class="line">                mainAxisSpacing: <span class="number">4.0</span>,</div><div class="line">                crossAxisSpacing: <span class="number">4.0</span></div><div class="line">            ),</div><div class="line">            padding: EdgeInsets.all(<span class="number">4.0</span>),</div><div class="line">            itemBuilder: _itemBuilder,</div><div class="line">            itemCount: list.length,</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">    Widget _itemBuilder(BuildContext context, <span class="built_in">int</span> index) &#123;</div><div class="line">        AssetEntity entity = list[index];</div><div class="line"></div><div class="line">        <span class="keyword">return</span> Image.file(</div><div class="line">            File(entity.path),</div><div class="line">            fit: BoxFit.cover,</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h1><p>Flutter框架在设计上，整体优于其他跨平台框架，实现使用时，也是非常的方便，有如下感受：</p>
+<ol>
+<li>开发调试非常的快，比Android的instant run强很多，也稳定很多</li>
+<li>dependencies依赖管理比ReactNative强，native扩展能力是一个独立的plugin库，便于管理依赖</li>
+<li>基于MVVM框架，在自定义UI组件及动画方面，结构清楚，容易理解</li>
+<li>实现相同的功能，代码量远小于使用java实现</li>
+</ol>
+<p>由于Flutter的社区不太完善，时间太短，生态不完善，相当于2011年开发Android一样，缺少大量成熟的基础库，大量的基础能力都需要从头到尾开发，下面是上述实践过程中发现的一些点：</p>
+<ol>
+<li>渐变Button，图片Button</li>
+<li>GridView或ListView的图片加载策略（Fling时不加载，scrolling或idle时加载）</li>
+<li>崩溃日志收集</li>
+<li>大量的基础Plugin：加载相册，授权，地图，视频等等</li>
+<li>…</li>
+</ol>
+<p>在已经集成ReactNative的58App里，已经基本满足部分业务的动态能力，再花大量的成本完美Flutter的基础，花大量的成本去推动业务线使用，短期来看，投入产出比太低。</p>
+<p>但从长期来看，在跨平台框架上，我更加看好Flutter，在设计与使用体验上，Flutter确实都优于其他框架，但Flutter最终能否成为主流，还是要看Google的推广力度。</p>
+<p>持续关注跨平台框架的动态，ReactNative也在向Flutter学习，改进其性能差的一面，Flutter的基础库也在不断的完善中</p>
+<p>此demo的代码：// TODO-ly 代码上传到github上</p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-04-22T03:25:05.446Z" itemprop="dateUpdated">2019-04-22 11:25:05</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/02/25/百度小程序源码解读/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">百度小程序源码解读</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtklEQVR42u3awU7jQBAEUP7/p0HaExIkqeqeWUB6PkXEsef54G6q5+0tPt7/HZ8/f/7Lo/O/nvP1Oskdk/NXBx4eHt5o6Y+OlvTo/EdXzh/Q86s9vDIeHh7eNd6sGCS/3TDaooKHh4f323ibcpKfnxcePDw8vL/C2zTHSduNh4eH91d4+Ss7jyryRnz/iA9kLXh4eHgxbzYA+9nP1+d7eHh4eKOp+qwVzl/Z7fXr1eLh4eFd4CW3mRWPPG6Y/SoZpOHh4eHd4G0uPduA9TwyaMvJi7vj4eHhXeO1gWx7+3xBbRRb/MeAh4eHd4HXBgqzIVm7nSsvOS8KAx4eHt4h3qxpzl/i7St+1ta/WAkeHh7eBd6+zW3DhdmCZuM0PDw8vLO8vCHO44Z9qcjb8SKlxsPDw7vAy0f7+Su73Th1uHHHw8PDu8BrS8IwSC3/3sa4q5wDDw8Pb8TL29nnr/jk27ac5NeM2Hh4eHiHeG202g6oks/JI0seyjcKPDw8vKO82eCqRe6nc/kaXsS4eHh4eEd5+c/ObrfKH247isPDw8O7wWtH9ZtQYNY6P8dEJQoPDw/vKC9/fW82GeSN+L4g4eHh4d3mta/j1WxtEU/k2xQettR4eHh4h3htCDuLazeFYdPQ4+Hh4d3g5a1zfrk2Ykga9LZ9f7GnDA8PD2/BG47kF+zZt7PYAg8PD+//8PKx04HbH40zXkz28PDw8A7x2tBhNvLfD8naI/qPAQ8PD2/Eey+Ps5sGNiOxKPzFw8PDu8DbV5LN+L+95mxshoeHh3eDlxeDdlmnYuJ2DcWy8PDw8Ba8PJhIAHkQXC+3LWN4eHh4P8prG9wkUMiLwTDswMPDw/s1vHaQPyszs8DiQGHAw8PDC3ibMGKTEM82fhUDOTw8PLwLvNkAbNMKt+BjDDw8PLwt7wMqSqZLToMcQgAAAABJRU5ErkJggg==" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
