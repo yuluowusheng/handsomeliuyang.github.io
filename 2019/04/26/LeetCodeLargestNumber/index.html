@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+
+    
+
+    
+
+
+
+    <meta charset="utf-8">
+    
+    
+    
+    <title>LeetCode Largest Number | LiuYang&#39;s blog | 探索，分享，创新——追求卓越</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <meta name="theme-color" content="#3F51B5">
+    
+    
+    <meta name="keywords" content="leetcode,算法">
+    <meta name="description" content="题目Given a list of non negative integers, arrange them such that they form the largest number. Example 1:12Input: [10,2]Output: &amp;quot;210&amp;quot; Example 2:12Input: [3,30,34,5,9]Output: &amp;quot;9534330&amp;quo">
+<meta name="keywords" content="leetcode,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode Largest Number">
+<meta property="og:url" content="https://handsomeliuyang.github.io/2019/04/26/LeetCodeLargestNumber/index.html">
+<meta property="og:site_name" content="LiuYang&#39;s blog">
+<meta property="og:description" content="题目Given a list of non negative integers, arrange them such that they form the largest number. Example 1:12Input: [10,2]Output: &amp;quot;210&amp;quot; Example 2:12Input: [3,30,34,5,9]Output: &amp;quot;9534330&amp;quo">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-05-05T07:23:51.119Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode Largest Number">
+<meta name="twitter:description" content="题目Given a list of non negative integers, arrange them such that they form the largest number. Example 1:12Input: [10,2]Output: &amp;quot;210&amp;quot; Example 2:12Input: [3,30,34,5,9]Output: &amp;quot;9534330&amp;quo">
+    
+        <link rel="alternate" type="application/atom+xml" title="LiuYang&#39;s blog" href="/atom.xml">
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="stylesheet" href="/css/style.css?v=1.7.2">
+    <script>window.lazyScripts=[]</script>
+
+    <!-- custom head -->
+    
+
+</head>
+
+<body>
+    <div id="loading" class="active"></div>
+
+    <aside id="menu" class="hide" >
+  <div class="inner flex-row-vertical">
+    <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+        <i class="icon icon-lg icon-close"></i>
+    </a>
+    <div class="brand-wrap" style="background-image:url(/img/brand.jpg)">
+      <div class="brand">
+        <a href="/" class="avatar waves-effect waves-circle waves-light">
+          <img src="/img/logo.png">
+        </a>
+        <hgroup class="introduce">
+          <h5 class="nickname">刘阳</h5>
+          <a href="mailto:40610243@qq.com" title="40610243@qq.com" class="mail">40610243@qq.com</a>
+        </hgroup>
+      </div>
+    </div>
+    <div class="scroll-wrap flex-col">
+      <ul class="nav">
+        
+            <li class="waves-block waves-effect">
+              <a href="/"  >
+                <i class="icon icon-lg icon-home"></i>
+                主页
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/archives"  >
+                <i class="icon icon-lg icon-archives"></i>
+                归档
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/tags"  >
+                <i class="icon icon-lg icon-tags"></i>
+                标签
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/categories"  >
+                <i class="icon icon-lg icon-th-list"></i>
+                类别
+              </a>
+            </li>
+        
+            <li class="waves-block waves-effect">
+              <a href="/about"  >
+                <i class="icon icon-lg icon-link"></i>
+                关于
+              </a>
+            </li>
+        
+      </ul>
+    </div>
+  </div>
+</aside>
+
+    <main id="main">
+        <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">LeetCode Largest Number</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input" autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menuShare">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header post-header">
+
+    <div class="container fade-scale">
+        <h1 class="title">LeetCode Largest Number</h1>
+        <h5 class="subtitle">
+            
+                <time datetime="2019-04-26T00:42:51.000Z" itemprop="datePublished" class="page-time">
+  2019-04-26
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+            
+        </h5>
+    </div>
+
+    
+
+
+</header>
+
+
+<div class="container body-wrap">
+    
+    <aside class="post-widget">
+        <nav class="post-toc-wrap post-toc-shrink" id="post-toc">
+            <h4>TOC</h4>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#题目"><span class="post-toc-number">1.</span> <span class="post-toc-text">题目</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#解决"><span class="post-toc-number">2.</span> <span class="post-toc-text">解决</span></a></li></ol>
+        </nav>
+    </aside>
+
+
+<article id="post-LeetCodeLargestNumber"
+  class="post-article article-type-post fade" itemprop="blogPost">
+
+    <div class="post-card">
+        <h1 class="post-card-title">LeetCode Largest Number</h1>
+        <div class="post-meta">
+            <time class="post-time" title="2019-04-26 08:42:51" datetime="2019-04-26T00:42:51.000Z"  itemprop="datePublished">2019-04-26</time>
+
+            
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/算法/">算法</a></li></ul>
+
+
+
+            
+<span id="busuanzi_container_page_pv" title="文章总阅读量" style='display:none'>
+    <i class="icon icon-eye icon-pr"></i><span id="busuanzi_value_page_pv"></span>
+</span>
+
+
+        </div>
+        <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>Given a list of non negative integers, arrange them such that they form the largest number.</p>
+<p>Example 1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Input: [10,2]</div><div class="line">Output: &quot;210&quot;</div></pre></td></tr></table></figure></p>
+<p>Example 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Input: [3,30,34,5,9]</div><div class="line">Output: &quot;9534330&quot;</div></pre></td></tr></table></figure></p>
+<p>Note: The result may be very large, so you need to return a string instead of an integer.</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>看到此题目后的直接思路是：按位排序，再合并为字符串，如[3,30,34,5,9]</p>
+<ol>
+<li>先按首位3, 3, 3, 5, 9排序：[9,5,3,30,34]</li>
+<li>再排序3, 30, 34, 取其第二位排序（如没有第二位，假定与第一位一样）：[34, 3, 30]</li>
+<li>最后的排序结果：[9, 5, 34, 3, 30]</li>
+</ol>
+<p>实现代码的思路: 此思路与基数排序的过程类似，代码如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">largestNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        <span class="comment">// 思路：利用基数排序类似的思想排序</span></div><div class="line">        </div><div class="line">        ArrayList&lt;Integer&gt; array = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++)&#123;</div><div class="line">            array.add(nums[i]);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ArrayList&lt;Integer&gt; result = RadixSort(array, <span class="number">1</span>);</div><div class="line">        </div><div class="line">        StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=result.size()-<span class="number">1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</div><div class="line">            buffer.append(result.get(i));</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> buffer.toString();</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> ArrayList&lt;Integer&gt; <span class="title">RadixSort</span><span class="params">(ArrayList&lt;Integer&gt; array, <span class="keyword">int</span> digit)</span></span>&#123;</div><div class="line">        <span class="comment">// 分配桶</span></div><div class="line">        ArrayList&lt;ArrayList&lt;Integer&gt;&gt; bucket = <span class="keyword">new</span> ArrayList&lt;ArrayList&lt;Integer&gt;&gt;();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;=<span class="number">9</span>; i++)&#123;</div><div class="line">            bucket.add(<span class="keyword">new</span> ArrayList&lt;Integer&gt;());</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// 入桶</span></div><div class="line">        <span class="keyword">int</span> div = <span class="number">10</span> ^ digit;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;array.size(); i++)&#123;</div><div class="line">            </div><div class="line">            <span class="keyword">int</span> value = array.get(i);</div><div class="line">            <span class="keyword">while</span>(value &gt;= div)&#123;</div><div class="line">                value = value / div;</div><div class="line">            &#125;</div><div class="line">            value = value % <span class="number">10</span>;</div><div class="line">            </div><div class="line">            bucket.get(value).add(array.get(i));</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        ArrayList&lt;Integer&gt; result = <span class="keyword">new</span> ArrayList&lt;Integer&gt;();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;bucket.size(); i++)&#123;</div><div class="line">            <span class="keyword">int</span> size = bucket.get(i).size();</div><div class="line">            </div><div class="line">            <span class="keyword">if</span>(size == <span class="number">0</span>) &#123;</div><div class="line">                <span class="keyword">continue</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span>(size == <span class="number">1</span>)&#123;</div><div class="line">                result.add(bucket.get(i).get(<span class="number">0</span>));</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">boolean</span> isFinish = <span class="keyword">true</span>;</div><div class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;bucket.get(i).size(); j++)&#123;</div><div class="line">                    <span class="keyword">if</span>(bucket.get(i).get(j) &gt; div)&#123;</div><div class="line">                        isFinish = <span class="keyword">false</span>;</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span>(isFinish) &#123;</div><div class="line">                    result.addAll(bucket.get(i));</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="comment">// 先递归排序</span></div><div class="line">                    ArrayList&lt;Integer&gt; sorted = RadixSort(bucket.get(i), digit+<span class="number">1</span>);</div><div class="line">                    result.addAll(sorted);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>此算法的问题是：无法处理大数据，计算int div = 10 ^ digit;时，很容易出现div越界的问题，虽然也能解决，但复杂程序太大了。</p>
+<p>优化两个数字的比较过程：</p>
+<ol>
+<li>如数字int a, int b</li>
+<li>先转换为String：String aStr, String bStr</li>
+<li>比较：aStrbStr, bStraStr</li>
+</ol>
+<p>剩下的就是一个排序的过程了，有很多排序算法可以选择，这里直接使用Java的Arrays.sort()方法，其里使用快速排序与归并排序，时间复杂度为O(n*logn)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">LargestNumberComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">String</span>&gt; </span>&#123;</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String str1, String str2)</span></span>&#123;</div><div class="line">            String order1 = str1+str2;</div><div class="line">            String order2 = str2 + str1;</div><div class="line">            <span class="keyword">return</span> order2.compareTo(order1); <span class="comment">// 此处是重点，要理解compareTo()方法</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">largestNumber</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">        </div><div class="line">        <span class="comment">// 转换为字符串数组</span></div><div class="line">        String[] numStrs = <span class="keyword">new</span> String[nums.length];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;nums.length; i++)&#123;</div><div class="line">            numStrs[i] = String.valueOf(nums[i]);</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// 对字符串数组进行排序</span></div><div class="line">        Arrays.sort(numStrs, <span class="keyword">new</span> LargestNumberComparator());</div><div class="line">        </div><div class="line">        <span class="comment">// 特例：全为0的情况</span></div><div class="line">        <span class="keyword">if</span>(numStrs[<span class="number">0</span>].equals(<span class="string">"0"</span>))&#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"0"</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// 拼接为字符串输出</span></div><div class="line">        StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;numStrs.length; i++)&#123;</div><div class="line">            buffer.append(numStrs[i]);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> buffer.toString();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+        </div>
+
+        <blockquote class="post-copyright">
+    
+    <div class="content">
+        
+<span class="post-time">
+    最后更新时间：<time datetime="2019-05-05T07:23:51.119Z" itemprop="dateUpdated">2019-05-05 15:23:51</time>
+</span><br>
+
+
+        
+    </div>
+    
+    <footer>
+        <a href="https://handsomeliuyang.github.io">
+            <img src="/img/logo.png" alt="刘阳">
+            刘阳
+        </a>
+    </footer>
+</blockquote>
+
+        
+
+
+        <div class="post-footer">
+            
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/leetcode/">leetcode</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/算法/">算法</a></li></ul>
+
+
+            
+<div class="page-share-wrap">
+    
+
+<div class="page-share" id="pageShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+    <a href="javascript:;" id="shareFab" class="page-share-fab waves-effect waves-circle">
+        <i class="icon icon-share-alt icon-lg"></i>
+    </a>
+</div>
+
+
+
+        </div>
+    </div>
+
+    
+<nav class="post-nav flex-row flex-justify-between flex-row-reverse">
+  
+
+  
+    <div class="waves-block waves-effect next">
+      <a href="/2019/04/16/Flutter在58App上的深度调研/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Flutter在58App上的深度调研</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+
+
+</div>
+
+        <footer class="footer">
+    <div class="top">
+        <!--
+<p>
+    <span id="busuanzi_container_site_uv" style='display:none'>
+        站点总访客数：<span id="busuanzi_value_site_uv"></span>
+    </span>
+    <span id="busuanzi_container_site_pv" style='display:none'>
+        站点总访问量：<span id="busuanzi_value_site_pv"></span>
+    </span>
+</p>
+
+-->
+        <p>
+            <!--
+            <span><a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-lg icon-rss"></i></a></span>
+            -->
+            <span>Hi, I'm LiuYang. For now I'm an Android Programmer in 58. This is my blog, believe it or not.</span>
+        </p>
+    </div>
+    <div class="bottom">
+        <p><span>刘阳 &copy; 2017 - 2019</span>
+            <span>
+                
+                Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a>
+            </span>
+        </p>
+    </div>
+</footer>
+    </main>
+    <div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<div class="global-share" id="globalShare">
+    <ul class="reset share-icons">
+      <li>
+        <a class="weixin share-sns wxFab" href="javascript:;" data-title="二维码">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+<div class="page-modal wx-share" id="wxShare">
+    <a class="close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAADeCAAAAAB3DOFrAAACtUlEQVR42u3aS1LDMBAFwNz/0rCFohy/+Sh40Vm5wI7VWmiUN3q94s/Xxefnf6/u//v393cm18sfPDw8vKWh//3q6gveD/TqL1dveX//5bN4eHh4x3j54KoFIJ+aKu/9PXh4eHhP5vUGmpeZZBOPh4eH92ReNSzIN9B55IGHh4f3BF41qJ0AkuHm2/S1rAUPDw8v5s0D2c9fH+nv4eHh4Y276r2NbzXqzQPf8mjx8PDwDvDyBTffIq9tc+MjBTdTiYeHh7fK6wWmk8LQe7ZaSPDw8PA+z+st0MnQ8411dWs+qip4eHh4RV71et7y701lPq14eHh4p3n5AabkzqQw9I4mlMeGh4eHd4zX/KkfRxXVxn9SfqLgGA8PD+8Ar1cGkoU730xvNcxunsXDw8Nb4uVLfLW51ZvjPNSInsLDw8M7wKsu99XIIGlxJaTqtv7Vq2Z4eHh4MS9/QR7RVo8F9HLX6DABHh4e3mFeHi7sNtJ65SEqWnh4eHjHeNUFOp+mSZxRDX/LrS88PDy8Ii/akg4KydY3VI9//Uqp8fDw8FZ5yYJeDSbm4UVSopJoGA8PD++/eHkTq7rJXujRJYEIHh4e3jFedfHtLeVV/MLBLzw8PLzDvN6LJ42reRm4KTB4eHh4H+RFy24xWq1OR1KWmoUBDw8Pb8ybLPHJi6tFqLqBvnwKDw8P7xivSs0ZWwFHMxTGw8PDO8ZLIoNkKNXt9VYD7CaMwMPDw1vi9cLZ6pI9P2qQt9N+XePh4eEd4M2PNOVflG+Lk0mpThweHh7eLm8SQEyi2GRZXygMeHh4eMd4SeeoV0ImrbVevoKHh4f3NN4kzM0LRv7Gm9AEDw8P7wG8aiurdzig98lafnh4eHg7vHzjO2+Pbd1ZKAx4eHh4q7zeD/4kSug9VS0/Cwe28PDw8FLeN53PxTqzI7RPAAAAAElFTkSuQmCC" alt="微信分享二维码">
+</div>
+
+
+
+
+    <script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+<script>
+var BLOG = { ROOT: '/', SHARE: true, REWARD: false };
+
+
+</script>
+
+<script src="/js/main.min.js?v=1.7.2"></script>
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<template id="search-tpl">
+<li class="item">
+    <a href="{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</template>
+
+<script src="/js/search.min.js?v=1.7.2" async></script>
+
+
+
+
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+<script>
+(function() {
+    var OriginTitile = document.title, titleTime;
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            document.title = "LiuYang's Blog";
+            clearTimeout(titleTime);
+        } else {
+            document.title = "LiuYang's Blog";
+            titleTime = setTimeout(function() {
+                document.title = OriginTitile;
+            },2000);
+        }
+    });
+})();
+</script>
+
+
+
+</body>
+</html>
